@@ -19,7 +19,9 @@
 @property (nonatomic, strong) BPTaskDetailView *taskDetailPageView;
 @property (nonatomic, strong) BPNavigationTitleView *detailTitleView;
 
+/// 返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backButton;
+/// 完成按钮
 @property (nonatomic, strong) UIBarButtonItem *doneButton;
 
 
@@ -32,7 +34,9 @@
 
 @implementation BPTaskDetailViewController
 {
+    /// 任务
     TaskModel *_task;
+    /// 收否是添加
     BOOL _isAddMode;
 }
 
