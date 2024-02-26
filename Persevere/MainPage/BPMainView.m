@@ -280,7 +280,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     switch (direction) {
         case MGSwipeDirectionLeftToRight:
         {
-            TaskModel *task = indexPath.section == 1 ? self.unfinishedTaskArr[indexPath.row] : self.finishedTaskArr[indexPath.row];
+            TaskModel *task = TaskModel *task = [self taskAtIndexPath:indexPath];
             
         }
             break;
@@ -316,12 +316,10 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 /// 删除任务并刷新列表
 - (void)deleteTaskAtIndexPath:(NSIndexPath *)indexPath {
     
-    TaskModel *task;
+    TaskModel *task = [self taskAtIndexPath:indexPath];
     if (indexPath.section == 1) {
-        task = self.unfinishedTaskArr[indexPath.row];
         [self.unfinishedTaskArr removeObject:task];
     } else if(indexPath.section == 2) {
-        task = self.finishedTaskArr[indexPath.row];
         [self.finishedTaskArr removeObject:task];
     }
     
@@ -339,6 +337,18 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     }];
     
     
+}
+
+// MARK: 找到任务
+
+- (TaskModel *)taskAtIndexPath:(NSIndexPath *)indexPath {
+    TaskModel *task = nil;
+    if (indexPath.section == 1) {
+        task = self.unfinishedTaskArr[indexPath.row];
+    } else if(indexPath.section == 2) {
+        task = self.finishedTaskArr[indexPath.row];
+    }
+    return task;
 }
 
 // MARK: 点击标题
