@@ -280,7 +280,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     switch (direction) {
         case MGSwipeDirectionLeftToRight:
         {
-            TaskModel *task = TaskModel *task = [self taskAtIndexPath:indexPath];
+            TaskModel *task = [self taskAtIndexPath:indexPath];
             
         }
             break;
