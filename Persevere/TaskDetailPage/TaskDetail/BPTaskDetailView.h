@@ -11,10 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// BPTaskDetailView详情页数据源
 @protocol BPTaskDetailViewDataSource <NSObject>
 
 @property (nonatomic, strong) TaskModel *task;
-/// 是否是添加（YES是添加，NO是修改）
+/// 是否是添加新任务（YES是添加，NO是修改）
 @property (nonatomic, assign) BOOL isAddMode;
 
 @end

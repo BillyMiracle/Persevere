@@ -283,7 +283,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         {
             // 右滑，点击详情
             TaskModel *task = [self taskAtIndexPath:indexPath];
-            
+            [self.delegate displayTask:task];
         }
             break;
         case MGSwipeDirectionRightToLeft:

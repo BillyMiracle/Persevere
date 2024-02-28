@@ -10,6 +10,7 @@
 #import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
 #import "DateTools.h"
+#import "BPTaskDisplayViewController.h"
 
 @interface BPMainViewController ()
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
@@ -41,6 +42,12 @@
 
 - (void)changeColor:(NSInteger)colorId {
     [self.mainNavigationTitleView changeColor:[UIColor bp_colorPickerColorWithIndex:colorId]];
+}
+
+- (void)displayTask:(TaskModel *)task {
+    BPTaskDisplayViewController *displayViewController = [[BPTaskDisplayViewController alloc] initWithTask:task];
+    displayViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:displayViewController animated:YES];
 }
 
 // MARK: BPNavigationTitleViewDelegate

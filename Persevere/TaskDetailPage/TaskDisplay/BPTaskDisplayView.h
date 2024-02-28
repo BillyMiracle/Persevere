@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// BPTaskDisplayView展示页数据源
 @protocol BPTaskDisplayViewDataSource <NSObject>
 
 @property (nonatomic, strong) TaskModel *task;

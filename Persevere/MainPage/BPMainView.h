@@ -9,10 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TaskModel;
+
 @protocol BPMainViewDelegate <NSObject>
 
 /// 改变颜色
 - (void)changeColor:(NSInteger)colorId;
+
+/// 跳转到taskDisplay
+- (void)displayTask:(TaskModel *)task;
 
 @end
 
