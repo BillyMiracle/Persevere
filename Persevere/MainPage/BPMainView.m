@@ -90,6 +90,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     if (![self.fsCalendarView.today isToday]) {
         self.selectedDate = [NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]];
     }
+    self.fsCalendarView.today = [NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]];
     [self.fsCalendarView selectDate:self.selectedDate scrollToDate:YES];
     [self loadTasksFinished:^(BOOL success) {
         dispatch_async(dispatch_get_main_queue(), ^{
