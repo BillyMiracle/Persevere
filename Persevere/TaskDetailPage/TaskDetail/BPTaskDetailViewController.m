@@ -74,6 +74,8 @@
     self.navigationItem.titleView = self.detailTitleView;
 }
 
+// MARK: Button Actions
+
 - (void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
 }

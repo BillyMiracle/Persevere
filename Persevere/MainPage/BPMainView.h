@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol BPMainViewDelegate <NSObject>
 
+/// 改变颜色
 - (void)changeColor:(NSInteger)colorId;
 
 @end

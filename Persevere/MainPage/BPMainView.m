@@ -280,12 +280,14 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     switch (direction) {
         case MGSwipeDirectionLeftToRight:
         {
+            // 右滑，点击详情
             TaskModel *task = [self taskAtIndexPath:indexPath];
             
         }
             break;
         case MGSwipeDirectionRightToLeft:
         {
+            // 左滑，点击删除
             [self presentAlertToDeleteTaskAtIndexPath:indexPath];
         }
             break;

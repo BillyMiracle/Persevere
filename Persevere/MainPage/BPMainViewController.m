@@ -37,6 +37,8 @@
 //    [self.mainPageView refreshAndLoadTasksWithDate:[NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]]];
 }
 
+// MARK: BPMainViewDelegate
+
 - (void)changeColor:(NSInteger)colorId {
     [self.mainNavigationTitleView changeColor:[UIColor bp_colorPickerColorWithIndex:colorId]];
 }

@@ -40,7 +40,9 @@ HXCustomNavigationControllerDelegate
 
 @property (nonatomic, strong) NSArray <NSString*>*titleArray;
 
+/// 必选标题框
 @property (nonatomic, strong) BPSectionHeaderView *requiredSectionHeader;
+/// 可选标题框
 @property (nonatomic, strong) BPSectionHeaderView *optionalSectionHeader;
 
 @property (nonatomic, strong) TaskModel *currentTaskModel;
