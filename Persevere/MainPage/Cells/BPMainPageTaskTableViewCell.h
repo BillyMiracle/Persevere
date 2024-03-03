@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) id<BPMainPageTaskTableViewCellDelegate> checkDelegate;
 
-- (void)configureWithTask:(TaskModel *)task;
+- (void)bindTask:(TaskModel *)task;
 - (void)setIsFinished:(BOOL)isFinished;
 
 @end

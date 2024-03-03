@@ -43,7 +43,7 @@ BEMCheckBoxDelegate
     return self;
 }
 
-- (void)configureWithTask:(TaskModel *)task {
+- (void)bindTask:(TaskModel *)task {
     self.bp_titleLabel.text = task.name;
 }
 

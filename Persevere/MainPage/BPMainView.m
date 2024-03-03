@@ -205,7 +205,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     } else if (indexPath.section == 1) {
         BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
-        [cell configureWithTask:[self.unfinishedTaskArr objectAtIndex:indexPath.row]];
+        [cell bindTask:[self.unfinishedTaskArr objectAtIndex:indexPath.row]];
         cell.checkDelegate = self;
         cell.delegate = self;
         [cell setIsFinished:NO];
@@ -213,7 +213,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     } else if (indexPath.section == 2) {
         BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
-        [cell configureWithTask:[self.finishedTaskArr objectAtIndex:indexPath.row]];
+        [cell bindTask:[self.finishedTaskArr objectAtIndex:indexPath.row]];
         cell.checkDelegate = self;
         cell.delegate = self;
         [cell setIsFinished:YES];
