@@ -62,6 +62,11 @@
 		3AB735722B09ECD400FE6975 /* BPMainPageTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB735712B09ECD400FE6975 /* BPMainPageTaskTableViewCell.m */; };
 		3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */; };
 		3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */; };
+		3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */; };
+		3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824C62B90E4D200521E94 /* BPInfoCardTableViewCell.m */; };
+		3AE824CA2B90E54000521E94 /* BPTaskDisplayInfoCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824C92B90E54000521E94 /* BPTaskDisplayInfoCardView.m */; };
+		3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */; };
+		3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */; };
 		6C665E1B675DD9599822C2BB /* libPods-Persevere.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C75144AAB11619FA957E932 /* libPods-Persevere.a */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +176,16 @@
 		3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputShortTextTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSectionHeaderView.h; sourceTree = "<group>"; };
 		3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSectionHeaderView.m; sourceTree = "<group>"; };
+		3AE824BD2B8CEFF300521E94 /* BPTaskDisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDisplayView.h; sourceTree = "<group>"; };
+		3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDisplayView.m; sourceTree = "<group>"; };
+		3AE824C52B90E4D200521E94 /* BPInfoCardTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInfoCardTableViewCell.h; sourceTree = "<group>"; };
+		3AE824C62B90E4D200521E94 /* BPInfoCardTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoCardTableViewCell.m; sourceTree = "<group>"; };
+		3AE824C82B90E54000521E94 /* BPTaskDisplayInfoCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDisplayInfoCardView.h; sourceTree = "<group>"; };
+		3AE824C92B90E54000521E94 /* BPTaskDisplayInfoCardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDisplayInfoCardView.m; sourceTree = "<group>"; };
+		3AE824D12B91041400521E94 /* BPInfoDisplayTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInfoDisplayTableView.h; sourceTree = "<group>"; };
+		3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoDisplayTableView.m; sourceTree = "<group>"; };
+		3AE824D72B92419800521E94 /* IconAndLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconAndLabelTableViewCell.h; sourceTree = "<group>"; };
+		3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndLabelTableViewCell.m; sourceTree = "<group>"; };
 		B01DE06BDFA83D354F730C54 /* Pods-Persevere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Persevere.debug.xcconfig"; path = "Target Support Files/Pods-Persevere/Pods-Persevere.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +281,8 @@
 		3A03CE1D2AF64D8D0001B562 /* TaskDetailPage */ = {
 			isa = PBXGroup;
 			children = (
+				3A3F195D2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.h */,
+				3A3F195E2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m */,
 				3A03CE1E2AF650B60001B562 /* TaskDisplay */,
 				3A03CE1F2AF650C20001B562 /* TaskDetail */,
 			);
@@ -275,8 +292,11 @@
 		3A03CE1E2AF650B60001B562 /* TaskDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				3AE824C02B90E30E00521E94 /* Cells */,
 				3A4DE9E12B0D0205006D91A4 /* BPTaskDisplayViewController.h */,
 				3A4DE9E22B0D0205006D91A4 /* BPTaskDisplayViewController.m */,
+				3AE824BD2B8CEFF300521E94 /* BPTaskDisplayView.h */,
+				3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */,
 			);
 			path = TaskDisplay;
 			sourceTree = "<group>";
@@ -477,8 +497,6 @@
 		3AB33E752AFA3B2D0023575F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				3A3F195D2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.h */,
-				3A3F195E2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m */,
 				3AB33E882AFA3DFC0023575F /* InputText */,
 				3AB33E8A2AFA3E1E0023575F /* SelectWeekday */,
 				3AB33E892AFA3E0E0023575F /* SelectDateOrTime */,
@@ -551,6 +569,77 @@
 				3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */,
 			);
 			path = SectionHeaderView;
+			sourceTree = "<group>";
+		};
+		3AE824C02B90E30E00521E94 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824C12B90E3CD00521E94 /* InfoCard */,
+				3AE824C22B90E3DE00521E94 /* ExtraInfoCard */,
+				3AE824C32B90E47B00521E94 /* Progress */,
+				3AE824C42B90E48F00521E94 /* Calander */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3AE824C12B90E3CD00521E94 /* InfoCard */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824D42B923FE000521E94 /* CardView */,
+				3AE824C52B90E4D200521E94 /* BPInfoCardTableViewCell.h */,
+				3AE824C62B90E4D200521E94 /* BPInfoCardTableViewCell.m */,
+			);
+			path = InfoCard;
+			sourceTree = "<group>";
+		};
+		3AE824C22B90E3DE00521E94 /* ExtraInfoCard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ExtraInfoCard;
+			sourceTree = "<group>";
+		};
+		3AE824C32B90E47B00521E94 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		3AE824C42B90E48F00521E94 /* Calander */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calander;
+			sourceTree = "<group>";
+		};
+		3AE824D42B923FE000521E94 /* CardView */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824D52B923FF200521E94 /* InfoDisplayTableView */,
+				3AE824C82B90E54000521E94 /* BPTaskDisplayInfoCardView.h */,
+				3AE824C92B90E54000521E94 /* BPTaskDisplayInfoCardView.m */,
+			);
+			path = CardView;
+			sourceTree = "<group>";
+		};
+		3AE824D52B923FF200521E94 /* InfoDisplayTableView */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824D62B92415C00521E94 /* Cells */,
+				3AE824D12B91041400521E94 /* BPInfoDisplayTableView.h */,
+				3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */,
+			);
+			path = InfoDisplayTableView;
+			sourceTree = "<group>";
+		};
+		3AE824D62B92415C00521E94 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824D72B92419800521E94 /* IconAndLabelTableViewCell.h */,
+				3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E65204918685594D8F30E167 /* Pods */ = {
@@ -731,6 +820,7 @@
 				3A0DD2572B04EB8F00F2DAC6 /* LocalTaskDataManager.m in Sources */,
 				3A03CE382AF7BBBB0001B562 /* BPColorPickerView.m in Sources */,
 				3A3C8F1A2AF146FE00AF62E4 /* main.m in Sources */,
+				3AE824CA2B90E54000521E94 /* BPTaskDisplayInfoCardView.m in Sources */,
 				3A03CDE12AF3B4300001B562 /* BPMainViewController.m in Sources */,
 				3AB7356F2B09E8A800FE6975 /* BPTaskBaseTableViewCell.m in Sources */,
 				3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */,
@@ -738,11 +828,13 @@
 				3A03CDD92AF3B22B0001B562 /* BPMainTabBarController.m in Sources */,
 				3AA8C6B32B079991006AA569 /* TaskDataHelper.m in Sources */,
 				3A03CE322AF776490001B562 /* BPTaskDetailView.m in Sources */,
+				3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */,
 				3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */,
 				3A03CE062AF63FF40001B562 /* UIColor+BPAddtion.m in Sources */,
 				3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */,
 				3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */,
 				3A03CDED2AF3C2E90001B562 /* BPTaskListViewController.m in Sources */,
+				3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */,
 				3A3C8F0C2AF146FD00AF62E4 /* SceneDelegate.m in Sources */,
 				3A03CDF92AF3EB520001B562 /* UIView+BPUIHelper.m in Sources */,
 				3AB33E812AFA3CBB0023575F /* BPSelectColorTableViewCell.m in Sources */,
@@ -751,6 +843,8 @@
 				3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */,
 				3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
+				3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */,
+				3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */,
 				3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */,
 				3AA8C6B72B07C197006AA569 /* BPProgressLabel.m in Sources */,
 				3A03CE2A2AF692D40001B562 /* BPTaskListView.m in Sources */,

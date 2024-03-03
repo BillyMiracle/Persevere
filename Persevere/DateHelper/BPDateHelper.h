@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 static const NSString *BPEndlessString = @"到无限期";
 static const NSString *BPDateFormat = @"yyyy/MM/dd";
+static const NSString *BPTimeFormat = @"HH:mm";
 
 @interface BPDateHelper : NSObject
 
