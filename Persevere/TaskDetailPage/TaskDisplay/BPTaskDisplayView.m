@@ -8,6 +8,7 @@
 #import "BPTaskDisplayView.h"
 #import "BPUIHelper.h"
 #import "BPSectionHeaderView.h"
+#import "BPInfoCardTableViewCell.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
 
@@ -17,6 +18,7 @@ UITableViewDelegate,
 UITableViewDataSource
 >
 
+/// 任务信息 tableView
 @property (nonatomic, strong) UITableView *displayTableView;
 
 /// 信息标题框
@@ -30,6 +32,7 @@ UITableViewDataSource
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
+    [self registerCells];
     self.backgroundColor = [UIColor bp_backgroundThemeColor];
     [self addSubview:self.displayTableView];
     return self;
@@ -53,7 +56,9 @@ UITableViewDataSource
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 140;
+    }
     return 70;
 }
 
@@ -91,8 +96,18 @@ UITableViewDataSource
 
 // MARK: 返回cell
 
+- (void)registerCells {
+    [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        BPInfoCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCard" forIndexPath:indexPath];
+        [cell bindTask:self.dataSource.task];
+        cell.isTopBorder = YES;
+        cell.isBottomBorder = YES;
+        return cell;
+    }
     return [[UITableViewCell alloc] init];
 }
 

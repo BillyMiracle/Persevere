@@ -36,6 +36,7 @@ UITableViewDataSource
     self = [super initWithFrame:frame style:style];
     self.dataSource = self;
     self.delegate = self;
+    [self registerCells];
     self.scrollEnabled = NO;
     return self;
 }
@@ -123,9 +124,10 @@ UITableViewDataSource
 - (NSArray<UIImage *> *)imageArray {
     if (!_imageArray) {
         _imageArray = @[
-            [UIImage imageNamed:@""],
-            [UIImage imageNamed:@""],
-            [UIImage imageNamed:@""]
+            [UIImage imageNamed:@"Start"],
+            [UIImage imageNamed:@"Stop"],
+            [UIImage imageNamed:@"Clock"],
+            [UIImage imageNamed:@"Calander"]
         ];
     }
     return _imageArray;

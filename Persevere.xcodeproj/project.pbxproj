@@ -67,6 +67,7 @@
 		3AE824CA2B90E54000521E94 /* BPTaskDisplayInfoCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824C92B90E54000521E94 /* BPTaskDisplayInfoCardView.m */; };
 		3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */; };
 		3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */; };
+		3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */; };
 		6C665E1B675DD9599822C2BB /* libPods-Persevere.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C75144AAB11619FA957E932 /* libPods-Persevere.a */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +187,7 @@
 		3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoDisplayTableView.m; sourceTree = "<group>"; };
 		3AE824D72B92419800521E94 /* IconAndLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconAndLabelTableViewCell.h; sourceTree = "<group>"; };
 		3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndLabelTableViewCell.m; sourceTree = "<group>"; };
+		3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DetailPageAsset.xcassets; sourceTree = "<group>"; };
 		B01DE06BDFA83D354F730C54 /* Pods-Persevere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Persevere.debug.xcconfig"; path = "Target Support Files/Pods-Persevere/Pods-Persevere.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +287,7 @@
 				3A3F195E2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m */,
 				3A03CE1E2AF650B60001B562 /* TaskDisplay */,
 				3A03CE1F2AF650C20001B562 /* TaskDetail */,
+				3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */,
 			);
 			path = TaskDetailPage;
 			sourceTree = "<group>";
@@ -723,6 +726,7 @@
 				3A4548762AF9390600A857F7 /* ColorAsset.xcassets in Resources */,
 				3A3C8F172AF146FE00AF62E4 /* LaunchScreen.storyboard in Resources */,
 				3A3C8F142AF146FE00AF62E4 /* Assets.xcassets in Resources */,
+				3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */,
 				3AA8C6AE2B06848A006AA569 /* TodayPage.xcassets in Resources */,
 				3A03CE462AF7CF7E0001B562 /* WeekDayAsset.xcassets in Resources */,
 				3A3C8F122AF146FD00AF62E4 /* Main.storyboard in Resources */,

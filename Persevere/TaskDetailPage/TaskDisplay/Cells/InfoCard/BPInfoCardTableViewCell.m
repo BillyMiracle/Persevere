@@ -6,10 +6,12 @@
 //
 
 #import "BPInfoCardTableViewCell.h"
+#import "BPTaskDisplayInfoCardView.h"
+#import "BPUIHelper.h"
 
 @interface BPInfoCardTableViewCell()
 
-
+@property (nonatomic, strong) BPTaskDisplayInfoCardView *infoCardView;
 
 @end
 
@@ -29,7 +31,28 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
+    [self.bp_backgroundView addSubview:self.infoCardView];
+    
     return self;
+}
+
+// 绑定数据
+- (void)bindTask:(TaskModel *)task {
+    [self.infoCardView bindTask:task];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    self.infoCardView.frame = CGRectMake(0, 0, self.bp_backgroundView.bp_width, self.bp_backgroundView.bp_height);
+}
+
+// MARK: Getters
+
+- (BPTaskDisplayInfoCardView *)infoCardView {
+    if (!_infoCardView) {
+        _infoCardView = [[BPTaskDisplayInfoCardView alloc] init];
+    }
+    return _infoCardView;
 }
 
 @end
