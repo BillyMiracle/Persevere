@@ -51,10 +51,10 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
     // 设置圆角
     if (self.isTopBorder || self.isBottomBorder) {
         UIRectCorner corner = 0;
-        if (self.isTopBorder) {
+        if (self.isTopBorder && !self.isBottomBorder) {
             corner = UIRectCornerTopLeft | UIRectCornerTopRight;
             self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
-        } else if (self.isBottomBorder) {
+        } else if (self.isBottomBorder && !self.isTopBorder) {
             corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
             self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
         } else {
