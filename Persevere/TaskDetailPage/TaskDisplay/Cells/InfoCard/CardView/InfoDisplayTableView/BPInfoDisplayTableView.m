@@ -99,11 +99,11 @@ UITableViewDataSource
 - (NSString *)titleForRow:(NSInteger)row {
     switch (row) {
         case 0:
-            return [self.task.startDate formattedDateWithFormat:(NSString *)BPDateFormat];
+            return [NSString stringWithFormat:@"%@ 起", [self.task.startDate formattedDateWithFormat:(NSString *)BPDateFormat]];
         case 1:
-            return [self.task.startDate formattedDateWithFormat:(NSString *)BPDateFormat];
+            return [self.task.endDate formattedDateWithFormat:(NSString *)BPDateFormat] ?: (NSString *)BPEndlessString;
         case 2:
-            return self.task.reminderTime ? [self.task.reminderTime formattedDateWithFormat:(NSString *)BPTimeFormat] : (NSString *)BPEndlessString;
+            return self.task.reminderTime ? [self.task.reminderTime formattedDateWithFormat:(NSString *)BPTimeFormat] : @"全天";
     }
     return @"";
 }

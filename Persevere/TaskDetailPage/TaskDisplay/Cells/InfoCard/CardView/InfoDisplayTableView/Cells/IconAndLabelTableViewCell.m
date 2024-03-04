@@ -40,7 +40,7 @@ static const CGFloat kborderWidth = 10.0f;
         CGFloat iconViewLength = cellHeight - 2 * kborderWidth;
         self.iconView.frame = CGRectMake(kborderWidth, kborderWidth, iconViewLength, iconViewLength);
         CGFloat titleLabelHeight = self.titleLabel.font.lineHeight;
-        self.titleLabel.frame = CGRectMake(self.iconView.bp_right, (cellHeight - titleLabelHeight) / 2, cellWidth - 2 * kborderWidth, titleLabelHeight);
+        self.titleLabel.frame = CGRectMake(self.iconView.bp_right + kborderWidth, (cellHeight - titleLabelHeight) / 2, cellWidth - 2 * kborderWidth, titleLabelHeight);
     } else {
         self.iconView.frame = CGRectZero;
         self.titleLabel.frame = CGRectZero;
@@ -57,9 +57,10 @@ static const CGFloat kborderWidth = 10.0f;
 }
 
 - (UILabel *)titleLabel {
-    if (_titleLabel) {
+    if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
-        _titleLabel.adjustsFontSizeToFitWidth = YES;
+//        _titleLabel.adjustsFontSizeToFitWidth = YES;
+        _titleLabel.font = [UIFont systemFontOfSize:16.0f];
     }
     return _titleLabel;
 }
