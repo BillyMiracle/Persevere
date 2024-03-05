@@ -30,9 +30,9 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    
-    [self.bp_backgroundView addSubview:self.infoCardView];
-    
+    if (self) {
+        [self.bp_backgroundView addSubview:self.infoCardView];
+    }
     return self;
 }
 

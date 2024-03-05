@@ -31,17 +31,13 @@ static const NSInteger colorButtonCount = 7;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame andSelectedItem:(NSInteger)selectedItem {
-//    CGFloat viewWidth = frame.size.width;
-//    CGFloat btnWidth = 0, viewHeight = 0;
-//    btnWidth = (viewWidth - 8 * hPadding) / 7;
-//    viewHeight = btnWidth + 2 * vPadding;
-//    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, viewHeight)];
-    self = [super initWithFrame:frame];
-    _selectedIndex = selectedItem;
-    self.backgroundColor = [UIColor whiteColor];
-//    [self createWeekDayButtonsWithFrame:frame];
-    [self createWeekDayButtons];
-    [self refreshWithFrame:frame];
+    if (self) {
+        self = [super initWithFrame:frame];
+        _selectedIndex = selectedItem;
+        self.backgroundColor = [UIColor whiteColor];
+        [self createWeekDayButtons];
+        [self refreshWithFrame:frame];
+    }
     return self;
 }
 
@@ -53,18 +49,7 @@ static const NSInteger colorButtonCount = 7;
     }
     
 }
-/*
-- (void)createWeekDayButtonsWithFrame:(CGRect)frame {
-    CGFloat viewWidth = frame.size.width;
-    CGFloat btnWidth = (viewWidth - 8 * hPadding) / 7;
-    for (int i = 1; i <= 7; i++) {
-        BPColorButton *btn = [self colorPickerButtonWithId:i];
-        [self addSubview:btn];
-        [btn setFrame:CGRectMake(i * hPadding + (i - 1) * btnWidth, vPadding, btnWidth, btnWidth)];
-        [self.buttonArray addObject:btn];
-    }
-}
-*/
+
 - (BPColorButton *)colorPickerButtonWithId:(NSInteger)btnId {
     BPColorButton *button = [BPColorButton buttonWithType:UIButtonTypeCustom];
     button.buttonId = btnId;

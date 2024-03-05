@@ -71,15 +71,19 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor bp_backgroundThemeColor];
-    [self addSubview:self.mainTableView];
-    [self.fsCalendarView addSubview:self.previousMonthButton];
-    [self.fsCalendarView addSubview:self.nextMonthButton];
-    [self.hoverView addSubview:self.fsCalendarView];
-    [self.hoverView addSubview:self.colorPickerView];
-    [self.mainTableView addSubview:self.hoverView];
-    [self.mainTableView bringSubviewToFront:self.hoverView];
-    [self.mainTableView addObserver:self.hoverView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    if (self) {
+        self.backgroundColor = [UIColor bp_backgroundThemeColor];
+        
+        [self addSubview:self.mainTableView];
+        [self.fsCalendarView addSubview:self.previousMonthButton];
+        [self.fsCalendarView addSubview:self.nextMonthButton];
+        [self.hoverView addSubview:self.fsCalendarView];
+        [self.hoverView addSubview:self.colorPickerView];
+        [self.mainTableView addSubview:self.hoverView];
+        [self.mainTableView bringSubviewToFront:self.hoverView];
+        
+        [self.mainTableView addObserver:self.hoverView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    }
     return self;
 }
 

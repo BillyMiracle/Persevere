@@ -63,10 +63,10 @@ HXCustomNavigationControllerDelegate
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor bp_backgroundThemeColor];
-//    [self addSubview:self.weekdayPickerView];
-//    [self addSubview:self.colorPickerView];
-    [self addSubview:self.detailTableView];
+    if (self) {
+        self.backgroundColor = [UIColor bp_backgroundThemeColor];
+        [self addSubview:self.detailTableView];
+    }
     return self;
 }
 

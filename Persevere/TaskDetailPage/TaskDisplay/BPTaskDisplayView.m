@@ -32,9 +32,11 @@ UITableViewDataSource
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    [self registerCells];
-    self.backgroundColor = [UIColor bp_backgroundThemeColor];
-    [self addSubview:self.displayTableView];
+    if (self) {
+        [self registerCells];
+        self.backgroundColor = [UIColor bp_backgroundThemeColor];
+        [self addSubview:self.displayTableView];
+    }
     return self;
 }
 

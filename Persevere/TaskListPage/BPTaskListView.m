@@ -54,13 +54,15 @@ BPWeekdayPickerDelegate
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    self.backgroundColor = [UIColor bp_backgroundThemeColor];
-    [self addSubview:self.taskListTableView];
-    [self.hoverView addSubview:self.weekdayPickerView];
-    [self.hoverView addSubview:self.colorPickerView];
-    [self.taskListTableView addSubview:self.hoverView];
-    [self.taskListTableView bringSubviewToFront:self.hoverView];
-    [self.taskListTableView addObserver:self.hoverView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    if (self) {
+        self.backgroundColor = [UIColor bp_backgroundThemeColor];
+        [self addSubview:self.taskListTableView];
+        [self.hoverView addSubview:self.weekdayPickerView];
+        [self.hoverView addSubview:self.colorPickerView];
+        [self.taskListTableView addSubview:self.hoverView];
+        [self.taskListTableView bringSubviewToFront:self.hoverView];
+        [self.taskListTableView addObserver:self.hoverView forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    }
     return self;
 }
 

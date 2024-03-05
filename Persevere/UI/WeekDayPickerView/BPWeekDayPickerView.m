@@ -39,22 +39,14 @@ static const NSInteger weekdayButtonCount = 7;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame andShowSelectAllButton:(BOOL)shouldShow andSelectedWeekDayArray:(NSArray *)selectedWeekdaysArray {
-//    CGFloat viewWidth = frame.size.width;
-//    CGFloat btnWidth = 0, viewHeight = 0;
-//    if (!shouldShow) {
-//        btnWidth = (viewWidth - 8 * hPadding) / 7;
-//        viewHeight = btnWidth + 2 * vPadding;
-//    } else {
-//
-//    }
-//    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, viewHeight)];
     self = [super initWithFrame:frame];
-    _selectedWeekdayArray = [NSMutableArray arrayWithArray:selectedWeekdaysArray];
-    self.backgroundColor = [UIColor whiteColor];
-//    [self createWeekDayButtonsWithFrame:frame];
-    [self createWeekDayButtons];
-    [self refreshWeekdayButtons];
-    [self refreshWithFrame:frame];
+    if (self) {
+        self.selectedWeekdayArray = [NSMutableArray arrayWithArray:selectedWeekdaysArray];
+        self.backgroundColor = [UIColor whiteColor];
+        [self createWeekDayButtons];
+        [self refreshWeekdayButtons];
+        [self refreshWithFrame:frame];
+    }
     return self;
 }
 - (void)createWeekDayButtons {
@@ -65,18 +57,7 @@ static const NSInteger weekdayButtonCount = 7;
     }
     
 }
-/*
-- (void)createWeekDayButtonsWithFrame:(CGRect)frame {
-    CGFloat viewWidth = frame.size.width;
-    CGFloat btnWidth = (viewWidth - 8 * hPadding) / 7;
-    for (int i = 0; i < 7; i++) {
-        BPWeekDayButton *btn = [self weekDayButtonAtWeekDay:((i + 6) % 7 + 1)];
-        [self addSubview:btn];
-        [btn setFrame:CGRectMake((1 + i) * hPadding + i * btnWidth, vPadding, btnWidth, btnWidth)];
-        [self.buttonArray addObject:btn];
-    }
-}
-*/
+
 - (BPWeekDayButton *)weekDayButtonAtWeekDay:(NSInteger)weekDay {
     BPWeekDayButton *button = [BPWeekDayButton buttonWithType:UIButtonTypeCustom];
     button.weekDay = weekDay;

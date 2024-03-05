@@ -34,10 +34,12 @@ UITableViewDataSource
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     self = [super initWithFrame:frame style:style];
-    self.dataSource = self;
-    self.delegate = self;
-    [self registerCells];
-    self.scrollEnabled = NO;
+    if (self) {
+        self.dataSource = self;
+        self.delegate = self;
+        [self registerCells];
+        self.scrollEnabled = NO;
+    }
     return self;
 }
 

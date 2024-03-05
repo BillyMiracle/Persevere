@@ -19,13 +19,11 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    
-    [self addKeyValueObserving];
-    
-    [self addSubview:self.infoTableView];
-    [self setUILayout];
-    
-    
+    if (self) {
+        [self addKeyValueObserving];
+        [self addSubview:self.infoTableView];
+        [self setUILayout];
+    }
     return self;
 }
 

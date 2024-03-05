@@ -20,10 +20,13 @@ static const CGFloat hPadding = 15.0f;
 
 - (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title {
     self = [super initWithFrame:frame];
-    [self addSubview:self.titleLabel];
-    [self.titleLabel setText:title];
-    [self.titleLabel sizeToFit];
-    self.titleLabel.frame = CGRectMake(hPadding, (self.bp_height - self.titleLabel.bp_height) / 2, ceilf(self.titleLabel.bp_width), ceilf(self.titleLabel.bp_height));
+    if (self) {
+        [self addSubview:self.titleLabel];
+        
+        [self.titleLabel setText:title];
+        [self.titleLabel sizeToFit];
+        self.titleLabel.frame = CGRectMake(hPadding, (self.bp_height - self.titleLabel.bp_height) / 2, ceilf(self.titleLabel.bp_width), ceilf(self.titleLabel.bp_height));
+    }
     return self;
 }
 
