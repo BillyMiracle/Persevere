@@ -68,6 +68,7 @@
 		3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D22B91041400521E94 /* BPInfoDisplayTableView.m */; };
 		3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */; };
 		3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */; };
+		3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824DE2B97895E00521E94 /* BPProgressView.m */; };
 		6C665E1B675DD9599822C2BB /* libPods-Persevere.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C75144AAB11619FA957E932 /* libPods-Persevere.a */; };
 /* End PBXBuildFile section */
 
@@ -188,6 +189,8 @@
 		3AE824D72B92419800521E94 /* IconAndLabelTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconAndLabelTableViewCell.h; sourceTree = "<group>"; };
 		3AE824D82B92419800521E94 /* IconAndLabelTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndLabelTableViewCell.m; sourceTree = "<group>"; };
 		3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DetailPageAsset.xcassets; sourceTree = "<group>"; };
+		3AE824DD2B97895E00521E94 /* BPProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPProgressView.h; sourceTree = "<group>"; };
+		3AE824DE2B97895E00521E94 /* BPProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPProgressView.m; sourceTree = "<group>"; };
 		B01DE06BDFA83D354F730C54 /* Pods-Persevere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Persevere.debug.xcconfig"; path = "Target Support Files/Pods-Persevere/Pods-Persevere.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +278,7 @@
 				3AE37CB42AFF9B81000CA19D /* SectionHeaderView */,
 				3A0DD2642B0536D000F2DAC6 /* HoverView */,
 				3AA8C6B42B07C17B006AA569 /* ProgressLabel */,
+				3AE824DC2B97869400521E94 /* ProgressView */,
 				3AA8C6BE2B07D2D4006AA569 /* DateView */,
 			);
 			path = UI;
@@ -645,6 +649,15 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		3AE824DC2B97869400521E94 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				3AE824DD2B97895E00521E94 /* BPProgressView.h */,
+				3AE824DE2B97895E00521E94 /* BPProgressView.m */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
 		E65204918685594D8F30E167 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -837,6 +850,7 @@
 				3A03CE062AF63FF40001B562 /* UIColor+BPAddtion.m in Sources */,
 				3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */,
 				3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */,
+				3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */,
 				3A03CDED2AF3C2E90001B562 /* BPTaskListViewController.m in Sources */,
 				3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */,
 				3A3C8F0C2AF146FD00AF62E4 /* SceneDelegate.m in Sources */,
