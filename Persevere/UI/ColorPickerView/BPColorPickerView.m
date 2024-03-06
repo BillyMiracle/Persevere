@@ -98,19 +98,10 @@ static const NSInteger colorButtonCount = 7;
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    CGFloat viewWidth = frame.size.width;
-    CGFloat viewHeight = frame.size.height;
-    CGFloat btnWidth = MIN((viewWidth - (colorButtonCount + 1) * hPadding) / colorButtonCount , (viewHeight - 2 * vPadding));
-    CGFloat newHPadding = (viewWidth - colorButtonCount * btnWidth) / (colorButtonCount + 1);
-    CGFloat newVPadding = (viewHeight - btnWidth) / 2;
-    for (BPColorButton *btn in self.buttonArray) {
-        NSInteger i = btn.buttonId;
-        [btn setFrame:CGRectMake(i * newHPadding + (i - 1) * btnWidth, newVPadding, btnWidth, btnWidth)];
-    }
+    [self refreshWithFrame:frame];
 }
 
 - (void)refreshWithFrame:(CGRect)frame {
-    self.frame = frame;
     CGFloat viewWidth = frame.size.width;
     CGFloat viewHeight = frame.size.height;
     CGFloat btnWidth = MIN((viewWidth - (colorButtonCount + 1) * hPadding) / colorButtonCount , (viewHeight - 2 * vPadding));
