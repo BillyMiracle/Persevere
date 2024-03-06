@@ -7,11 +7,19 @@
 
 #import "BPTaskDisplayInfoCardView.h"
 #import "BPInfoDisplayTableView.h"
+#import "BPProgressView.h"
+#import "TaskModel.h"
 #import "BPUIHelper.h"
+
+static const CGFloat verticalPadding = 20.0f;
+static const CGFloat horizontalPadding = 20.0f;
+
+static const CGFloat progressViewLineWidth = 5.0f;
 
 @interface BPTaskDisplayInfoCardView()
 
 @property (nonatomic, strong) BPInfoDisplayTableView *infoTableView;
+@property (nonatomic, strong) BPProgressView *progressView;
 
 @end
 
@@ -22,6 +30,7 @@
     if (self) {
         [self addKeyValueObserving];
         [self addSubview:self.infoTableView];
+        [self addSubview:self.progressView];
         [self setUILayout];
     }
     return self;
@@ -29,10 +38,14 @@
 
 - (void)bindTask:(TaskModel *)task {
     [self.infoTableView reloadWithTask:task];
+    [self.progressView setProgress:task.progress animated:NO];
 }
 
 - (void)setUILayout {
-    self.infoTableView.frame = CGRectMake(0, 0, self.bp_width * 0.6, self.bp_height);
+    CGFloat progressViewLength = MIN(self.bp_width * 0.4 - 2 * horizontalPadding, self.bp_height - 2 * verticalPadding);
+    self.progressView.frame = CGRectMake(0, 0, progressViewLength, progressViewLength);
+    self.progressView.center = CGPointMake(self.bp_width - progressViewLength / 2 - horizontalPadding, self.bp_height / 2);
+    self.infoTableView.frame = CGRectMake(0, 0, self.progressView.bp_left - horizontalPadding, self.bp_height);
 }
 
 - (void)dealloc {
@@ -64,5 +77,14 @@
     return _infoTableView;
 }
 
+- (BPProgressView *)progressView {
+    if (!_progressView) {
+        _progressView = [[BPProgressView alloc] init];
+        [_progressView setProgress:0 animated:NO];
+        _progressView.progressLineWidth = progressViewLineWidth;
+        _progressView.backgroundLineWidth = progressViewLineWidth;
+    }
+    return _progressView;
+}
 
 @end

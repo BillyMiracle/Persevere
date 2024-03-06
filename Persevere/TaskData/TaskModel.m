@@ -17,13 +17,13 @@
     return totaldays == 0.0 ? 0.0 : progress;
 }
 
-//- (NSUInteger)totalDays {
-//    return [[LocalTaskDataManager shareInstance] totalPunchNumberOfTask:self] - [[TaskManager shareInstance] punchSkipNumberOfTask:self];
-//}
-//
-//- (NSUInteger)punchDays {
-//    return [[LocalTaskDataManager shareInstance] punchNumberOfTask:self];
-//}
+- (NSUInteger)totalDays {
+    return [[LocalTaskDataManager shareInstance] totalDayCountOfTask:self] - [[LocalTaskDataManager shareInstance] skipPunchDayCountOfTask:self];
+}
+
+- (NSUInteger)punchDays {
+    return [[LocalTaskDataManager shareInstance] didPunchDayNumberOfTask:self];
+}
 
 - (NSString *)sortName {
     return [self.name stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];

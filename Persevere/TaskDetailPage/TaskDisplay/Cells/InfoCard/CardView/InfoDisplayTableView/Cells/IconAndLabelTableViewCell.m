@@ -26,8 +26,11 @@ static const CGFloat kborderWidth = 10.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    [self.contentView addSubview:self.iconView];
-    [self.contentView addSubview:self.titleLabel];
+    if (self) {
+        [self.contentView addSubview:self.iconView];
+        [self.contentView addSubview:self.titleLabel];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     return self;
 }
 
@@ -37,8 +40,8 @@ static const CGFloat kborderWidth = 10.0f;
     CGFloat cellWidth = self.contentView.bp_width;
     
     if (cellHeight > kborderWidth * 2 && cellWidth >= cellHeight) {
-        CGFloat iconViewLength = cellHeight - 2 * kborderWidth;
-        self.iconView.frame = CGRectMake(kborderWidth, kborderWidth, iconViewLength, iconViewLength);
+        CGFloat iconViewLength = MIN(16, (cellHeight - 2 * kborderWidth));
+        self.iconView.frame = CGRectMake(kborderWidth, (cellHeight - iconViewLength) / 2, iconViewLength, iconViewLength);
         CGFloat titleLabelHeight = self.titleLabel.font.lineHeight;
         self.titleLabel.frame = CGRectMake(self.iconView.bp_right + kborderWidth, (cellHeight - titleLabelHeight) / 2, cellWidth - 2 * kborderWidth, titleLabelHeight);
     } else {

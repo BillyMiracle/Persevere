@@ -10,6 +10,7 @@
 
 #define kDuration 0.5
 #define kDefaultLineWidth 2
+#define kDefaultFontSize 16
 
 @interface BPProgressView()
 
@@ -27,8 +28,8 @@
 
 @implementation BPProgressView
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)init {
+    self = [super init];
     if (self) {
         self.clipsToBounds = YES;
         
@@ -46,14 +47,46 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.clipsToBounds = YES;
+        
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self createSubViews];
+        
+        // 初始化值
+        self.backgroundLineWidth = kDefaultLineWidth;
+        self.progressLineWidth = kDefaultLineWidth;
+        self.percentage = 0;
+        self.offset = 0;
+        self.sumSteps = 0;
+        self.step = 0.1;
+        
+        [self refreshWithFrame:frame];
+    }
+    return self;
+}
+
 - (void)createSubViews {
     [self addSubview:self.progressLabel];
-    [self.layer addSublayer:_backgroundLayer];
-    [self.layer addSublayer:_progressLayer];
+    [self.layer addSublayer:self.backgroundLayer];
+    [self.layer addSublayer:self.progressLayer];
 }
 
 - (void)setFontWithSize:(CGFloat)size {
     self.progressLabel.font = [UIFont fontWithName:@"Futura" size:size];
+}
+
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    [self refreshWithFrame:frame];
+}
+
+- (void)refreshWithFrame:(CGRect)frame {
+    self.progressLabel.frame = CGRectMake((self.bp_width -100) / 2, (self.bp_height - 100) / 2, 100, 100);
+    [self setBackgroundCircleLine];
+    [self setProgressCircleLine];
 }
 
 // MARK: 绘制
@@ -81,8 +114,9 @@
 
 - (UILabel *)progressLabel {
     if (!_progressLabel) {
-        _progressLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.bounds.size.width -100) / 2, (self.bounds.size.height - 100) / 2, 100, 100)];
+        _progressLabel = [[UILabel alloc] init];
         _progressLabel.textAlignment = NSTextAlignmentCenter;
+        _progressLabel.font = [UIFont fontWithName:@"Futura" size:kDefaultFontSize];
         _progressLabel.text = @"0%";
     }
     return _progressLabel;

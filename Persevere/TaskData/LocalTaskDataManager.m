@@ -12,6 +12,12 @@
 
 typedef void (^loadTasksFinished)(void);
 
+@interface LocalTaskDataManager()
+
+@property (nonnull, nonatomic) NSMutableArray *taskArray;
+
+@end
+
 @implementation LocalTaskDataManager
 
 static LocalTaskDataManager* _instance = nil;
@@ -40,6 +46,7 @@ static LocalTaskDataManager* _instance = nil;
     return [LocalTaskDataManager shareInstance] ;
 }
 
+// MARK: 添加
 - (void)addTask:(TaskModel *)task finished:(nonnull updateTaskFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSError *err = nil;
@@ -89,6 +96,7 @@ static LocalTaskDataManager* _instance = nil;
     });
 }
 
+// MARK: 删除
 - (void)deleteTask:(TaskModel *)task finished:(updateTaskFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
@@ -98,6 +106,7 @@ static LocalTaskDataManager* _instance = nil;
     });
 }
 
+// MARK: 获取
 - (void)loadAllTasksFinished:(loadTasksFinished)finishedBlock {
     [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
         [self.taskArray removeAllObjects];
@@ -269,6 +278,45 @@ static LocalTaskDataManager* _instance = nil;
             finishedBlock(succeeded);
         }];
     });
+}
+
+// MARK: 数据计算
+- (NSInteger)totalDayCountOfTask:(TaskModel *)task {
+    NSDate *date = task.startDate;
+    NSArray *weekDays = task.reminderDays;
+    NSInteger count = 0;
+    NSDate *realEndDate = (task.endDate == NULL ? [NSDate date] : ([task.endDate isLaterThan:[NSDate date]] ? [NSDate date] : task.endDate));
+    // 计算一共多少天
+    while ([[BPDateHelper transformDateToyyyyMMdd:date] intValue] <
+           [[BPDateHelper transformDateToyyyyMMdd:[realEndDate dateByAddingDays:1]]  intValue]) {
+        if ([weekDays containsObject:@(date.weekday)]){
+            count++;
+        }
+        date = [date dateByAddingDays:1];
+    }
+    return count;
+}
+
+- (NSInteger)didPunchDayNumberOfTask:(TaskModel *)task {
+    NSInteger count = 0;
+    for (NSString *str in task.punchDateArray) {
+        if (str.intValue >= [[BPDateHelper transformDateToyyyyMMdd:task.startDate] intValue] &&
+            (task.endDate == NULL ? YES : str.intValue <= [[BPDateHelper transformDateToyyyyMMdd:task.endDate] intValue])) {
+            count++;
+        }
+    }
+    return count;
+}
+
+- (NSInteger)skipPunchDayCountOfTask:(TaskModel *)task {
+    NSInteger count = 0;
+    for (NSString *str in task.punchSkipArray) {
+        if (str.intValue >= [[BPDateHelper transformDateToyyyyMMdd:task.startDate] intValue] &&
+            (task.endDate == NULL ? YES : str.intValue <= [[BPDateHelper transformDateToyyyyMMdd:task.endDate] intValue])) {
+            count++;
+        }
+    }
+    return count;
 }
 
 @end
