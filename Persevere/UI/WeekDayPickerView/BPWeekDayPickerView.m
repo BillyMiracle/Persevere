@@ -119,10 +119,12 @@ static const NSInteger weekdayButtonCount = 7;
     CGFloat viewWidth = frame.size.width;
     CGFloat viewHeight = frame.size.height;
     CGFloat btnWidth = MIN((viewWidth - (weekdayButtonCount + 1) * hPadding) / weekdayButtonCount , (viewHeight - 2 * vPadding));
+    CGFloat fontSize = 12 * (btnWidth / [UIFont systemFontOfSize:16].lineHeight);
     CGFloat newHPadding = (viewWidth - weekdayButtonCount * btnWidth) / (weekdayButtonCount + 1);
     CGFloat newVPadding = (viewHeight - btnWidth) / 2;
     for (BPWeekDayButton *btn in self.buttonArray) {
         NSInteger i = btn.weekDay % 7;
+        btn.titleLabel.font = [UIFont systemFontOfSize:fontSize];
         [btn setFrame:CGRectMake((i + 1) * newHPadding + i * btnWidth, newVPadding, btnWidth, btnWidth)];
     }
 }
