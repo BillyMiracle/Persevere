@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFrame:(CGRect)frame andSelectedItem:(NSInteger)selectedItem;
 - (void)refreshViewsWithSelectedItem:(NSInteger)selectedItem;
-//- (void)refreshWithFrame:(CGRect)frame;
 
 @end
 

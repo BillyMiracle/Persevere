@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame andShowSelectAllButton:(BOOL)shouldShow;
 - (instancetype)initWithFrame:(CGRect)frame andShowSelectAllButton:(BOOL)shouldShow andSelectedWeekDayArray:(NSArray *_Nonnull)selectedWeekdaysArray;
 - (void)refreshViewsWithSelectedWeekDayArray:(NSArray *_Nonnull)selectedWeekdaysArray;
-//- (void)refreshWithFrame:(CGRect)frame;
 
 @end
 
