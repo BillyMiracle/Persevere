@@ -1,17 +1,17 @@
 //
-//  InconAndLabelTableViewCell.m
+//  IconAndWeekdayTableViewCell.m
 //  Persevere
 //
-//  Created by 张博添 on 2024/3/2.
+//  Created by 张博添 on 2024/3/7.
 //
 
-#import "IconAndLabelTableViewCell.h"
+#import "IconAndWeekdayTableViewCell.h"
 
 #import "BPUIHelper.h"
 
 static const CGFloat kborderWidth = 10.0f;
 
-@implementation IconAndLabelTableViewCell
+@implementation IconAndWeekdayTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -28,7 +28,7 @@ static const CGFloat kborderWidth = 10.0f;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:self.iconView];
-        [self.contentView addSubview:self.titleLabel];
+        [self.contentView addSubview:self.weekdayPickerView];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -42,11 +42,11 @@ static const CGFloat kborderWidth = 10.0f;
     if (cellHeight > kborderWidth * 2 && cellWidth >= cellHeight) {
         CGFloat iconViewLength = MIN(16, (cellHeight - 2 * kborderWidth));
         self.iconView.frame = CGRectMake(kborderWidth, (cellHeight - iconViewLength) / 2, iconViewLength, iconViewLength);
-        CGFloat titleLabelHeight = self.titleLabel.font.lineHeight;
-        self.titleLabel.frame = CGRectMake(self.iconView.bp_right + kborderWidth, (cellHeight - titleLabelHeight) / 2, cellWidth - 2 * kborderWidth  - self.iconView.bp_right, titleLabelHeight);
+        CGFloat weekdayPickerHeight = self.bp_height - kborderWidth;
+        self.weekdayPickerView.frame = CGRectMake(self.iconView.bp_right + kborderWidth, (cellHeight - weekdayPickerHeight) / 2, cellWidth - 2 * kborderWidth - self.iconView.bp_right, weekdayPickerHeight);
     } else {
         self.iconView.frame = CGRectZero;
-        self.titleLabel.frame = CGRectZero;
+        self.weekdayPickerView.frame = CGRectZero;
     }
 }
 
@@ -59,13 +59,11 @@ static const CGFloat kborderWidth = 10.0f;
     return _iconView;
 }
 
-- (UILabel *)titleLabel {
-    if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] init];
-//        _titleLabel.adjustsFontSizeToFitWidth = YES;
-        _titleLabel.font = [UIFont systemFontOfSize:16.0f];
+- (BPWeekDayPickerView *)weekdayPickerView {
+    if (!_weekdayPickerView) {
+        _weekdayPickerView = [[BPWeekDayPickerView alloc] init];
     }
-    return _titleLabel;
+    return _weekdayPickerView;
 }
 
 @end

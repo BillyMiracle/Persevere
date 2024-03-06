@@ -12,6 +12,7 @@
 #import "NSDate+DateTools.h"
 
 #import "IconAndLabelTableViewCell.h"
+#import "IconAndWeekdayTableViewCell.h"
 
 /// 行数
 static const int rowCount = 4;
@@ -51,7 +52,7 @@ UITableViewDataSource
 
 - (void)registerCells {
     [self registerClass:[IconAndLabelTableViewCell class] forCellReuseIdentifier:@"IconAndLabelCell"];
-    
+    [self registerClass:[IconAndWeekdayTableViewCell class] forCellReuseIdentifier:@"IconAndWeekdayCell"];
 }
 
 // MARK: UITableViewDelegate & UITableViewDataSource
@@ -85,15 +86,21 @@ UITableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         // 前面3个，左侧icon，右侧文字
-        if (indexPath.row != 4) {
+        if (indexPath.row < 3) {
             IconAndLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IconAndLabelCell" forIndexPath:indexPath];
             
             cell.iconView.image = [self.imageArray objectAtIndex:indexPath.row];
             cell.titleLabel.text = [self titleForRow:indexPath.row];
             
             return cell;
-        } else if (indexPath.row == 4) {
+        } else if (indexPath.row == 3) {
+            IconAndWeekdayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IconAndWeekdayCell" forIndexPath:indexPath];
             
+            cell.iconView.image = [self.imageArray objectAtIndex:indexPath.row];
+            [cell.weekdayPickerView refreshViewsWithSelectedWeekDayArray:self.task.reminderDays];
+            cell.weekdayPickerView.userInteractionEnabled = NO;
+            
+            return cell;
         }
     }
     return [[UITableViewCell alloc] init];
@@ -104,7 +111,7 @@ UITableViewDataSource
         case 0:
             return [NSString stringWithFormat:@"%@ 起", [self.task.startDate formattedDateWithFormat:(NSString *)BPDateFormat]];
         case 1:
-            return [self.task.endDate formattedDateWithFormat:(NSString *)BPDateFormat] ?: (NSString *)BPEndlessString;
+            return  [NSString stringWithFormat:@"%@ 止", [self.task.endDate formattedDateWithFormat:(NSString *)BPDateFormat]] ?: (NSString *)BPEndlessString;
         case 2:
             return self.task.reminderTime ? [self.task.reminderTime formattedDateWithFormat:(NSString *)BPTimeFormat] : @"全天";
     }
