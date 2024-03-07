@@ -155,13 +155,15 @@ HXCustomNavigationControllerDelegate
 - (void)confirmActionFQDateTimePicker:(FQDateTimePickerView *)pickerView WithDate:(NSDate *)date withDateString:(NSString *)dateStr {
 //    NSLog(@"%@---%@", date, dateStr);
     if ([pickerView.title isEqualToString:@"请选择开始日期"]) {
-        NSLog(@"start, %@", date);
-        self.currentTaskModel.startDate = date;
+        NSDate *startDate = [NSDate dateWithYear:[date year] month:[date month] day:[date day] hour:0 minute:0 second:0];
+        NSLog(@"start, %@", startDate);
+        self.currentTaskModel.startDate = startDate;
         // 选择后刷新列表
         [self.detailTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
     } else if ([pickerView.title isEqualToString:@"请选择结束日期"]) {
-        NSLog(@"end, %@", date);
-        self.currentTaskModel.endDate = date;
+        NSDate *endDate = [NSDate dateWithYear:[date year] month:[date month] day:[date day] hour:23 minute:59 second:59];
+        NSLog(@"end, %@", endDate);
+        self.currentTaskModel.endDate = endDate;
         // 选择后刷新列表
         [self.detailTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
     } else if ([pickerView.title isEqualToString:@"请选择提醒时间"]) {
@@ -494,7 +496,7 @@ HXCustomNavigationControllerDelegate
             _currentTaskModel = self.dataSource.task;
         } else {
             _currentTaskModel = [[TaskModel alloc] init];
-            _currentTaskModel.startDate = [NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]];
+            _currentTaskModel.startDate = [NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day] hour:0 minute:0 second:0];
         }
     }
     return _currentTaskModel;
