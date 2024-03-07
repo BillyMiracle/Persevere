@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIFont *)bp_timeViewSubTitleFont;
 + (UIFont *)bp_timeViewDayTextFont;
 + (UIFont *)bp_progressViewFont;
++ (UIFont *)bp_progressViewSmallFont;
 
 + (UIFont *)bp_taskListFont;
 

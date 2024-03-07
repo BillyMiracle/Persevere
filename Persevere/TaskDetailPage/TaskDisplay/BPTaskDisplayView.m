@@ -9,6 +9,7 @@
 #import "BPUIHelper.h"
 #import "BPSectionHeaderView.h"
 #import "BPInfoCardTableViewCell.h"
+#import "BPProgressTableViewCell.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
 
@@ -100,15 +101,40 @@ UITableViewDataSource
 
 - (void)registerCells {
     [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
+    [self.displayTableView registerClass:[BPProgressTableViewCell class] forCellReuseIdentifier:@"progress"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) {
+        
+        // 1-1 信息展示
         BPInfoCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCard" forIndexPath:indexPath];
         [cell bindTask:self.dataSource.task];
         cell.isTopBorder = YES;
         cell.isBottomBorder = YES;
         return cell;
+        
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        
+        // 1-2 信息分类
+        
+    } else if (indexPath.section == 1 && indexPath.row == 0) {
+        
+        // 2-1 进度
+        BPProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"progress" forIndexPath:indexPath];
+        [cell bindModel:[[BPProgressTableViewCellModel alloc] initWithPunchedDayCount:self.dataSource.task.punchDays totalDayCount:self.dataSource.task.totalDays]];
+        cell.isTopBorder = YES;
+        cell.isBottomBorder = YES;
+        return cell;
+        
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+        
+        // 2-2 日历
+        
+    } else if (indexPath.section == 1 && indexPath.row == 2) {
+        
+        // 2-3 删除
+        
     }
     return [[UITableViewCell alloc] init];
 }

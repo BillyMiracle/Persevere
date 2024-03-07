@@ -33,6 +33,9 @@
 + (UIFont *)bp_progressViewFont {
     return [UIFont fontWithName:@"Futura Medium" size:40.0];
 }
++ (UIFont *)bp_progressViewSmallFont {
+    return [UIFont fontWithName:@"Futura Medium" size:30.0];
+}
 + (UIFont *)bp_taskListFont {
     return [UIFont systemFontOfSize:17.0];
 }

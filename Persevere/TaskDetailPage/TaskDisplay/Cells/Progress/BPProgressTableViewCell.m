@@ -64,6 +64,11 @@
 - (BPProgressLabel *)progressLabel {
     if (!_progressLabel) {
         _progressLabel = [[BPProgressLabel alloc] init];
+        _progressLabel.font = [UIFont bp_progressViewSmallFont];
+        _progressLabel.textColor = [UIColor bp_defaultThemeColor];
+        _progressLabel.textAlignment = NSTextAlignmentCenter;
+        _progressLabel.backgroundColor = [UIColor whiteColor];
+        _progressLabel.layer.cornerRadius = 10.0f;
     }
     return _progressLabel;
 }
