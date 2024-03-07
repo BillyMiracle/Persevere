@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define BPConvertToMondayBasedWeekday(sundayBasedWeekday) ((sundayBasedWeekday + 5) % 7 + 1)
+
 static const NSString *BPEndlessString = @"到无限期";
 static const NSString *BPDateFormat = @"yyyy/MM/dd";
 static const NSString *BPTimeFormat = @"HH:mm";

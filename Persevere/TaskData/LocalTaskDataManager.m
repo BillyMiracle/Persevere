@@ -170,8 +170,9 @@ static LocalTaskDataManager* _instance = nil;
     [self getTasksFinished:^(NSMutableArray * _Nonnull taskArray) {
         NSMutableArray *result = [[NSMutableArray alloc] init];
         for (TaskModel *task in taskArray) {
-            if([task.reminderDays containsObject:[NSNumber numberWithInt:(int)date.weekday]]
-                && [task.startDate isEarlierThanOrEqualTo:date] && (task.endDate == NULL ? TRUE : [task.endDate isLaterThanOrEqualTo:date])){
+            if ([task.reminderDays containsObject:[NSNumber numberWithInt:BPConvertToMondayBasedWeekday(date.weekday)]] &&
+                [task.startDate isEarlierThanOrEqualTo:date] &&
+                (task.endDate == NULL ? TRUE : [task.endDate isLaterThanOrEqualTo:date])) {
                 [result addObject:task];
             }
         }
