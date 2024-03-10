@@ -13,7 +13,7 @@
 #import "BPCalanderTableViewCell.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
-static const CGFloat calendarViewHeight = 240.f;
+//static const CGFloat calendarViewHeight = 250.f;
 
 @interface BPTaskDisplayView()
 <
@@ -64,7 +64,7 @@ UITableViewDataSource
     if (indexPath.section == 0 && indexPath.row == 0) {
         return self.bp_width / 2.5;
     } else if (indexPath.section == 1 && indexPath.row == 1) {
-        return calendarViewHeight;
+        return self.bp_width / 1.5;
     }
     return 70;
 }
