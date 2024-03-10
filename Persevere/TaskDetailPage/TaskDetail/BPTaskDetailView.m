@@ -344,7 +344,6 @@ HXCustomNavigationControllerDelegate
         cell.colorPickerView.delegate = self;
         [cell.colorPickerView refreshViewsWithSelectedItem:self.currentTaskModel.type];
         cell.isTopBorder = YES;
-        cell.isBottomBorder = NO;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         return cell;
     } else if (indexPath.section == 2 && indexPath.row == 1) {

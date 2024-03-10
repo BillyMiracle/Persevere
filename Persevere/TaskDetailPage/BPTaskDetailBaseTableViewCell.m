@@ -49,26 +49,22 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
 - (void)layoutSubviews {
     [super layoutSubviews];
     // 设置圆角
-    if (self.isTopBorder || self.isBottomBorder) {
-        UIRectCorner corner = 0;
-        if (self.isTopBorder && !self.isBottomBorder) {
-            corner = UIRectCornerTopLeft | UIRectCornerTopRight;
-            self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
-        } else if (self.isBottomBorder && !self.isTopBorder) {
-            corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
-            self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
-        } else {
-            corner = UIRectCornerAllCorners;
-            self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding * 2);
-        }
-        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bp_backgroundView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(backgroundCornerRadis, backgroundCornerRadis)];
-        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-        maskLayer.frame = self.bp_backgroundView.bounds;
-        maskLayer.path = maskPath.CGPath;
-        self.bp_backgroundView.layer.mask = maskLayer;
-    } else {// 不设置圆角
-        self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height);
+    UIRectCorner corner = 0;
+    if (self.isTopBorder && !self.isBottomBorder) {
+        corner = UIRectCornerTopLeft | UIRectCornerTopRight;
+        self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
+    } else if (self.isBottomBorder && !self.isTopBorder) {
+        corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+        self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
+    } else {
+        corner = UIRectCornerAllCorners;
+        self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding * 2);
     }
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bp_backgroundView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(backgroundCornerRadis, backgroundCornerRadis)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = self.bp_backgroundView.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.bp_backgroundView.layer.mask = maskLayer;
 }
 
 // MARK: Getters

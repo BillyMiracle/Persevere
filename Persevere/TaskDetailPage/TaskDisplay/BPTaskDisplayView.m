@@ -110,8 +110,6 @@ UITableViewDataSource
         // 1-1 信息展示
         BPInfoCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"infoCard" forIndexPath:indexPath];
         [cell bindTask:self.dataSource.task];
-        cell.isTopBorder = YES;
-        cell.isBottomBorder = YES;
         return cell;
         
     } else if (indexPath.section == 0 && indexPath.row == 1) {
@@ -123,8 +121,6 @@ UITableViewDataSource
         // 2-1 进度
         BPProgressTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"progress" forIndexPath:indexPath];
         [cell bindModel:[[BPProgressTableViewCellModel alloc] initWithPunchedDayCount:self.dataSource.task.punchDays totalDayCount:self.dataSource.task.totalDays]];
-        cell.isTopBorder = YES;
-        cell.isBottomBorder = YES;
         return cell;
         
     } else if (indexPath.section == 1 && indexPath.row == 1) {
