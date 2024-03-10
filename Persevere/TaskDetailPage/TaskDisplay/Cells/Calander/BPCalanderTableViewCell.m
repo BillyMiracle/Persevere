@@ -112,19 +112,15 @@ FSCalendarDelegateAppearance
 }
 
 - (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance titleDefaultColorForDate:(NSDate *)date {
-    if(self.task != NULL) {
+    if (self.task != NULL) {
         // 打了卡的日子
         // 跳过打卡的日子
         if (([self.task.punchDateArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]] &&
              [date isLaterThanOrEqualTo:self.task.startDate]) ||
             ([self.task.punchSkipArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]] &&
              [date isLaterThanOrEqualTo:self.task.startDate])) {
-            // 不是无限期
-            if (self.task.endDate != nil) {
-                if([self.task.endDate isLaterThanOrEqualTo:date]){
-                    return [UIColor whiteColor];
-                }
-            } else {
+            // 不是无限期 && 比结束日期早
+            if (self.task.endDate != nil && [self.task.endDate isLaterThanOrEqualTo:date]) {
                 return [UIColor whiteColor];
             }
         }
@@ -132,30 +128,30 @@ FSCalendarDelegateAppearance
     return appearance.borderDefaultColor;
 }
 
-- (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance borderDefaultColorForDate:(NSDate *)date{
+- (UIColor *)calendar:(FSCalendar *)calendar appearance:(FSCalendarAppearance *)appearance borderDefaultColorForDate:(NSDate *)date {
     if (self.task != nil) {
         if ([date isEarlierThan:self.task.startDate]) {
             return [UIColor clearColor];
         }
-        // 不是无限期
-        if (self.task.endDate != nil) {
-            if ([date isLaterThan:self.task.endDate]) {
-                return [UIColor clearColor];
-            }
+        // 不是无限期 && 比结束日期晚
+        if (self.task.endDate != nil && [date isLaterThan:self.task.endDate]) {
+            return [UIColor clearColor];
         }
-        if ([self.task.reminderDays containsObject:@(date.weekday)]) {
+        if ([self.task.reminderDays containsObject:@(BPConvertToMondayBasedWeekday(date.weekday))]) {
             if ([self.task.punchDateArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+                // 打卡
                 return [UIColor bp_defaultThemeColor];
             } else if ([self.task.punchSkipArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+                // 跳过
                 return [UIColor lightGrayColor];
+            } else if ([[NSDate date] isLaterThan:date]) {
+                // 未打卡
+                return [UIColor redColor];
             } else {
-                if ([[NSDate date] isLaterThan:date]) {
-                    return [UIColor redColor];
-                } else {
-                    return [UIColor bp_defaultThemeColor];
-                }
+                return [UIColor bp_defaultThemeColor];
             }
         } else {
+            // 不在打卡weekday范围
             return [UIColor clearColor];
         }
     }
