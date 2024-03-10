@@ -10,8 +10,10 @@
 #import "BPSectionHeaderView.h"
 #import "BPInfoCardTableViewCell.h"
 #import "BPProgressTableViewCell.h"
+#import "BPCalanderTableViewCell.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
+static const CGFloat calendarViewHeight = 240.f;
 
 @interface BPTaskDisplayView()
 <
@@ -61,6 +63,8 @@ UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) {
         return self.bp_width / 2.5;
+    } else if (indexPath.section == 1 && indexPath.row == 1) {
+        return calendarViewHeight;
     }
     return 70;
 }
@@ -102,6 +106,7 @@ UITableViewDataSource
 - (void)registerCells {
     [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
     [self.displayTableView registerClass:[BPProgressTableViewCell class] forCellReuseIdentifier:@"progress"];
+    [self.displayTableView registerClass:[BPCalanderTableViewCell class] forCellReuseIdentifier:@"calander"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,6 +131,9 @@ UITableViewDataSource
     } else if (indexPath.section == 1 && indexPath.row == 1) {
         
         // 2-2 日历
+        BPCalanderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"calander" forIndexPath:indexPath];
+        [cell bindTask:self.dataSource.task];
+        return cell;
         
     } else if (indexPath.section == 1 && indexPath.row == 2) {
         

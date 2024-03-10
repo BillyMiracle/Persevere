@@ -61,6 +61,7 @@
 		3AB7356F2B09E8A800FE6975 /* BPTaskBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB7356E2B09E8A800FE6975 /* BPTaskBaseTableViewCell.m */; };
 		3AB735722B09ECD400FE6975 /* BPMainPageTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB735712B09ECD400FE6975 /* BPMainPageTaskTableViewCell.m */; };
 		3ADE1F122B9A3A9900D7558D /* BPProgressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F112B9A3A9900D7558D /* BPProgressTableViewCell.m */; };
+		3ADE1F152B9DEDEA00D7558D /* BPCalanderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F142B9DEDEA00D7558D /* BPCalanderTableViewCell.m */; };
 		3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */; };
 		3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */; };
 		3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */; };
@@ -178,6 +179,8 @@
 		3AB735712B09ECD400FE6975 /* BPMainPageTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMainPageTaskTableViewCell.m; sourceTree = "<group>"; };
 		3ADE1F102B9A3A9900D7558D /* BPProgressTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPProgressTableViewCell.h; sourceTree = "<group>"; };
 		3ADE1F112B9A3A9900D7558D /* BPProgressTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPProgressTableViewCell.m; sourceTree = "<group>"; };
+		3ADE1F132B9DEDEA00D7558D /* BPCalanderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPCalanderTableViewCell.h; sourceTree = "<group>"; };
+		3ADE1F142B9DEDEA00D7558D /* BPCalanderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPCalanderTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CAF2AFCDA58000CA19D /* BPInputShortTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInputShortTextTableViewCell.h; sourceTree = "<group>"; };
 		3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputShortTextTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSectionHeaderView.h; sourceTree = "<group>"; };
@@ -624,6 +627,8 @@
 		3AE824C42B90E48F00521E94 /* Calander */ = {
 			isa = PBXGroup;
 			children = (
+				3ADE1F132B9DEDEA00D7558D /* BPCalanderTableViewCell.h */,
+				3ADE1F142B9DEDEA00D7558D /* BPCalanderTableViewCell.m */,
 			);
 			path = Calander;
 			sourceTree = "<group>";
@@ -834,6 +839,7 @@
 				3A03CE352AF7BB990001B562 /* BPWeekDayPickerView.m in Sources */,
 				3A03CDDD2AF3B27D0001B562 /* BPUIHelper.m in Sources */,
 				3A03CE032AF5497B0001B562 /* BPNavigationTitleView.m in Sources */,
+				3ADE1F152B9DEDEA00D7558D /* BPCalanderTableViewCell.m in Sources */,
 				3AA8C6C12B07D306006AA569 /* BPDateView.m in Sources */,
 				3AB7356B2B08A46C00FE6975 /* BPDateAndProgressTableViewCell.m in Sources */,
 				3A03CDFC2AF3F0E20001B562 /* UIDevice+BPAddition.m in Sources */,
