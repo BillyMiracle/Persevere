@@ -84,7 +84,9 @@ static const CGFloat typeViewWidth = 10.0;
 }
 
 - (void)tapAction:(id)sender {
-    [self.navigationTitleDelegate navigationTitleViewTapped];
+    if ([self.navigationTitleDelegate respondsToSelector:@selector(navigationTitleViewTapped)]) {
+        [self.navigationTitleDelegate navigationTitleViewTapped];
+    }
 }
 
 //MARK: Getters
