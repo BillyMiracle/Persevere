@@ -62,16 +62,12 @@
     
     self.navigationItem.leftBarButtonItem = self.backButton;
     self.navigationItem.rightBarButtonItem = self.doneButton;
+    self.navigationItem.titleView = self.detailTitleView;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.taskDetailPageView.dataSource = self;
     self.taskDetailPageView.parentViewController = self;
     [self.view addSubview:self.taskDetailPageView];
-    [self refreshNavigationBarView];
-}
-
-- (void)refreshNavigationBarView {
-    self.navigationItem.titleView = self.detailTitleView;
 }
 
 // MARK: Button Actions

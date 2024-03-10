@@ -26,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param shouldShowType 是否展示类别
 - (_Nonnull instancetype)initWithTitle:(NSString *_Nonnull)title andColor:(UIColor *_Nullable)color andShouldShowType:(BOOL)shouldShowType;
 
+/// 刷新
+/// @param title  标题
+/// @param color  颜色
+/// @param shouldShowType 是否展示类别
+- (void)refreshWithTitle:(NSString *_Nonnull)title andColor:(UIColor *_Nullable)color andShouldShowType:(BOOL)shouldShowType;
+
 /// 改变颜色
 - (void)changeColor:(UIColor *_Nullable)thisColor;
 

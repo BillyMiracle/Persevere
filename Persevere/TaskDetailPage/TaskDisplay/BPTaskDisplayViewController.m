@@ -8,7 +8,7 @@
 #import "BPTaskDisplayViewController.h"
 #import "BPTaskDisplayView.h"
 #import "BPTaskDetailViewController.h"
-
+#import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
 
 @interface BPTaskDisplayViewController ()
@@ -21,6 +21,8 @@ BPTaskDisplayViewDataSource
 @property (nonatomic, strong) UIBarButtonItem *editButton;
 /// view
 @property (nonatomic, strong) BPTaskDisplayView *taskDisplayPageView;
+/// 任务标题
+@property (nonatomic, strong) BPNavigationTitleView *taskNameTitleView;
 
 @end
 
@@ -38,16 +40,26 @@ BPTaskDisplayViewDataSource
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshNavigationBarView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.leftBarButtonItem = self.backButton;
     self.navigationItem.rightBarButtonItem = self.editButton;
+    self.navigationItem.titleView = self.taskNameTitleView;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.taskDisplayPageView.dataSource = self;
     self.taskDisplayPageView.parentViewController = self;
     [self.view addSubview:self.taskDisplayPageView];
+}
+
+- (void)refreshNavigationBarView {
+    [self.taskNameTitleView refreshWithTitle:self.task.name andColor:[UIColor bp_colorPickerColorWithIndex:self.task.type] andShouldShowType:YES];
 }
 
 // MARK: Button Actions
@@ -79,6 +91,14 @@ BPTaskDisplayViewDataSource
     }
     return _taskDisplayPageView;
 }
+
+- (BPNavigationTitleView *)taskNameTitleView {
+    if (!_taskNameTitleView) {
+        _taskNameTitleView = [[BPNavigationTitleView alloc] initWithTitle:self.task.name andColor:[UIColor bp_colorPickerColorWithIndex:self.task.type] andShouldShowType:YES];
+    }
+    return _taskNameTitleView;
+}
+
 
 - (UIBarButtonItem *)backButton {
     if (!_backButton) {
