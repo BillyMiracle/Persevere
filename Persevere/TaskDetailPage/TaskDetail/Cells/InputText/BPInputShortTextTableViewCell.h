@@ -5,11 +5,11 @@
 //  Created by 张博添 on 2023/11/9.
 //
 
-#import "BPTaskDetailBaseTableViewCell.h"
+#import "BPTaskDetailTitleTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BPInputShortTextTableViewCell : BPTaskDetailBaseTableViewCell
+@interface BPInputShortTextTableViewCell : BPTaskDetailTitleTableViewCell
 
 @property (nonatomic, strong) UITextField *inputTextField;
 

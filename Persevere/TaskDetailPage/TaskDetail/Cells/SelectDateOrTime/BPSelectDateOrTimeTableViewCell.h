@@ -5,11 +5,11 @@
 //  Created by 张博添 on 2023/11/7.
 //
 
-#import "BPTaskDetailBaseTableViewCell.h"
+#import "BPTaskDetailTitleTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BPSelectDateOrTimeTableViewCell : BPTaskDetailBaseTableViewCell
+@interface BPSelectDateOrTimeTableViewCell : BPTaskDetailTitleTableViewCell
 
 @property (nonatomic, strong) UIButton *selecetDateButton;
 

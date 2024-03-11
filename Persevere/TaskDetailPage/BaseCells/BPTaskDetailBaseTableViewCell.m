@@ -38,11 +38,11 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor bp_backgroundThemeColor];
-//    self.bp_backgroundView.backgroundColor = [UIColor clearColor];
-    [self.contentView addSubview:self.bp_backgroundView];
-    [self.bp_backgroundView addSubview:self.bp_titleLabel];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor bp_backgroundThemeColor];
+        [self.contentView addSubview:self.bp_backgroundView];
+    }
     return self;
 }
 
@@ -68,16 +68,6 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
 }
 
 // MARK: Getters
-
-- (UILabel *)bp_titleLabel {
-    if (!_bp_titleLabel) {
-        _bp_titleLabel = [[UILabel alloc] init];
-        _bp_titleLabel.font = [UIFont bp_taskDetailTitleFont];
-        _bp_titleLabel.textColor = [UIColor blackColor];
-        _bp_titleLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _bp_titleLabel;
-}
 
 - (UIView *)bp_backgroundView {
     if (!_bp_backgroundView) {

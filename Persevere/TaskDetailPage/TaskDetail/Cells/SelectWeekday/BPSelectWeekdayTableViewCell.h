@@ -5,12 +5,12 @@
 //  Created by 张博添 on 2023/11/7.
 //
 
-#import "BPTaskDetailBaseTableViewCell.h"
+#import "BPTaskDetailTitleTableViewCell.h"
 #import "BPWeekDayPickerView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BPSelectWeekdayTableViewCell : BPTaskDetailBaseTableViewCell
+@interface BPSelectWeekdayTableViewCell : BPTaskDetailTitleTableViewCell
 
 @property (nonatomic, strong) BPWeekDayPickerView *weekdayPickerView;
 
