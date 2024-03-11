@@ -18,10 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@protocol BPTaskDisplayViewDelegate <NSObject>
+
+- (void)deleteCurrentTask;
+
+@end
+
 @interface BPTaskDisplayView : UIView
 
 @property (nonatomic, weak) UIViewController *parentViewController;
 @property (nonatomic, weak) id<BPTaskDisplayViewDataSource> dataSource;
+@property (nonatomic, weak) id<BPTaskDisplayViewDelegate> delegate;
 - (TaskModel *)getCurrentTaskInfo;
 
 @end

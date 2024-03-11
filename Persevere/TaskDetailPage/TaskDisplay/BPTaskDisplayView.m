@@ -11,6 +11,7 @@
 #import "BPInfoCardTableViewCell.h"
 #import "BPProgressTableViewCell.h"
 #import "BPCalanderTableViewCell.h"
+#import "BPDeleteTaskTableViewCell.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
 //static const CGFloat calendarViewHeight = 250.f;
@@ -98,7 +99,10 @@ UITableViewDataSource
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSLog(@"%@", indexPath);
+    if (indexPath.section == 1 && indexPath.row == 2) {
+        // 删除任务
+        
+    }
 }
 
 // MARK: 返回cell
@@ -107,6 +111,7 @@ UITableViewDataSource
     [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
     [self.displayTableView registerClass:[BPProgressTableViewCell class] forCellReuseIdentifier:@"progress"];
     [self.displayTableView registerClass:[BPCalanderTableViewCell class] forCellReuseIdentifier:@"calander"];
+    [self.displayTableView registerClass:[BPDeleteTaskTableViewCell class] forCellReuseIdentifier:@"delete"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,6 +143,9 @@ UITableViewDataSource
     } else if (indexPath.section == 1 && indexPath.row == 2) {
         
         // 2-3 删除
+        BPDeleteTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"delete" forIndexPath:indexPath];
+        cell.bp_titleLabel.text = @"删除任务";
+        return cell;
         
     }
     return [[UITableViewCell alloc] init];
