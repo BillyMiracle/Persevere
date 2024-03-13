@@ -101,8 +101,22 @@ UITableViewDataSource
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1 && indexPath.row == 2) {
         // 删除任务
-        
+        [self presentAlertToDeleteTask];
     }
+}
+
+/// 弹出确认删除弹窗
+- (void)presentAlertToDeleteTask {
+    UIAlertController *deleteAlertController = [UIAlertController alertControllerWithTitle:@"是否确认删除任务" message:@"此操作不可逆" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if ([self.delegate respondsToSelector:@selector(deleteCurrentTask)]) {
+            [self.delegate deleteCurrentTask];
+        }
+    }];
+    [deleteAlertController addAction:cancelAction];
+    [deleteAlertController addAction:deleteAction];
+    [self.parentViewController presentViewController:deleteAlertController animated:YES completion:nil];
 }
 
 // MARK: 返回cell

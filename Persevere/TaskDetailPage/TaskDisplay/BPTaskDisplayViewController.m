@@ -10,10 +10,12 @@
 #import "BPTaskDetailViewController.h"
 #import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
+#import "LocalTaskDataManager.h"
 
 @interface BPTaskDisplayViewController ()
 <
-BPTaskDisplayViewDataSource
+BPTaskDisplayViewDataSource,
+BPTaskDisplayViewDelegate
 >
 /// 返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backButton;
@@ -30,7 +32,6 @@ BPTaskDisplayViewDataSource
 {
     /// 任务
     TaskModel *_task;
-    
 }
 
 - (instancetype)initWithTask:(TaskModel *)task {
@@ -52,14 +53,23 @@ BPTaskDisplayViewDataSource
     self.navigationItem.rightBarButtonItem = self.editButton;
     self.navigationItem.titleView = self.taskNameTitleView;
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.taskDisplayPageView.dataSource = self;
-    self.taskDisplayPageView.parentViewController = self;
     [self.view addSubview:self.taskDisplayPageView];
 }
 
 - (void)refreshNavigationBarView {
     [self.taskNameTitleView refreshWithTitle:self.task.name andColor:[UIColor bp_colorPickerColorWithIndex:self.task.type] andShouldShowType:YES];
+}
+
+// MARK: delete task
+
+- (void)deleteCurrentTask {
+    [[LocalTaskDataManager shareInstance] deleteTask:self.task finished:^(BOOL succeeded) {
+        if (succeeded) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        }
+    }];
 }
 
 // MARK: Button Actions
@@ -88,6 +98,9 @@ BPTaskDisplayViewDataSource
 - (BPTaskDisplayView *)taskDisplayPageView {
     if (!_taskDisplayPageView) {
         _taskDisplayPageView = [[BPTaskDisplayView alloc] initWithFrame:CGRectMake(0, [UIDevice bp_navigationFullHeight], self.bp_width, self.bp_height - [UIDevice bp_navigationFullHeight])];
+        _taskDisplayPageView.delegate = self;
+        _taskDisplayPageView.dataSource = self;
+        _taskDisplayPageView.parentViewController = self;
     }
     return _taskDisplayPageView;
 }
