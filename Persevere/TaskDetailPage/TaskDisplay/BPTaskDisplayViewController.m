@@ -110,7 +110,7 @@ BPTaskDisplayViewDataSource
 
 - (UIBarButtonItem *)editButton {
     if (!_editButton) {
-        _editButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavDone"] style:UIBarButtonItemStylePlain target:self action:@selector(pressEditButton)];
+        _editButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavEdit"] style:UIBarButtonItemStylePlain target:self action:@selector(pressEditButton)];
         _editButton.tintColor = [UIColor whiteColor];
     }
     return _editButton;
