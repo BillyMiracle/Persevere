@@ -46,6 +46,7 @@
 		3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680B2B0233AB00B2FF86 /* UITextField+BPIndexPath.m */; };
 		3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */; };
 		3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE9E22B0D0205006D91A4 /* BPTaskDisplayViewController.m */; };
+		3A5EAC0F2BA2D16700336664 /* BPInfoTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */; };
 		3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AB2B05370D006AA569 /* BPTableViewHoverView.m */; };
 		3AA8C6AE2B06848A006AA569 /* TodayPage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AD2B068489006AA569 /* TodayPage.xcassets */; };
 		3AA8C6B32B079991006AA569 /* TaskDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6B22B079991006AA569 /* TaskDataHelper.m */; };
@@ -152,6 +153,8 @@
 		3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+BPIndexPath.m"; sourceTree = "<group>"; };
 		3A4DE9E12B0D0205006D91A4 /* BPTaskDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDisplayViewController.h; sourceTree = "<group>"; };
 		3A4DE9E22B0D0205006D91A4 /* BPTaskDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDisplayViewController.m; sourceTree = "<group>"; };
+		3A5EAC0D2BA2D16700336664 /* BPInfoTabView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInfoTabView.h; sourceTree = "<group>"; };
+		3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoTabView.m; sourceTree = "<group>"; };
 		3AA8C6AA2B05370D006AA569 /* BPTableViewHoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewHoverView.h; sourceTree = "<group>"; };
 		3AA8C6AB2B05370D006AA569 /* BPTableViewHoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewHoverView.m; sourceTree = "<group>"; };
 		3AA8C6AD2B068489006AA569 /* TodayPage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TodayPage.xcassets; sourceTree = "<group>"; };
@@ -294,6 +297,7 @@
 				3A0DD2642B0536D000F2DAC6 /* HoverView */,
 				3AA8C6B42B07C17B006AA569 /* ProgressLabel */,
 				3AE824DC2B97869400521E94 /* ProgressView */,
+				3A5EAC0C2BA2D13400336664 /* InfoTabView */,
 				3AA8C6BE2B07D2D4006AA569 /* DateView */,
 			);
 			path = UI;
@@ -493,6 +497,15 @@
 				3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */,
 			);
 			path = TextFieldAndViewWithIndexPath;
+			sourceTree = "<group>";
+		};
+		3A5EAC0C2BA2D13400336664 /* InfoTabView */ = {
+			isa = PBXGroup;
+			children = (
+				3A5EAC0D2BA2D16700336664 /* BPInfoTabView.h */,
+				3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */,
+			);
+			path = InfoTabView;
 			sourceTree = "<group>";
 		};
 		3AA8C6B42B07C17B006AA569 /* ProgressLabel */ = {
@@ -861,6 +874,7 @@
 				3AB33E782AFA3C610023575F /* BPInputLongTextTableViewCell.m in Sources */,
 				3A03CE2F2AF6C5030001B562 /* TaskModel.m in Sources */,
 				3A03CDF02AF3DBA60001B562 /* BPMainView.m in Sources */,
+				3A5EAC0F2BA2D16700336664 /* BPInfoTabView.m in Sources */,
 				3A03CE092AF6407D0001B562 /* UIFont+BPAddtion.m in Sources */,
 				3A03CE352AF7BB990001B562 /* BPWeekDayPickerView.m in Sources */,
 				3A03CDDD2AF3B27D0001B562 /* BPUIHelper.m in Sources */,
