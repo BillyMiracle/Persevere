@@ -9,6 +9,7 @@
 #import "BPUIHelper.h"
 #import "BPSectionHeaderView.h"
 #import "BPInfoCardTableViewCell.h"
+#import "BPExtraInfoTableViewCell.h"
 #import "BPProgressTableViewCell.h"
 #import "BPCalanderTableViewCell.h"
 #import "BPDeleteTaskTableViewCell.h"
@@ -123,6 +124,7 @@ UITableViewDataSource
 
 - (void)registerCells {
     [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
+    [self.displayTableView registerClass:[BPExtraInfoTableViewCell class] forCellReuseIdentifier:@"extraInfo"];
     [self.displayTableView registerClass:[BPProgressTableViewCell class] forCellReuseIdentifier:@"progress"];
     [self.displayTableView registerClass:[BPCalanderTableViewCell class] forCellReuseIdentifier:@"calander"];
     [self.displayTableView registerClass:[BPDeleteTaskTableViewCell class] forCellReuseIdentifier:@"delete"];
@@ -139,6 +141,11 @@ UITableViewDataSource
     } else if (indexPath.section == 0 && indexPath.row == 1) {
         
         // 1-2 信息分类
+        BPExtraInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"extraInfo" forIndexPath:indexPath];
+        TaskModel *task = self.dataSource.task;
+        UIImage *image = task.imageData == nil ? [UIImage imageWithData:task.imageData] : nil;
+        [cell bindWithModel:[[BPInfoTabViewModel alloc] initWithLink:task.link image:image memo:task.memo]];
+        return cell;
         
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         

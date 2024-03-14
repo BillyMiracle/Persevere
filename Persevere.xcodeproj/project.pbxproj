@@ -65,6 +65,8 @@
 		3ADE1F152B9DEDEA00D7558D /* BPCalanderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F142B9DEDEA00D7558D /* BPCalanderTableViewCell.m */; };
 		3ADE1F192B9E24BA00D7558D /* BPDeleteTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F182B9E24BA00D7558D /* BPDeleteTaskTableViewCell.m */; };
 		3ADE1F1C2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F1B2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.m */; };
+		3ADE1F1F2BA34AA900D7558D /* InfoTabAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ADE1F1E2BA34AA900D7558D /* InfoTabAsset.xcassets */; };
+		3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */; };
 		3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */; };
 		3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */; };
 		3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */; };
@@ -190,6 +192,9 @@
 		3ADE1F182B9E24BA00D7558D /* BPDeleteTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPDeleteTaskTableViewCell.m; sourceTree = "<group>"; };
 		3ADE1F1A2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDetailTitleTableViewCell.h; sourceTree = "<group>"; };
 		3ADE1F1B2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDetailTitleTableViewCell.m; sourceTree = "<group>"; };
+		3ADE1F1E2BA34AA900D7558D /* InfoTabAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = InfoTabAsset.xcassets; sourceTree = "<group>"; };
+		3ADE1F202BA34E8200D7558D /* BPExtraInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPExtraInfoTableViewCell.h; sourceTree = "<group>"; };
+		3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPExtraInfoTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CAF2AFCDA58000CA19D /* BPInputShortTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInputShortTextTableViewCell.h; sourceTree = "<group>"; };
 		3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputShortTextTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSectionHeaderView.h; sourceTree = "<group>"; };
@@ -504,6 +509,7 @@
 			children = (
 				3A5EAC0D2BA2D16700336664 /* BPInfoTabView.h */,
 				3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */,
+				3ADE1F1E2BA34AA900D7558D /* InfoTabAsset.xcassets */,
 			);
 			path = InfoTabView;
 			sourceTree = "<group>";
@@ -650,6 +656,8 @@
 		3AE824C22B90E3DE00521E94 /* ExtraInfoCard */ = {
 			isa = PBXGroup;
 			children = (
+				3ADE1F202BA34E8200D7558D /* BPExtraInfoTableViewCell.h */,
+				3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */,
 			);
 			path = ExtraInfoCard;
 			sourceTree = "<group>";
@@ -791,6 +799,7 @@
 			files = (
 				3A03CDE32AF3B8140001B562 /* TabBarAsset.xcassets in Resources */,
 				3A4548762AF9390600A857F7 /* ColorAsset.xcassets in Resources */,
+				3ADE1F1F2BA34AA900D7558D /* InfoTabAsset.xcassets in Resources */,
 				3A3C8F172AF146FE00AF62E4 /* LaunchScreen.storyboard in Resources */,
 				3A3C8F142AF146FE00AF62E4 /* Assets.xcassets in Resources */,
 				3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */,
@@ -921,6 +930,7 @@
 				3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */,
 				3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
+				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
 				3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */,
 				3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */,
 				3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */,
