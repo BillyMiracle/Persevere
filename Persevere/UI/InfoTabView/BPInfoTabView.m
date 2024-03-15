@@ -93,7 +93,27 @@ static const NSInteger buttonCount = 3;
 }
 
 - (void)refreshButtonState {
-    
+    if (self.model.link && ![self.model.link isEqualToString:@""]) {
+        self.linkButton.userInteractionEnabled = YES;
+        [self.linkButton setTintColor:[UIColor bp_defaultThemeColor]];
+    } else {
+        self.linkButton.userInteractionEnabled = NO;
+        [self.linkButton setTintColor:[UIColor lightGrayColor]];
+    }
+    if (self.model.image) {
+        self.imageButton.userInteractionEnabled = YES;
+        [self.imageButton setTintColor:[UIColor bp_defaultThemeColor]];
+    } else {
+        self.imageButton.userInteractionEnabled = NO;
+        [self.imageButton setTintColor:[UIColor lightGrayColor]];
+    }
+    if (self.model.memo&& ![self.model.memo isEqualToString:@""]) {
+        self.memoButton.userInteractionEnabled = YES;
+        [self.memoButton setTintColor:[UIColor bp_defaultThemeColor]];
+    } else {
+        self.memoButton.userInteractionEnabled = NO;
+        [self.memoButton setTintColor:[UIColor lightGrayColor]];
+    }
 }
 
 // MARK: Getters
