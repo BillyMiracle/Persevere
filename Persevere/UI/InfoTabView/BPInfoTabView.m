@@ -116,6 +116,26 @@ static const NSInteger buttonCount = 3;
     }
 }
 
+// MARK: ButtonActions
+
+- (void)didClickLinkButton:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(didSelectLink)]) {
+        [self.delegate didSelectLink];
+    }
+}
+
+- (void)didClickImageButton:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(didSelectImage)]) {
+        [self.delegate didSelectImage];
+    }
+}
+
+- (void)didClickMemoButton:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(didSelectMemo)]) {
+        [self.delegate didSelectMemo];
+    }
+}
+
 // MARK: Getters
 
 - (UIButton *)linkButton {
@@ -125,6 +145,7 @@ static const NSInteger buttonCount = 3;
         _linkButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         [_linkButton setImage:[[UIImage imageNamed:@"InfoLink"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_linkButton setTintColor:[UIColor bp_defaultThemeColor]];
+        [_linkButton addTarget:self action:@selector(didClickLinkButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _linkButton;
 }
@@ -136,6 +157,7 @@ static const NSInteger buttonCount = 3;
         _imageButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         [_imageButton setImage:[[UIImage imageNamed:@"InfoImage"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_imageButton setTintColor:[UIColor bp_defaultThemeColor]];
+        [_imageButton addTarget:self action:@selector(didClickImageButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _imageButton;
 }
@@ -147,6 +169,7 @@ static const NSInteger buttonCount = 3;
         _memoButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         [_memoButton setImage:[[UIImage imageNamed:@"InfoMemo"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
         [_memoButton setTintColor:[UIColor bp_defaultThemeColor]];
+        [_memoButton addTarget:self action:@selector(didClickMemoButton:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _memoButton;
 }
