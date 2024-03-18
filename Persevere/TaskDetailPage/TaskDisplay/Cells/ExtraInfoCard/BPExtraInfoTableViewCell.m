@@ -9,6 +9,7 @@
 #import "BPUIHelper.h"
 
 @interface BPExtraInfoTableViewCell()
+<BPInfoTabViewDelegate>
 
 @property (nonatomic, strong) BPInfoTabView *infoTabView;
 
@@ -44,11 +45,26 @@
     [self.infoTabView refreshWithModel:model];
 }
 
+// MARK: BPInfoTabViewDelegate
+
+- (void)didSelectLink {
+    
+}
+
+- (void)didSelectImage {
+    
+}
+
+- (void)didSelectMemo {
+    
+}
+
 // MARK: Getters
 
 - (BPInfoTabView *)infoTabView {
     if (!_infoTabView) {
         _infoTabView = [[BPInfoTabView alloc] init];
+        _infoTabView.delegate = self;
     }
     return _infoTabView;
 }
