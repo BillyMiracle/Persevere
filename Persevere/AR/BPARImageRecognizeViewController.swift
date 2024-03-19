@@ -51,7 +51,11 @@ class BPARImageRecognizeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.setUpSceneView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.runSceneView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,9 +82,11 @@ extension BPARImageRecognizeViewController {
         self.arWordTrackingConfiguration.detectionImages = detectionImages
     }
     
-    /// 设定AR Scene View
-    private func setUpSceneView() {
-        
+    /// 运行AR Scene View
+    private func runSceneView() {
+        let options: ARSession.RunOptions = [.resetTracking, .removeExistingAnchors, .resetSceneReconstruction]
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        sceneView.session.run(arWordTrackingConfiguration, options: options)
     }
 }
 
