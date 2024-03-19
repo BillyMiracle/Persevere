@@ -68,6 +68,7 @@
 		3ADE1F1F2BA34AA900D7558D /* InfoTabAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3ADE1F1E2BA34AA900D7558D /* InfoTabAsset.xcassets */; };
 		3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */; };
 		3ADE1F292BA8ADD300D7558D /* BPARImageRecognizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */; };
+		3ADE1F2B2BAA093D00D7558D /* BPARTaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */; };
 		3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */; };
 		3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */; };
 		3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */; };
@@ -198,6 +199,7 @@
 		3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPExtraInfoTableViewCell.m; sourceTree = "<group>"; };
 		3ADE1F272BA8ADD300D7558D /* Persevere-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Persevere-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPARImageRecognizeViewController.swift; sourceTree = "<group>"; };
+		3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPARTaskCardView.swift; sourceTree = "<group>"; };
 		3AE37CAF2AFCDA58000CA19D /* BPInputShortTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInputShortTextTableViewCell.h; sourceTree = "<group>"; };
 		3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputShortTextTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSectionHeaderView.h; sourceTree = "<group>"; };
@@ -631,6 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */,
+				3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -892,6 +895,7 @@
 			files = (
 				3A03CE272AF690A30001B562 /* BPTaskDetailViewController.m in Sources */,
 				3A3C8F0F2AF146FD00AF62E4 /* ViewController.m in Sources */,
+				3ADE1F2B2BAA093D00D7558D /* BPARTaskCardView.swift in Sources */,
 				3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */,
 				3A3F195F2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m in Sources */,
 				3AB33E782AFA3C610023575F /* BPInputLongTextTableViewCell.m in Sources */,
