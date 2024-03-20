@@ -49,7 +49,7 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
 - (void)layoutSubviews {
     [super layoutSubviews];
     // 设置圆角
-    UIRectCorner corner = 0;
+    UIRectCorner corner = -1;
     if (!self.hideTopCorners && self.hideBottomCorners) {// 上圆下方
         corner = UIRectCornerTopLeft | UIRectCornerTopRight;
         self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
@@ -60,11 +60,15 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
         corner = UIRectCornerAllCorners;
         self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding * 2);
     }
-    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bp_backgroundView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(backgroundCornerRadis, backgroundCornerRadis)];
-    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-    maskLayer.frame = self.bp_backgroundView.bounds;
-    maskLayer.path = maskPath.CGPath;
-    self.bp_backgroundView.layer.mask = maskLayer;
+    if (self.hideBottomCorners && self.hideTopCorners) {// 上方下方
+        self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height);
+    } else {
+        UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bp_backgroundView.bounds byRoundingCorners:corner cornerRadii:CGSizeMake(backgroundCornerRadis, backgroundCornerRadis)];
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+        maskLayer.frame = self.bp_backgroundView.bounds;
+        maskLayer.path = maskPath.CGPath;
+        self.bp_backgroundView.layer.mask = maskLayer;
+    }
 }
 
 // MARK: Getters
