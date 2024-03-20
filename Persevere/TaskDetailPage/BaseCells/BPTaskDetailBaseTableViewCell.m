@@ -32,8 +32,8 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
 - (void)prepareForReuse {
     [super prepareForReuse];
     self.bp_indexPath = nil;
-    self.isBottomBorder = NO;
-    self.isTopBorder = NO;
+    self.hideBottomCorners = NO;
+    self.hideTopCorners = NO;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -50,13 +50,13 @@ static const  CGFloat backgroundCornerRadis = 10.0f;
     [super layoutSubviews];
     // 设置圆角
     UIRectCorner corner = 0;
-    if (self.isTopBorder && !self.isBottomBorder) {
+    if (!self.hideTopCorners && self.hideBottomCorners) {// 上圆下方
         corner = UIRectCornerTopLeft | UIRectCornerTopRight;
         self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
-    } else if (self.isBottomBorder && !self.isTopBorder) {
+    } else if (!self.hideBottomCorners && self.hideTopCorners) {// 上方下圆
         corner = UIRectCornerBottomLeft | UIRectCornerBottomRight;
         self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, 0, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding);
-    } else {
+    } else if (!self.hideBottomCorners && !self.hideTopCorners) {// 上圆下圆
         corner = UIRectCornerAllCorners;
         self.bp_backgroundView.frame = CGRectMake(backgroundHPadding, backgroundVPadding, self.bp_width - 2 * backgroundHPadding, self.bp_height - backgroundVPadding * 2);
     }
