@@ -32,8 +32,8 @@ class BPARImageRecognizeViewController: UIViewController {
         return configuration
     }()
     
-    // MARK: 私有方法
-    init(taskArray: [TaskModel]) {
+    // MARK: 初始化
+    public init(taskArray: [TaskModel]) {
         self.taskArray = taskArray
         super.init(nibName: nil, bundle: nil)
     }
@@ -95,7 +95,9 @@ extension BPARImageRecognizeViewController {
 extension BPARImageRecognizeViewController: ARSCNViewDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
-            
+            if let imageAnchor = anchor as? ARImageAnchor, let imageName = imageAnchor.referenceImage.name {
+                
+            }
         }
     }
     

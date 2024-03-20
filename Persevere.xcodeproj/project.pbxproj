@@ -69,6 +69,8 @@
 		3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F212BA34E8200D7558D /* BPExtraInfoTableViewCell.m */; };
 		3ADE1F292BA8ADD300D7558D /* BPARImageRecognizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */; };
 		3ADE1F2B2BAA093D00D7558D /* BPARTaskCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */; };
+		3ADE1F2E2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F2D2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift */; };
+		3ADE1F302BAB506100D7558D /* ARCardWeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADE1F2F2BAB506100D7558D /* ARCardWeekdayCell.swift */; };
 		3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */; };
 		3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */; };
 		3AE824BF2B8CEFF300521E94 /* BPTaskDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824BE2B8CEFF300521E94 /* BPTaskDisplayView.m */; };
@@ -200,6 +202,8 @@
 		3ADE1F272BA8ADD300D7558D /* Persevere-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Persevere-Bridging-Header.h"; sourceTree = "<group>"; };
 		3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPARImageRecognizeViewController.swift; sourceTree = "<group>"; };
 		3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BPARTaskCardView.swift; sourceTree = "<group>"; };
+		3ADE1F2D2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCardIconAndLabelCell.swift; sourceTree = "<group>"; };
+		3ADE1F2F2BAB506100D7558D /* ARCardWeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCardWeekdayCell.swift; sourceTree = "<group>"; };
 		3AE37CAF2AFCDA58000CA19D /* BPInputShortTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInputShortTextTableViewCell.h; sourceTree = "<group>"; };
 		3AE37CB02AFCDA58000CA19D /* BPInputShortTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputShortTextTableViewCell.m; sourceTree = "<group>"; };
 		3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSectionHeaderView.h; sourceTree = "<group>"; };
@@ -632,10 +636,20 @@
 		3ADE1F232BA8AC8C00D7558D /* AR */ = {
 			isa = PBXGroup;
 			children = (
+				3ADE1F2C2BAB4DD300D7558D /* ARTaskCardView */,
 				3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */,
-				3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */,
 			);
 			path = AR;
+			sourceTree = "<group>";
+		};
+		3ADE1F2C2BAB4DD300D7558D /* ARTaskCardView */ = {
+			isa = PBXGroup;
+			children = (
+				3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */,
+				3ADE1F2D2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift */,
+				3ADE1F2F2BAB506100D7558D /* ARCardWeekdayCell.swift */,
+			);
+			path = ARTaskCardView;
 			sourceTree = "<group>";
 		};
 		3AE37CB42AFF9B81000CA19D /* SectionHeaderView */ = {
@@ -902,6 +916,7 @@
 				3A03CE2F2AF6C5030001B562 /* TaskModel.m in Sources */,
 				3A03CDF02AF3DBA60001B562 /* BPMainView.m in Sources */,
 				3A5EAC0F2BA2D16700336664 /* BPInfoTabView.m in Sources */,
+				3ADE1F302BAB506100D7558D /* ARCardWeekdayCell.swift in Sources */,
 				3A03CE092AF6407D0001B562 /* UIFont+BPAddtion.m in Sources */,
 				3A03CE352AF7BB990001B562 /* BPWeekDayPickerView.m in Sources */,
 				3A03CDDD2AF3B27D0001B562 /* BPUIHelper.m in Sources */,
@@ -952,6 +967,7 @@
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
 				3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */,
 				3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */,
+				3ADE1F2E2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift in Sources */,
 				3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */,
 				3AA8C6B72B07C197006AA569 /* BPProgressLabel.m in Sources */,
 				3A03CE2A2AF692D40001B562 /* BPTaskListView.m in Sources */,
