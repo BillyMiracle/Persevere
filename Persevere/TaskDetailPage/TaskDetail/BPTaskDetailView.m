@@ -303,7 +303,7 @@ HXCustomNavigationControllerDelegate
     if (indexPath.section == 0 && indexPath.row == 0) {
         // 任务名称
         BPInputShortTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inputShortText" forIndexPath:indexPath];
-        cell.isTopBorder = YES;
+        cell.hideBottomCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         [cell.inputTextField removeTarget:self action:@selector(titleTextFieldDidChangeValue:) forControlEvents:UIControlEventEditingChanged];
         [cell.inputTextField addTarget:self action:@selector(titleTextFieldDidChangeValue:) forControlEvents:UIControlEventEditingChanged];
@@ -314,14 +314,14 @@ HXCustomNavigationControllerDelegate
         // 完成weekday
         BPSelectWeekdayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectWeekday" forIndexPath:indexPath];
         cell.weekdayPickerView.delegate = self;
-        cell.isBottomBorder = YES;
+        cell.hideTopCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         [cell.weekdayPickerView refreshViewsWithSelectedWeekDayArray:self.currentTaskModel.reminderDays];
         return cell;
     } else if (indexPath.section == 1 && indexPath.row == 0) {
         // 开始时间
         BPSelectDateOrTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectDateOrTime" forIndexPath:indexPath];
-        cell.isTopBorder = YES;
+        cell.hideBottomCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         [cell.selecetDateButton setTitle:[self.currentTaskModel.startDate formattedDateWithFormat:(NSString *)BPDateFormat] forState:UIControlStateNormal];
         [cell.selecetDateButton addTarget:self action:@selector(selectStartDate) forControlEvents:UIControlEventTouchUpInside];
@@ -329,7 +329,7 @@ HXCustomNavigationControllerDelegate
     } else if (indexPath.section == 1 && indexPath.row == 1) {
         // 结束时间
         BPSelectDateOrTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectDateOrTime" forIndexPath:indexPath];
-        cell.isBottomBorder = YES;
+        cell.hideTopCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         if (self.currentTaskModel.endDate == nil) {
             [cell.selecetDateButton setTitle:(NSString *)BPEndlessString forState:UIControlStateNormal];
@@ -343,13 +343,13 @@ HXCustomNavigationControllerDelegate
         BPSelectColorTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectColor" forIndexPath:indexPath];
         cell.colorPickerView.delegate = self;
         [cell.colorPickerView refreshViewsWithSelectedItem:self.currentTaskModel.type];
-        cell.isTopBorder = YES;
+        cell.hideBottomCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         return cell;
     } else if (indexPath.section == 2 && indexPath.row == 1) {
         // 提醒时间
         BPSelectDateOrTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectDateOrTime" forIndexPath:indexPath];
-        cell.isBottomBorder = YES;
+        cell.hideTopCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         if (self.currentTaskModel.reminderTime == nil) {
             [cell.selecetDateButton setTitle:@"无提醒" forState:UIControlStateNormal];
@@ -361,7 +361,7 @@ HXCustomNavigationControllerDelegate
     } else if (indexPath.section == 3 && indexPath.row == 0) {
         // 任务关联链接
         BPInputShortTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inputShortText" forIndexPath:indexPath];
-        cell.isTopBorder = YES;
+        cell.hideBottomCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         cell.inputTextField.placeholder = @"请输入 http:// 前缀的网址";
         cell.inputTextField.keyboardType = UIKeyboardTypeURL;
@@ -372,6 +372,8 @@ HXCustomNavigationControllerDelegate
     } else if (indexPath.section == 3 && indexPath.row == 1) {
         // 任务备注
         BPInputLongTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"inputLongText" forIndexPath:indexPath];
+        cell.hideTopCorners = YES;
+        cell.hideBottomCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         cell.inputTextView.delegate = self;
         cell.inputTextView.indexPath = indexPath;
@@ -379,7 +381,7 @@ HXCustomNavigationControllerDelegate
     } else if (indexPath.section == 3 && indexPath.row == 2) {
         // 关联图片
         BPSelectImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selectImage" forIndexPath:indexPath];
-        cell.isBottomBorder = YES;
+        cell.hideTopCorners = YES;
         cell.bp_titleLabel.text = [self cellTitleWithIndexPath:indexPath];
         NSString *selectText = @"";
         if (self.currentTaskModel.imageData == nil) {
