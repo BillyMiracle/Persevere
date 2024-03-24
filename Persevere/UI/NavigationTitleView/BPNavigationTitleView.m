@@ -41,7 +41,6 @@ static const CGFloat typeViewWidth = 10.0;
         [self addSubview:self.stackView];
         [self changeColor:color];
         [self changeShouldShowType:shouldShowType];
-        [self refreshFrame];
     }
     return self;
 }
@@ -52,16 +51,14 @@ static const CGFloat typeViewWidth = 10.0;
     [self.titleLabel sizeToFit];
     [self changeColor:color];
     [self changeShouldShowType:shouldShowType];
-    [self refreshFrame];
 }
 
-- (void)refreshFrame {
+- (void)layoutSubviews {
+    [super layoutSubviews];
     self.frame = CGRectMake(([BPUIHelper mainScreenWidth] - self.stackView.bp_width) / 2,
                             0,
                             self.stackView.bp_width,
                             self.stackView.bp_height);
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
 }
 
 /// 改变颜色
