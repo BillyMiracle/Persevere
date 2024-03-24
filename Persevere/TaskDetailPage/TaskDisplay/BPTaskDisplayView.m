@@ -10,6 +10,7 @@
 #import "BPSectionHeaderView.h"
 #import "BPInfoCardTableViewCell.h"
 #import "BPExtraInfoTableViewCell.h"
+#import "BPShowARTableViewCell.h"
 #import "BPProgressTableViewCell.h"
 #import "BPCalanderTableViewCell.h"
 #import "BPDeleteTaskTableViewCell.h"
@@ -30,6 +31,8 @@ UITableViewDataSource
 @property (nonatomic, strong) BPSectionHeaderView *infoSectionHeader;
 /// 进度标题框
 @property (nonatomic, strong) BPSectionHeaderView *progressSectionHeader;
+/// 是否可以启用AR
+@property (nonatomic, assign, readonly) BOOL isAREnabled;
 
 @end
 
@@ -54,7 +57,7 @@ UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 2;
+            return 3;
         case 1:
             return 3;
         default:
@@ -103,6 +106,9 @@ UITableViewDataSource
     if (indexPath.section == 1 && indexPath.row == 2) {
         // 删除任务
         [self presentAlertToDeleteTask];
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+        // 展示AR
+        [self interactWithARAction];
     }
 }
 
@@ -120,11 +126,26 @@ UITableViewDataSource
     [self.parentViewController presentViewController:deleteAlertController animated:YES completion:nil];
 }
 
+/// 点击AR按钮后操作
+- (void)interactWithARAction {
+    if (!self.isAREnabled) {
+        // AR不可用
+        UIAlertController *tipAlertController = [UIAlertController alertControllerWithTitle:@"此任务不支持AR自动展示" message:@"请为此任务添加图片" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:nil];
+        [tipAlertController addAction:cancelAction];
+        [self.parentViewController presentViewController:tipAlertController animated:YES completion:nil];
+    } else if ([self.delegate respondsToSelector:@selector(currentTaskInteractWithAR)]) {
+        // 可以使用AR
+        [self.delegate currentTaskInteractWithAR];
+    }
+}
+
 // MARK: 返回cell
 
 - (void)registerCells {
     [self.displayTableView registerClass:[BPInfoCardTableViewCell class] forCellReuseIdentifier:@"infoCard"];
     [self.displayTableView registerClass:[BPExtraInfoTableViewCell class] forCellReuseIdentifier:@"extraInfo"];
+    [self.displayTableView registerClass:[BPShowARTableViewCell class] forCellReuseIdentifier:@"ar"];
     [self.displayTableView registerClass:[BPProgressTableViewCell class] forCellReuseIdentifier:@"progress"];
     [self.displayTableView registerClass:[BPCalanderTableViewCell class] forCellReuseIdentifier:@"calander"];
     [self.displayTableView registerClass:[BPDeleteTaskTableViewCell class] forCellReuseIdentifier:@"delete"];
@@ -145,6 +166,13 @@ UITableViewDataSource
         TaskModel *task = self.dataSource.task;
         UIImage *image = task.imageData == nil ? [UIImage imageWithData:task.imageData] : nil;
         [cell bindWithModel:[[BPInfoTabViewModel alloc] initWithLink:task.link image:image memo:task.memo]];
+        return cell;
+        
+    } else if (indexPath.section == 0 && indexPath.row == 2) {
+        
+        // 1-3 单任务AR识别图片
+        BPShowARTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ar" forIndexPath:indexPath];
+        cell.bp_titleLabel.text = @"在AR世界中自动展示任务";
         return cell;
         
     } else if (indexPath.section == 1 && indexPath.row == 0) {
@@ -200,6 +228,11 @@ UITableViewDataSource
         _progressSectionHeader = [[BPSectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.bp_width, sectionHeaderViewHeight) title:@"完成进度"];
     }
     return _progressSectionHeader;
+}
+
+- (BOOL)isAREnabled {
+    // 图片不为空则启用
+    return self.dataSource.task.imageData != nil;
 }
 
 @end
