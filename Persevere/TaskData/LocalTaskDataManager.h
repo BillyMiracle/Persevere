@@ -31,7 +31,9 @@ typedef void (^errorBlock)(NSError * _Nonnull error);
 
 /// 获取全部任务
 - (void)getTasksFinished:(getTaskArraysucceededBlock)successBlock error:(errorBlock)errorBlock;
+/// 根据id获取任务
 - (void)getTasksOfID:(int)taskId finished:(getTasksucceededBlock)successBlock error:(errorBlock)errorBlock;
+/// 获取一天的全部任务
 - (void)getTasksOfDate:(NSDate *_Nonnull)date finished:(getTaskArraysucceededBlock)successBlock error:(errorBlock)errorBlock;
 - (void)getTasksOfWeekdays:(NSArray *_Nonnull)weekdays finished:(getTaskArraysucceededBlock)successBlock error:(errorBlock)errorBlock;
 
