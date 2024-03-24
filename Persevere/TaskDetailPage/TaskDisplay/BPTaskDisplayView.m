@@ -164,7 +164,7 @@ UITableViewDataSource
         // 1-2 信息分类
         BPExtraInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"extraInfo" forIndexPath:indexPath];
         TaskModel *task = self.dataSource.task;
-        UIImage *image = task.imageData == nil ? [UIImage imageWithData:task.imageData] : nil;
+        UIImage *image = task.imageData != nil ? [UIImage imageWithData:task.imageData] : nil;
         [cell bindWithModel:[[BPInfoTabViewModel alloc] initWithLink:task.link image:image memo:task.memo]];
         return cell;
         
