@@ -112,3 +112,9 @@ extension BPARImageRecognizeViewController: ARSCNViewDelegate {
         }
     }
 }
+
+extension BPARImageRecognizeViewController {
+    func getTask(name: String) -> TaskModel? {
+        return taskArray.first(where: { $0.name == name })
+    }
+}
