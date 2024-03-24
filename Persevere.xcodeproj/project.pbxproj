@@ -276,8 +276,6 @@
 				3A03CE082AF6407D0001B562 /* UIFont+BPAddtion.m */,
 				3A4D67FA2AFFB52C00B2FF86 /* NSString+BPAddition.h */,
 				3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */,
-				3A4A25DA2BB06A5600246792 /* UIImage+BPAddition.h */,
-				3A4A25DB2BB06A5600246792 /* UIImage+BPAddition.m */,
 			);
 			path = UIHelper;
 			sourceTree = "<group>";
