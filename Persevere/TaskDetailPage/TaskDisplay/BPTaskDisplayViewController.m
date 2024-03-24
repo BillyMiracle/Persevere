@@ -15,7 +15,8 @@
 @interface BPTaskDisplayViewController ()
 <
 BPTaskDisplayViewDataSource,
-BPTaskDisplayViewDelegate
+BPTaskDisplayViewDelegate,
+UIGestureRecognizerDelegate
 >
 /// 返回按钮
 @property (nonatomic, strong) UIBarButtonItem *backButton;
@@ -43,6 +44,8 @@ BPTaskDisplayViewDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self refreshNavigationBarView];
 }
 
