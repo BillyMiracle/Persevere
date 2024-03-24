@@ -42,6 +42,8 @@
 		3A3C8F1A2AF146FE00AF62E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C8F192AF146FE00AF62E4 /* main.m */; };
 		3A3F195F2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F195E2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m */; };
 		3A4548762AF9390600A857F7 /* ColorAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4548752AF9390600A857F7 /* ColorAsset.xcassets */; };
+		3A4A25D92BB03D3A00246792 /* ARAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A25D82BB03D3A00246792 /* ARAsset.xcassets */; };
+		3A4A25DC2BB06A5600246792 /* UIImage+BPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A25DB2BB06A5600246792 /* UIImage+BPAddition.m */; };
 		3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */; };
 		3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680B2B0233AB00B2FF86 /* UITextField+BPIndexPath.m */; };
 		3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */; };
@@ -151,6 +153,9 @@
 		3A3F195D2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDetailBaseTableViewCell.h; sourceTree = "<group>"; };
 		3A3F195E2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDetailBaseTableViewCell.m; sourceTree = "<group>"; };
 		3A4548752AF9390600A857F7 /* ColorAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAsset.xcassets; sourceTree = "<group>"; };
+		3A4A25D82BB03D3A00246792 /* ARAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ARAsset.xcassets; sourceTree = "<group>"; };
+		3A4A25DA2BB06A5600246792 /* UIImage+BPAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+BPAddition.h"; sourceTree = "<group>"; };
+		3A4A25DB2BB06A5600246792 /* UIImage+BPAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+BPAddition.m"; sourceTree = "<group>"; };
 		3A4D67FA2AFFB52C00B2FF86 /* NSString+BPAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BPAddition.h"; sourceTree = "<group>"; };
 		3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BPAddition.m"; sourceTree = "<group>"; };
 		3A4D680A2B0233AB00B2FF86 /* UITextField+BPIndexPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+BPIndexPath.h"; sourceTree = "<group>"; };
@@ -271,6 +276,8 @@
 				3A03CE082AF6407D0001B562 /* UIFont+BPAddtion.m */,
 				3A4D67FA2AFFB52C00B2FF86 /* NSString+BPAddition.h */,
 				3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */,
+				3A4A25DA2BB06A5600246792 /* UIImage+BPAddition.h */,
+				3A4A25DB2BB06A5600246792 /* UIImage+BPAddition.m */,
 			);
 			path = UIHelper;
 			sourceTree = "<group>";
@@ -638,6 +645,7 @@
 			children = (
 				3ADE1F2C2BAB4DD300D7558D /* ARTaskCardView */,
 				3ADE1F282BA8ADD300D7558D /* BPARImageRecognizeViewController.swift */,
+				3A4A25D82BB03D3A00246792 /* ARAsset.xcassets */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -645,9 +653,9 @@
 		3ADE1F2C2BAB4DD300D7558D /* ARTaskCardView */ = {
 			isa = PBXGroup;
 			children = (
-				3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */,
 				3ADE1F2D2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift */,
 				3ADE1F2F2BAB506100D7558D /* ARCardWeekdayCell.swift */,
+				3ADE1F2A2BAA093D00D7558D /* BPARTaskCardView.swift */,
 			);
 			path = ARTaskCardView;
 			sourceTree = "<group>";
@@ -834,6 +842,7 @@
 				3A3C8F172AF146FE00AF62E4 /* LaunchScreen.storyboard in Resources */,
 				3A3C8F142AF146FE00AF62E4 /* Assets.xcassets in Resources */,
 				3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */,
+				3A4A25D92BB03D3A00246792 /* ARAsset.xcassets in Resources */,
 				3AA8C6AE2B06848A006AA569 /* TodayPage.xcassets in Resources */,
 				3A03CE462AF7CF7E0001B562 /* WeekDayAsset.xcassets in Resources */,
 				3A3C8F122AF146FD00AF62E4 /* Main.storyboard in Resources */,
@@ -907,6 +916,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4A25DC2BB06A5600246792 /* UIImage+BPAddition.m in Sources */,
 				3A03CE272AF690A30001B562 /* BPTaskDetailViewController.m in Sources */,
 				3A3C8F0F2AF146FD00AF62E4 /* ViewController.m in Sources */,
 				3ADE1F2B2BAA093D00D7558D /* BPARTaskCardView.swift in Sources */,

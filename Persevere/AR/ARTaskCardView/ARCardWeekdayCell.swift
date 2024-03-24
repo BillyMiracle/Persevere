@@ -60,3 +60,11 @@ class ARCardWeekdayCell: UITableViewCell {
         }
     }
 }
+
+// MARK: bindData
+extension ARCardWeekdayCell {
+    public func bindData(icon: UIImage?, weekdays: [Any]) {
+        iconView.image = icon
+        weekdayPickerView.refreshViews(withSelectedWeekDayArray: weekdays)
+    }
+}

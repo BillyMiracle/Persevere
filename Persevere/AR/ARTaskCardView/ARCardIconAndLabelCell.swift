@@ -60,3 +60,11 @@ class ARCardIconAndLabelCell: UITableViewCell {
         }
     }
 }
+
+// MARK: bindData
+extension ARCardIconAndLabelCell {
+    public func bindData(icon: UIImage?, title: NSString?) {
+        iconView.image = icon
+        titleLabel.text = title as String?
+    }
+}
