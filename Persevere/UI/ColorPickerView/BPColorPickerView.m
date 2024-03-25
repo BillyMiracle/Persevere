@@ -70,9 +70,10 @@ static const NSInteger colorButtonCount = 7;
     } else {
         self.selectedIndex = button.buttonId;
     }
-    [self.delegate didChangeColor:self.selectedIndex];
     [self refreshColorButtons];
-    
+    if ([self.delegate respondsToSelector:@selector(didChangeColor:)]) {
+        [self.delegate didChangeColor:self.selectedIndex];
+    }
 }
 
 - (void)refreshColorButtons {

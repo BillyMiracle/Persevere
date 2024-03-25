@@ -81,7 +81,9 @@ static const NSInteger weekdayButtonCount = 7;
         [self.selectedWeekdayArray addObject:weekDay];
     }
     [self refreshWeekdayButtons];
-    [self.delegate didChangeWeekdays:[self.selectedWeekdayArray copy]];
+    if ([self.delegate respondsToSelector:@selector(didChangeWeekdays:)]) {
+        [self.delegate didChangeWeekdays:[self.selectedWeekdayArray copy]];
+    }
 }
 
 /// 刷新按钮状态
