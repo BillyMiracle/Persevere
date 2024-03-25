@@ -59,6 +59,7 @@ static const CGFloat typeViewWidth = 10.0;
                             0,
                             self.stackView.bp_width,
                             self.stackView.bp_height);
+    self.center = self.superview.center;
 }
 
 /// 改变颜色

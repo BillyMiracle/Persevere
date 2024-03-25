@@ -1,5 +1,5 @@
 //
-//  BPARImageRecognizeViewController.swift
+//  ARImageRecognizeViewController.swift
 //  Persevere
 //
 //  Created by 张博添 on 2024/3/19.
@@ -8,7 +8,9 @@
 import UIKit
 import ARKit
 
-class BPARImageRecognizeViewController: UIViewController {
+@objcMembers
+@objc(BPARImageRecognizeViewController)
+class ARImageRecognizeViewController: UIViewController {
     // MARK: 声明属性
     /// 任务数组
     private var taskArray: [TaskModel]
@@ -66,7 +68,7 @@ class BPARImageRecognizeViewController: UIViewController {
 
 // MARK: 私有方法
 
-extension BPARImageRecognizeViewController {
+extension ARImageRecognizeViewController {
     /// 设置检测图片
     private func setupDetectionImages() {
         let tasks = self.taskArray
@@ -92,7 +94,7 @@ extension BPARImageRecognizeViewController {
 
 // MARK: ARSCNViewDelegate
 
-extension BPARImageRecognizeViewController: ARSCNViewDelegate {
+extension ARImageRecognizeViewController: ARSCNViewDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             if let imageAnchor = anchor as? ARImageAnchor, let imageName = imageAnchor.referenceImage.name {
@@ -103,7 +105,7 @@ extension BPARImageRecognizeViewController: ARSCNViewDelegate {
                     let height = CGFloat(imageAnchor.referenceImage.physicalSize.height)
                     
                     let plane = SCNPlane(width: width, height: height)
-                    plane.materials.first?.diffuse.contents = BPARTaskCardView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height), task: task)
+                    plane.materials.first?.diffuse.contents = ARTaskCardView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height), task: task)
                     let planeNode = SCNNode(geometry: plane)
                     planeNode.position = SCNVector3(0, 0, 0)
                     planeNode.eulerAngles.x = -.pi / 2
@@ -125,7 +127,7 @@ extension BPARImageRecognizeViewController: ARSCNViewDelegate {
     }
 }
 
-extension BPARImageRecognizeViewController {
+extension ARImageRecognizeViewController {
     func getTask(name: String) -> TaskModel? {
         return taskArray.first(where: { $0.name == name })
     }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BPARTaskCardView: UIView {
+class ARTaskCardView: UIView {
     /// 任务
     private var task: TaskModel
     /// 展示列表
@@ -46,7 +46,7 @@ class BPARTaskCardView: UIView {
     }
 }
 
-extension BPARTaskCardView: UITableViewDelegate, UITableViewDataSource {
+extension ARTaskCardView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
