@@ -11,6 +11,7 @@
 #import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
 #import "LocalTaskDataManager.h"
+#import "Persevere-Swift.h"
 
 @interface BPTaskDisplayViewController ()
 <
@@ -73,6 +74,13 @@ UIGestureRecognizerDelegate
             });
         }
     }];
+}
+
+// MARK: interact with ar
+
+- (void)currentTaskInteractWithAR {
+    BPARImageRecognizeViewController *arViewController = [[BPARImageRecognizeViewController alloc] initWithTaskArray:@[self.task]];
+    [self.navigationController pushViewController:arViewController animated:YES];
 }
 
 // MARK: Button Actions
