@@ -59,7 +59,7 @@ static const CGFloat typeViewWidth = 10.0;
                             0,
                             self.stackView.bp_width,
                             self.stackView.bp_height);
-    self.center = self.superview.center;
+    self.center = CGPointMake(self.superview.bp_width / 2, self.superview.bp_height / 2);
 }
 
 /// 改变颜色
