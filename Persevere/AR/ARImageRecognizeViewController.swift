@@ -140,6 +140,16 @@ extension ARImageRecognizeViewController: ARSCNViewDelegate {
                 node.childNodes.map {
                     $0.removeFromParentNode()
                 }
+                if let task = self.getTask(name: imageName) {
+                    let width = CGFloat(imageAnchor.referenceImage.physicalSize.height)
+                    let height = CGFloat(imageAnchor.referenceImage.physicalSize.height)
+                    let plane = SCNPlane(width: width, height: height)
+                    plane.materials.first?.diffuse.contents = ARTaskCardView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 200), task: task)
+                    let planeNode = SCNNode(geometry: plane)
+                    planeNode.position = SCNVector3(0, 0, 0)
+                    planeNode.eulerAngles.x = -.pi / 2
+                    node.addChildNode(planeNode)
+                }
             }
         }
     }
