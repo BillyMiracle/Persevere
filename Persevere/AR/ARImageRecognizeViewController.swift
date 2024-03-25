@@ -14,6 +14,12 @@ class ARImageRecognizeViewController: UIViewController {
     // MARK: 声明属性
     /// 任务数组
     private var taskArray: [TaskModel]
+    /// 返回按钮
+    var backButton: UIBarButtonItem {
+        let backButton = UIBarButtonItem(image: UIImage(named: "NavBack"), style: .plain, target: self, action: #selector(pressBackButton))
+        backButton.tintColor = UIColor.white
+        return backButton
+    }
     /// AR view
     private lazy var sceneView: ARSCNView! = {
         let navigationBarHeight = UIDevice.bp_navigationFullHeight()
@@ -47,6 +53,7 @@ class ARImageRecognizeViewController: UIViewController {
     // MARK: 生命周期方法
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.leftBarButtonItem = backButton
         self.setupDetectionImages()
         self.view.addSubview(sceneView)
         
@@ -90,6 +97,11 @@ extension ARImageRecognizeViewController {
         let options: ARSession.RunOptions = [.resetTracking, .removeExistingAnchors, .resetSceneReconstruction]
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         sceneView.session.run(arWordTrackingConfiguration, options: options)
+    }
+    
+    /// 点击返回按钮
+    @objc private func pressBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
