@@ -7,3 +7,4 @@
 #import "BPWeekDayPickerView.h"
 #import "BPDateHelper.h"
 #import "DateTools.h"
+#import "BPNavigationTitleView.h"

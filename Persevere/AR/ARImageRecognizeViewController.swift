@@ -20,6 +20,10 @@ class ARImageRecognizeViewController: UIViewController {
         backButton.tintColor = UIColor.white
         return backButton
     }
+    /// 标题
+    var titleView: BPNavigationTitleView {
+        BPNavigationTitleView(title: "AR展示任务", andColor: nil, andShouldShowType: false)
+    }
     /// AR view
     private lazy var sceneView: ARSCNView! = {
         let navigationBarHeight = UIDevice.bp_navigationFullHeight()
@@ -54,6 +58,7 @@ class ARImageRecognizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.titleView = titleView
         self.setupDetectionImages()
         self.view.addSubview(sceneView)
         
