@@ -12,7 +12,7 @@ class ARTaskCardView: UIView {
     private var task: TaskModel
     /// 展示列表
     private lazy var infoTableView: UITableView = {
-        let tableView = UITableView.init(frame: self.frame, style: .grouped)
+        let tableView = UITableView.init(frame: CGRect(x: 0, y: 0, width: self.bp_width, height: self.bp_height), style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ARCardIconAndLabelCell.self, forCellReuseIdentifier: "IconLabelCell")
@@ -53,7 +53,7 @@ extension ARTaskCardView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return 40.0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

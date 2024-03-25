@@ -48,6 +48,7 @@ class ARImageRecognizeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupDetectionImages()
+        self.view.addSubview(sceneView)
         
     }
     
@@ -103,9 +104,9 @@ extension ARImageRecognizeViewController: ARSCNViewDelegate {
                     print("识别出来了：\(task)")
                     let width = CGFloat(imageAnchor.referenceImage.physicalSize.height)
                     let height = CGFloat(imageAnchor.referenceImage.physicalSize.height)
-                    
+                    print("width: \(width) height: \(height)")
                     let plane = SCNPlane(width: width, height: height)
-                    plane.materials.first?.diffuse.contents = ARTaskCardView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height), task: task)
+                    plane.materials.first?.diffuse.contents = ARTaskCardView.init(frame: CGRect.init(x: 0, y: 0, width: 200, height: 200), task: task)
                     let planeNode = SCNNode(geometry: plane)
                     planeNode.position = SCNVector3(0, 0, 0)
                     planeNode.eulerAngles.x = -.pi / 2
@@ -118,6 +119,11 @@ extension ARImageRecognizeViewController: ARSCNViewDelegate {
     public func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         DispatchQueue.main.async {
             
+            if let imageAnchor = anchor as? ARImageAnchor, let imageName = imageAnchor.referenceImage.name {
+                node.childNodes.map {
+                    $0.removeFromParentNode()
+                }
+            }
         }
     }
     public func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
