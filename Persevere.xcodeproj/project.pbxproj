@@ -44,6 +44,8 @@
 		3A4548762AF9390600A857F7 /* ColorAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4548752AF9390600A857F7 /* ColorAsset.xcassets */; };
 		3A4A25D92BB03D3A00246792 /* ARAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A4A25D82BB03D3A00246792 /* ARAsset.xcassets */; };
 		3A4A25E02BB092BC00246792 /* BPShowARTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A25DF2BB092BC00246792 /* BPShowARTableViewCell.m */; };
+		3A4A25E72BB4946900246792 /* BPSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A25E62BB4946900246792 /* BPSettingViewController.m */; };
+		3A4A25EA2BB4947E00246792 /* BPSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A25E92BB4947E00246792 /* BPSettingView.m */; };
 		3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */; };
 		3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680B2B0233AB00B2FF86 /* UITextField+BPIndexPath.m */; };
 		3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */; };
@@ -156,6 +158,10 @@
 		3A4A25D82BB03D3A00246792 /* ARAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ARAsset.xcassets; sourceTree = "<group>"; };
 		3A4A25DE2BB092BC00246792 /* BPShowARTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPShowARTableViewCell.h; sourceTree = "<group>"; };
 		3A4A25DF2BB092BC00246792 /* BPShowARTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPShowARTableViewCell.m; sourceTree = "<group>"; };
+		3A4A25E52BB4946900246792 /* BPSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingViewController.h; sourceTree = "<group>"; };
+		3A4A25E62BB4946900246792 /* BPSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingViewController.m; sourceTree = "<group>"; };
+		3A4A25E82BB4947E00246792 /* BPSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingView.h; sourceTree = "<group>"; };
+		3A4A25E92BB4947E00246792 /* BPSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingView.m; sourceTree = "<group>"; };
 		3A4D67FA2AFFB52C00B2FF86 /* NSString+BPAddition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+BPAddition.h"; sourceTree = "<group>"; };
 		3A4D67FB2AFFB52C00B2FF86 /* NSString+BPAddition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+BPAddition.m"; sourceTree = "<group>"; };
 		3A4D680A2B0233AB00B2FF86 /* UITextField+BPIndexPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+BPIndexPath.h"; sourceTree = "<group>"; };
@@ -490,6 +496,7 @@
 				3A03CDE72AF3BF0F0001B562 /* TaskListPage */,
 				3A03CE1D2AF64D8D0001B562 /* TaskDetailPage */,
 				3ADE1F232BA8AC8C00D7558D /* AR */,
+				3A4A25E12BB4942400246792 /* SettingPage */,
 				3A03CE2C2AF6C4820001B562 /* TaskData */,
 				3A03CDFD2AF4A7A20001B562 /* UI */,
 				3A4D67FD2B02064100B2FF86 /* TextFieldAndViewWithIndexPath */,
@@ -516,6 +523,17 @@
 				3A4A25DF2BB092BC00246792 /* BPShowARTableViewCell.m */,
 			);
 			path = AR;
+			sourceTree = "<group>";
+		};
+		3A4A25E12BB4942400246792 /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				3A4A25E52BB4946900246792 /* BPSettingViewController.h */,
+				3A4A25E62BB4946900246792 /* BPSettingViewController.m */,
+				3A4A25E82BB4947E00246792 /* BPSettingView.h */,
+				3A4A25E92BB4947E00246792 /* BPSettingView.m */,
+			);
+			path = SettingPage;
 			sourceTree = "<group>";
 		};
 		3A4D67FD2B02064100B2FF86 /* TextFieldAndViewWithIndexPath */ = {
@@ -983,12 +1001,14 @@
 				3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
+				3A4A25E72BB4946900246792 /* BPSettingViewController.m in Sources */,
 				3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */,
 				3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */,
 				3ADE1F2E2BAB4E1B00D7558D /* ARCardIconAndLabelCell.swift in Sources */,
 				3A4D67FC2AFFB52C00B2FF86 /* NSString+BPAddition.m in Sources */,
 				3AA8C6B72B07C197006AA569 /* BPProgressLabel.m in Sources */,
 				3A03CE2A2AF692D40001B562 /* BPTaskListView.m in Sources */,
+				3A4A25EA2BB4947E00246792 /* BPSettingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import "BPUIHelper.h"
 #import "DateTools.h"
 #import "BPTaskDisplayViewController.h"
+#import "BPSettingViewController.h"
 
 @interface BPMainViewController ()
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
@@ -68,7 +69,9 @@
 }
 
 - (void)pressSettingButton {
-    
+    BPSettingViewController *settingPage = [[BPSettingViewController alloc] init];
+    settingPage.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingPage animated:YES];
 }
 
 // MARK: Getter
