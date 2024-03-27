@@ -16,6 +16,10 @@
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
 @property (nonatomic, strong) BPMainView *mainPageView;
 @property (nonatomic, strong) BPNavigationTitleView *mainNavigationTitleView;
+/// 排序按钮
+@property (nonatomic, strong) UIBarButtonItem *sortButton;
+/// 设置按钮
+@property (nonatomic, strong) UIBarButtonItem *settingButton;
 
 @end
 
@@ -32,6 +36,7 @@
     // Do any additional setup after loadingN the view.
     
     self.navigationItem.titleView = self.mainNavigationTitleView;
+    self.navigationItem.rightBarButtonItem= self.settingButton;
     
     [self.view addSubview:self.mainPageView];
     
@@ -56,6 +61,16 @@
     [self.mainPageView navigationTitleViewTapped];
 }
 
+// MARK: Button Actions
+
+- (void)pressSortButton {
+    
+}
+
+- (void)pressSettingButton {
+    
+}
+
 // MARK: Getter
 
 - (BPNavigationTitleView *)mainNavigationTitleView {
@@ -75,5 +90,20 @@
     return _mainPageView;
 }
 
+- (UIBarButtonItem *)sortButton {
+    if (!_sortButton) {
+        _sortButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressSortButton)];
+        _sortButton.tintColor = [UIColor whiteColor];
+    }
+    return _sortButton;
+}
+
+- (UIBarButtonItem *)settingButton {
+    if (!_settingButton) {
+        _settingButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavSetting"] style:UIBarButtonItemStylePlain target:self action:@selector(pressSettingButton)];
+        _settingButton.tintColor = [UIColor whiteColor];
+    }
+    return _settingButton;
+}
 
 @end
