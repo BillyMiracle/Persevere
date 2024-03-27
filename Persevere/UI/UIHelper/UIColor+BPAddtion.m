@@ -15,7 +15,7 @@
 }
 
 + (UIColor *)bp_backgroundThemeColor {
-    return [UIColor systemGroupedBackgroundColor];
+    return [UIColor colorWithWhite:0.95 alpha:1];
 }
 
 + (UIColor *)bp_colorPickerColorWithIndex:(NSInteger)index {

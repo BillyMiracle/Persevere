@@ -166,6 +166,60 @@ static LocalTaskDataManager* _instance = nil;
     });
 }
 
+- (void)getTasksOfID:(int)taskId finished:(getTasksucceededBlock)successBlock error:(errorBlock)errorBlock {
+    [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        [self.taskArray removeAllObjects];
+        FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", @(taskId)];
+        TaskModel *task;
+        while ([resultSet next]) {
+            task = [[TaskModel alloc] init];
+            task.taskId = [resultSet intForColumn:@"id"];
+            task.name = [resultSet stringForColumn:@"name"];
+            
+            NSString *daysJsonStr = [resultSet stringForColumn:@"reminderDays"];
+            if (daysJsonStr != nil) {
+                NSData *daysData = [daysJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                NSArray *daysArr = [NSJSONSerialization JSONObjectWithData:daysData options:NSJSONReadingAllowFragments error:nil];
+                task.reminderDays = daysArr;
+            }
+            
+            NSString *punchJsonStr = [resultSet stringForColumn:@"punchDateArr"];
+            if (punchJsonStr != nil) {
+                NSData *punchData = [punchJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                NSArray *punchArr = [NSJSONSerialization JSONObjectWithData:punchData options:NSJSONReadingAllowFragments error:nil];
+                task.punchDateArray = punchArr;
+            }
+            
+            NSString *punchMemoJsonStr = [resultSet stringForColumn:@"punchMemoArr"];
+            if (punchMemoJsonStr != nil) {
+                NSData *punchData = [punchMemoJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                NSArray *punchArr = [NSJSONSerialization JSONObjectWithData:punchData options:NSJSONReadingAllowFragments error:nil];
+                task.punchMemoArray = punchArr;
+            }
+            
+            NSString *punchSkipJsonStr = [resultSet stringForColumn:@"punchSkipArr"];
+            if (punchSkipJsonStr != nil) {
+                NSData *punchData = [punchSkipJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                NSArray *punchArr = [NSJSONSerialization JSONObjectWithData:punchData options:NSJSONReadingAllowFragments error:nil];
+                task.punchSkipArray = punchArr;
+            }
+            
+            task.startDate = [resultSet dateForColumn:@"addDate"];
+            task.reminderTime = [resultSet dateForColumn:@"reminderTime"];
+            task.imageData = [resultSet dataForColumn:@"image"];
+            task.link = [resultSet stringForColumn:@"link"];
+            task.endDate = [resultSet dateForColumn:@"endDate"];
+            task.memo = [resultSet stringForColumn:@"memo"];
+            task.type = [resultSet intForColumn:@"type"];
+        }
+        if (task != nil) {
+            successBlock(task);
+        } else {
+            errorBlock([[NSError alloc] initWithDomain:@"Query Task Error" code:-1 userInfo:@{@"description" : @"查询指定id任务失败"}]);
+        }
+    }];
+}
+
 - (void)getTasksOfDate:(NSDate *)date finished:(getTaskArraysucceededBlock)successBlock error:( errorBlock)errorBlock {
     [self getTasksFinished:^(NSMutableArray * _Nonnull taskArray) {
         NSMutableArray *result = [[NSMutableArray alloc] init];

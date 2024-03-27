@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol BPTaskDisplayViewDelegate <NSObject>
 
+- (void)currentTaskInteractWithAR;
 - (void)deleteCurrentTask;
 
 @end
