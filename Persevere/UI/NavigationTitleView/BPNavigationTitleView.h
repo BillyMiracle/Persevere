@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic, nullable) id<BPNavigationTitleViewDelegate> navigationTitleDelegate;
 
+/// 初始化，不展示颜色
+/// @param title  标题
+- (_Nonnull instancetype)initWithTitle:(NSString *_Nonnull)title;
+
 /// 初始化
 /// @param title  标题
 /// @param color  颜色

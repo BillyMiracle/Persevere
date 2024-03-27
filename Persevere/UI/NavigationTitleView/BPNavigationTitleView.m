@@ -35,6 +35,10 @@ static const CGFloat typeViewWidth = 10.0;
     return self;
 }
 
+- (instancetype)initWithTitle:(NSString *_Nonnull)title {
+    return [self initWithTitle:title andColor:nil andShouldShowType:NO];
+}
+
 - (instancetype)initWithTitle:(NSString *)title andColor:(UIColor *)color andShouldShowType:(BOOL)shouldShowType {
     if (self = [super init]) {
         self.title = title;

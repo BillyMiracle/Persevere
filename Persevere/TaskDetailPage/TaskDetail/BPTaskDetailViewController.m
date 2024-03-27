@@ -149,7 +149,7 @@
         } else {
             title = @"任务详情";
         }
-        _detailTitleView = [[BPNavigationTitleView alloc] initWithTitle:title andColor:nil andShouldShowType:NO];
+        _detailTitleView = [[BPNavigationTitleView alloc] initWithTitle:title];
     }
     return _detailTitleView;
 }
