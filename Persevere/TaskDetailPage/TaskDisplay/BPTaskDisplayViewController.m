@@ -67,7 +67,7 @@ UIGestureRecognizerDelegate
 // MARK: delete task
 
 - (void)deleteCurrentTask {
-    [[LocalTaskDataManager shareInstance] deleteTask:self.task finished:^(BOOL succeeded) {
+    [[LocalTaskDataManager sharedInstance] deleteTask:self.task finished:^(BOOL succeeded) {
         if (succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController popViewControllerAnimated:YES];

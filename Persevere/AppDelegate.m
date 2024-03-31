@@ -26,7 +26,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     
     //关闭数据库
-    [[DataBaseManager shareInstance] closeDataBase];
+    [[DataBaseManager sharedInstance] closeDataBase];
 }
 
 #pragma mark - UISceneSession lifecycle

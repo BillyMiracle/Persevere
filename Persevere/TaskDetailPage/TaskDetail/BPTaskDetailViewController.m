@@ -87,7 +87,7 @@
         if (self.isAddMode) {
             task.punchDateArray = [[NSMutableArray alloc] init];
             task.punchMemoArray = [[NSMutableArray alloc] init];
-            [[LocalTaskDataManager shareInstance] addTask:task finished:^(BOOL succeeded) {
+            [[LocalTaskDataManager sharedInstance] addTask:task finished:^(BOOL succeeded) {
                 if (succeeded) {// 添加成功
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.navigationController popViewControllerAnimated:YES];

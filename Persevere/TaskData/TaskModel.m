@@ -18,11 +18,11 @@
 }
 
 - (NSUInteger)totalDays {
-    return [[LocalTaskDataManager shareInstance] totalDayCountOfTask:self] - [[LocalTaskDataManager shareInstance] skipPunchDayCountOfTask:self];
+    return [[LocalTaskDataManager sharedInstance] totalDayCountOfTask:self] - [[LocalTaskDataManager sharedInstance] skipPunchDayCountOfTask:self];
 }
 
 - (NSUInteger)punchDays {
-    return [[LocalTaskDataManager shareInstance] didPunchDayNumberOfTask:self];
+    return [[LocalTaskDataManager sharedInstance] didPunchDayNumberOfTask:self];
 }
 
 - (NSString *)sortName {
