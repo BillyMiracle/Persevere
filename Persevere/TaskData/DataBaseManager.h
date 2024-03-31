@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 数据库路径
 @property (nonatomic, copy) NSString *databasePath;
 
-+ (_Nonnull instancetype)shareInstance;
++ (_Nonnull instancetype)sharedInstance;
 - (void)closeDataBase;
 
 @end

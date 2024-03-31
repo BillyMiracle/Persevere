@@ -22,28 +22,29 @@ typedef void (^loadTasksFinished)(void);
 
 static LocalTaskDataManager* _instance = nil;
 
-+ (instancetype)shareInstance {
-    static dispatch_once_t onceToken ;
-    dispatch_once(&onceToken, ^{
-        _instance = [[super allocWithZone:NULL] init];
-    });
-    return _instance ;
++ (instancetype)sharedInstance {
+    if (!_instance) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _instance = [[super allocWithZone:NULL] init];
+            if (_instance) {
+                _instance.taskArray = [NSMutableArray array];
+            }
+        });
+    }
+    return _instance;
 }
 
 + (id)allocWithZone:(struct _NSZone *)zone {
-    return [LocalTaskDataManager shareInstance] ;
+    return [LocalTaskDataManager sharedInstance];
 }
 
 - (instancetype)init {
-    self = [super init];
-    if (self) {
-        self.taskArray = [[NSMutableArray alloc] init];
-    }
-    return self;
+    return [LocalTaskDataManager sharedInstance];
 }
 
 - (id)copyWithZone:(struct _NSZone *)zone {
-    return [LocalTaskDataManager shareInstance] ;
+    return [LocalTaskDataManager sharedInstance] ;
 }
 
 // MARK: 添加
@@ -74,7 +75,7 @@ static LocalTaskDataManager* _instance = nil;
             NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchSkipArr options:NSJSONWritingPrettyPrinted error:&err];
             punchSkipJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
         }
-        [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
             BOOL succeeded = [db executeUpdate:
                 @"INSERT INTO task_table (name, reminderDays, addDate, reminderTime, punchDateArr, image, link, endDate, memo, type, punchMemoArr, punchSkipArr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
                 task.name,
@@ -99,7 +100,7 @@ static LocalTaskDataManager* _instance = nil;
 // MARK: 删除
 - (void)deleteTask:(TaskModel *)task finished:(updateTaskFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
             BOOL result = [db executeUpdate:@"delete from task_table where id = ?;", @(task.taskId)];
             finishedBlock(result);
         }];
@@ -108,7 +109,7 @@ static LocalTaskDataManager* _instance = nil;
 
 // MARK: 获取
 - (void)loadAllTasksFinished:(loadTasksFinished)finishedBlock {
-    [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
         [self.taskArray removeAllObjects];
         FMResultSet *resultSet = [db executeQuery:@"select * from task_table;"];
         while ([resultSet next]) {
@@ -167,7 +168,7 @@ static LocalTaskDataManager* _instance = nil;
 }
 
 - (void)getTasksOfID:(int)taskId finished:(getTasksucceededBlock)successBlock error:(errorBlock)errorBlock {
-    [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
         [self.taskArray removeAllObjects];
         FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", @(taskId)];
         TaskModel *task;
@@ -239,7 +240,7 @@ static LocalTaskDataManager* _instance = nil;
 // MARK: 打卡
 - (void)punchForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(nonnull updateTaskFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
             FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", taskid];
             BOOL succeeded = NO;
             while ([resultSet next]) {
@@ -301,7 +302,7 @@ static LocalTaskDataManager* _instance = nil;
 // MARK: 取消打卡
 - (void)unpunchForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(nonnull updateTaskFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[[DataBaseManager shareInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
             FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", taskid];
             BOOL succeeded = NO;
             while ([resultSet next]) {

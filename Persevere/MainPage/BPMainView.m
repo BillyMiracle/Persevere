@@ -108,7 +108,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 }
 
 - (void)loadTasksFinished:(loadTasksFinishedBlock)finishedBlock {
-    [[LocalTaskDataManager shareInstance] getTasksOfDate:self.selectedDate finished:^(NSMutableArray * _Nonnull taskArray) {
+    [[LocalTaskDataManager sharedInstance] getTasksOfDate:self.selectedDate finished:^(NSMutableArray * _Nonnull taskArray) {
         [self.unfinishedTaskArr removeAllObjects];
         [self.finishedTaskArr removeAllObjects];;
         for (TaskModel *task in taskArray) {
@@ -256,7 +256,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 - (void)checkTaskAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         TaskModel *task = self.unfinishedTaskArr[indexPath.row];
-        [[LocalTaskDataManager shareInstance] punchForTaskWithID:@(task.taskId) onDate:self.selectedDate finished:^(BOOL succeeded) {
+        [[LocalTaskDataManager sharedInstance] punchForTaskWithID:@(task.taskId) onDate:self.selectedDate finished:^(BOOL succeeded) {
             if (succeeded) {
                 [self loadTasksFinished:^(BOOL success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -267,7 +267,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         }];
     } else if(indexPath.section == 2) {
         TaskModel *task = self.finishedTaskArr[indexPath.row];
-        [[LocalTaskDataManager shareInstance] unpunchForTaskWithID:@(task.taskId) onDate:self.selectedDate finished:^(BOOL succeeded) {
+        [[LocalTaskDataManager sharedInstance] unpunchForTaskWithID:@(task.taskId) onDate:self.selectedDate finished:^(BOOL succeeded) {
             if (succeeded) {
                 [self loadTasksFinished:^(BOOL success) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -332,7 +332,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     
     [self.mainTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     
-    [[LocalTaskDataManager shareInstance] deleteTask:task finished:^(BOOL succeeded) {
+    [[LocalTaskDataManager sharedInstance] deleteTask:task finished:^(BOOL succeeded) {
         if (succeeded) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(self.finishedTaskArr.count == 0 || self.unfinishedTaskArr.count == 0) {

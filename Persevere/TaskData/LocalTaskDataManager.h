@@ -20,7 +20,7 @@ typedef void (^getTaskArraysucceededBlock)(NSMutableArray *taskArray);
 typedef void (^errorBlock)(NSError * _Nonnull error);
 
 /// 获取Manager单例对象
-+ (_Nonnull instancetype)shareInstance;
++ (_Nonnull instancetype)sharedInstance;
 
 /// 添加task
 - (void)addTask:(TaskModel *_Nonnull)task finished:(updateTaskFinishedBlock)finishedBlock;

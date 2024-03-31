@@ -11,7 +11,7 @@
 
 static DataBaseManager* _instance = nil;
 
-+ (instancetype)shareInstance {
++ (instancetype)sharedInstance {
     static dispatch_once_t onceToken ;
     dispatch_once(&onceToken, ^{
         _instance = [[super allocWithZone:NULL] init];
@@ -20,7 +20,7 @@ static DataBaseManager* _instance = nil;
 }
 
 + (id)allocWithZone:(struct _NSZone *)zone {
-    return [DataBaseManager shareInstance];
+    return [DataBaseManager sharedInstance];
 }
 
 - (instancetype)init {
