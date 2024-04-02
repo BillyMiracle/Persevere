@@ -47,6 +47,22 @@ static DataBaseManager* _instance = nil;
         } else {
             NSLog(@"表已存在");
         }
+//        if (![db tableExists:@"setting_table"]) {
+//            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_table (id integer PRIMARY KEY AUTOINCREMENT, setting_type text NOT NULL, setting_status integer)"];
+//            if (result) {
+//                NSLog(@"创建表成功");
+//            }
+//        } else {
+//            NSLog(@"表已存在");
+//        }
+//        if (![db tableExists:@"setting_color_table"]) {
+//            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_color_table (id integer PRIMARY KEY AUTOINCREMENT, color_type_id integer, color_content text)"];
+//            if (result) {
+//                NSLog(@"创建表成功");
+//            }
+//        } else {
+//            NSLog(@"表已存在");
+//        }
     }];
 }
 

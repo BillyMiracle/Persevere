@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BPSettingView : UIView
 
+@property (nonatomic, weak) UIViewController *parentViewController;
+
 @end
 
 NS_ASSUME_NONNULL_END

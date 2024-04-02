@@ -33,6 +33,10 @@
 		3A0DD2572B04EB8F00F2DAC6 /* LocalTaskDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD2562B04EB8F00F2DAC6 /* LocalTaskDataManager.m */; };
 		3A0DD25A2B04F5F600F2DAC6 /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD2592B04F5F600F2DAC6 /* DataBaseManager.m */; };
 		3A0DD25E2B051F9F00F2DAC6 /* UserNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD25D2B051F9F00F2DAC6 /* UserNotificationManager.m */; };
+		3A3373B32BB98424002131C4 /* BPSettingSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3373B22BB98424002131C4 /* BPSettingSectionView.m */; };
+		3A3373B82BB98DB6002131C4 /* LocalSettingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3373B72BB98DB6002131C4 /* LocalSettingDataManager.m */; };
+		3A3373BB2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3373BA2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m */; };
+		3A3373BE2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3373BD2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m */; };
 		3A3C8F092AF146FD00AF62E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C8F082AF146FD00AF62E4 /* AppDelegate.m */; };
 		3A3C8F0C2AF146FD00AF62E4 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C8F0B2AF146FD00AF62E4 /* SceneDelegate.m */; };
 		3A3C8F0F2AF146FD00AF62E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3C8F0E2AF146FD00AF62E4 /* ViewController.m */; };
@@ -140,6 +144,14 @@
 		3A0DD2592B04F5F600F2DAC6 /* DataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataBaseManager.m; sourceTree = "<group>"; };
 		3A0DD25C2B051F9F00F2DAC6 /* UserNotificationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserNotificationManager.h; sourceTree = "<group>"; };
 		3A0DD25D2B051F9F00F2DAC6 /* UserNotificationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserNotificationManager.m; sourceTree = "<group>"; };
+		3A3373B12BB98424002131C4 /* BPSettingSectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingSectionView.h; sourceTree = "<group>"; };
+		3A3373B22BB98424002131C4 /* BPSettingSectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingSectionView.m; sourceTree = "<group>"; };
+		3A3373B62BB98DB6002131C4 /* LocalSettingDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalSettingDataManager.h; sourceTree = "<group>"; };
+		3A3373B72BB98DB6002131C4 /* LocalSettingDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalSettingDataManager.m; sourceTree = "<group>"; };
+		3A3373B92BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingSwitchTableViewCell.h; sourceTree = "<group>"; };
+		3A3373BA2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingSwitchTableViewCell.m; sourceTree = "<group>"; };
+		3A3373BC2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingBaseTableViewCell.h; sourceTree = "<group>"; };
+		3A3373BD2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingBaseTableViewCell.m; sourceTree = "<group>"; };
 		3A3C8F042AF146FD00AF62E4 /* Persevere.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Persevere.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3C8F072AF146FD00AF62E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A3C8F082AF146FD00AF62E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -461,6 +473,35 @@
 			path = HoverView;
 			sourceTree = "<group>";
 		};
+		3A3373B02BB9830B002131C4 /* SectionHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				3A3373B12BB98424002131C4 /* BPSettingSectionView.h */,
+				3A3373B22BB98424002131C4 /* BPSettingSectionView.m */,
+			);
+			path = SectionHeaderView;
+			sourceTree = "<group>";
+		};
+		3A3373B42BB98732002131C4 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3A3373B92BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.h */,
+				3A3373BA2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m */,
+				3A3373BC2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.h */,
+				3A3373BD2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		3A3373B52BB98D0E002131C4 /* SettingData */ = {
+			isa = PBXGroup;
+			children = (
+				3A3373B62BB98DB6002131C4 /* LocalSettingDataManager.h */,
+				3A3373B72BB98DB6002131C4 /* LocalSettingDataManager.m */,
+			);
+			path = SettingData;
+			sourceTree = "<group>";
+		};
 		3A3C8EFB2AF146FD00AF62E4 = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +569,9 @@
 		3A4A25E12BB4942400246792 /* SettingPage */ = {
 			isa = PBXGroup;
 			children = (
+				3A3373B52BB98D0E002131C4 /* SettingData */,
+				3A3373B42BB98732002131C4 /* Cells */,
+				3A3373B02BB9830B002131C4 /* SectionHeaderView */,
 				3A4A25E52BB4946900246792 /* BPSettingViewController.h */,
 				3A4A25E62BB4946900246792 /* BPSettingViewController.m */,
 				3A4A25E82BB4947E00246792 /* BPSettingView.h */,
@@ -967,6 +1011,7 @@
 				3A3C8F092AF146FD00AF62E4 /* AppDelegate.m in Sources */,
 				3A03CDF62AF3DD860001B562 /* UIViewController+BPUIHelper.m in Sources */,
 				3AA8C6BA2B07C2B9006AA569 /* BPMaskLabel.m in Sources */,
+				3A3373B32BB98424002131C4 /* BPSettingSectionView.m in Sources */,
 				3AB33E842AFA3DD80023575F /* BPSelectImageTableViewCell.m in Sources */,
 				3A0DD2572B04EB8F00F2DAC6 /* LocalTaskDataManager.m in Sources */,
 				3A03CE382AF7BBBB0001B562 /* BPColorPickerView.m in Sources */,
@@ -988,6 +1033,7 @@
 				3A03CE062AF63FF40001B562 /* UIColor+BPAddtion.m in Sources */,
 				3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */,
 				3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */,
+				3A3373B82BB98DB6002131C4 /* LocalSettingDataManager.m in Sources */,
 				3ADE1F292BA8ADD300D7558D /* ARImageRecognizeViewController.swift in Sources */,
 				3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */,
 				3A03CDED2AF3C2E90001B562 /* BPTaskListViewController.m in Sources */,
@@ -998,7 +1044,9 @@
 				3AB33E7E2AFA3CA80023575F /* BPSelectWeekdayTableViewCell.m in Sources */,
 				3A03CE002AF4A7F20001B562 /* BPPublishTabBar.m in Sources */,
 				3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */,
+				3A3373BB2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m in Sources */,
 				3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */,
+				3A3373BE2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
 				3A4A25E72BB4946900246792 /* BPSettingViewController.m in Sources */,
