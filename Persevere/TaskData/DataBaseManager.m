@@ -47,22 +47,34 @@ static DataBaseManager* _instance = nil;
         } else {
             NSLog(@"表已存在");
         }
-//        if (![db tableExists:@"setting_table"]) {
-//            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_table (id integer PRIMARY KEY AUTOINCREMENT, setting_type text NOT NULL, setting_status integer)"];
+        if (![db tableExists:@"setting_table"]) {
+            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_table (id integer PRIMARY KEY AUTOINCREMENT, setting_type text NOT NULL, setting_status integer)"];
+            if (result) {
+                NSLog(@"创建表成功");
+            }
+        } else {
+            NSLog(@"表已存在");
+//            BOOL result = [db executeUpdate:@"DROP TABLE IF EXISTS setting_table"];
 //            if (result) {
-//                NSLog(@"创建表成功");
+//                NSLog(@"删除 setting_table 成功");
+//            } else {
+//                NSLog(@"删除 setting_table 失败");
 //            }
-//        } else {
-//            NSLog(@"表已存在");
-//        }
-//        if (![db tableExists:@"setting_color_table"]) {
-//            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_color_table (id integer PRIMARY KEY AUTOINCREMENT, color_type_id integer, color_content text)"];
+        }
+        if (![db tableExists:@"setting_color_table"]) {
+            BOOL result = [db executeUpdate: @"CREATE TABLE IF NOT EXISTS setting_color_table (id integer PRIMARY KEY AUTOINCREMENT, color_type_id integer, color_content text)"];
+            if (result) {
+                NSLog(@"创建表成功");
+            }
+        } else {
+            NSLog(@"表已存在");
+//            BOOL result = [db executeUpdate:@"DROP TABLE IF EXISTS setting_color_table"];
 //            if (result) {
-//                NSLog(@"创建表成功");
+//                NSLog(@"删除 setting_color_table 成功");
+//            } else {
+//                NSLog(@"删除 setting_color_table 失败");
 //            }
-//        } else {
-//            NSLog(@"表已存在");
-//        }
+        }
     }];
 }
 

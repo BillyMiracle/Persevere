@@ -56,33 +56,23 @@ static LocalSettingDataManager* _instance = nil;
                                   BPLocalSettingAnimation,
                                   BPLocalSettingShowUndoneCount,
                                   BPLocalSettingAutoRefreshTodayDate];
-        // 定义递归函数
-        __block NSInteger index = 0;
-        __weak typeof(self) weakSelf = self;
-        void (^getNextSetting)(void);
-        __weak void (^weakGetNextSetting)(void);
-        void (^getNextSettingWrapper)(void) = ^{
-            if (index < settingNames.count) {
-                NSString *name = settingNames[index];
-                [weakSelf getSettingUptodateWithName:name finished:^(BOOL updated) {
-                    if (updated) {
-                        index++;
-                        weakGetNextSetting(); // 递归调用
-                    } else {
-                        // 处理更新失败的情况
-                        finished(NO);
-                    }
-                }];
-            } else {
-                // 所有设置都已处理完成
-                weakSelf.isSettingsUptodate = YES;
-                finished(YES);
-            }
-        };
-        weakGetNextSetting = getNextSettingWrapper;
-        getNextSetting = getNextSettingWrapper;
-        // 开始递归调用
-        getNextSetting();
+        
+        dispatch_group_t group = dispatch_group_create();
+        for (int i = 0; i < settingNames.count; i++) {
+            NSString *settingName = settingNames[i];
+            dispatch_group_enter(group);
+            [self getSettingUptodateWithName:settingName finished:^(BOOL updated) {
+                // 处理完成后的操作
+                dispatch_group_leave(group);
+            }];
+        }
+
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            // 所有任务完成后执行的操作
+            NSLog(@"All tasks completed.");
+            self.isSettingsUptodate = YES;
+            finished(YES);
+        });
     } else {
         finished(YES);
     }
@@ -91,19 +81,24 @@ static LocalSettingDataManager* _instance = nil;
 // 更新设置项的状态
 - (void)getSettingUptodateWithName:(NSString *)name finished:(getDataUptodateFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM YourTable WHERE setting_type = ?", name];
+        FMResultSet *resultSet = [db executeQuery:@"SELECT * FROM setting_table WHERE setting_type = ?", name];
         // 如果结果集中不存在匹配行，则插入一行数据
         BOOL updateTodate = NO;
         if (![resultSet next]) {
             // 原先 table 里没有这个设置
-            if (![db executeUpdate:@"INSERT INTO setting_table (setting_type, setting_switch) VALUES (?, ?)", name, @0]) {
+            if (![db executeUpdate:@"INSERT INTO setting_table (setting_type, setting_status) VALUES (?, ?)", name, @0]) {
                 NSLog(@"DEBUG: Could not insert row.");
+            } else {
+                updateTodate = YES;
+                NSLog(@"DEBUG: Insert row %@", name);
             }
             [self updateSettingNamed:name to:NO];
         } else {
             // table 里有这个设置
             BOOL status = [resultSet boolForColumn:@"setting_status"];
+            NSLog(@"DEBUG: Has row %@ %d", name, status);
             [self updateSettingNamed:name to:status];
+            updateTodate = YES;
         }
         finished(updateTodate);
     }];
@@ -152,10 +147,13 @@ static LocalSettingDataManager* _instance = nil;
 }
 
 - (void)updateSettingFromName:(NSString *)name status:(BOOL)status succeeded:(updateSettingFinishedBlock)finishedBlock {
+    __weak typeof(self) weakSelf = self;
     [self setDataUptodateIfNeededFinished:^(BOOL succeeded) {
+        __strong typeof(weakSelf) self = weakSelf;
         if (succeeded) {
             [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-                if ([db executeUpdate:@"UPDATE setting_table SET setting_switch = ? WHERE setting_type = ?", @(status), name]) {
+                if ([db executeUpdate:@"UPDATE setting_table SET setting_status = ? WHERE setting_type = ?", @(status), name]) {
+                    [self updateSettingNamed:name to:status];
                     finishedBlock(YES);
                 } else {
                     finishedBlock(NO);

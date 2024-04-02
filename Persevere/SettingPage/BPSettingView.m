@@ -135,6 +135,7 @@ BPSettingSwitchTableViewCellDelegate
             });
         }];
         [cell.textLabel setText:@"是否开启大字号"];
+        cell.delegate = self;
         return cell;
     } else if (section == 2 && row == 1) {
         // 动画效果
@@ -206,7 +207,30 @@ BPSettingSwitchTableViewCellDelegate
 
 - (void)switchValueChanged:(UITableViewCell *)cell value:(BOOL)value {
     NSIndexPath *indexPath = [self.settingTableView indexPathForCell:cell];
-    
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    NSString *name = @"";
+    if (section == 2 && row == 0) {
+        // 是否开启大字号
+        name = BPLocalSettingBigFont;
+    } else if (section == 2 && row == 1) {
+        // 动画效果
+        name = BPLocalSettingAnimation;
+    } else if (section == 3 && row == 1) {
+        // 角标显示今日未完成任务数
+        name = BPLocalSettingShowUndoneCount;
+    } else if (section == 3 && row == 2) {
+        // 首页自动刷新今日日期
+        name = BPLocalSettingAutoRefreshTodayDate;
+    }
+    [LocalSettingDataManager.sharedInstance updateSettingFromName:name status:value succeeded:^(BOOL succeeded) {
+        if (!succeeded) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                BPSettingSwitchTableViewCell *switchCell = (BPSettingSwitchTableViewCell *)cell;
+                [switchCell setSwitchStatus:!value];
+            });
+        }
+    }];
 }
 
 // MARK: Getters
