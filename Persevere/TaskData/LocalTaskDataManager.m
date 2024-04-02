@@ -26,7 +26,7 @@ static LocalTaskDataManager* _instance = nil;
     if (!_instance) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            _instance = [[super allocWithZone:NULL] init];
+            _instance = [super allocWithZone:NULL];
             if (_instance) {
                 _instance.taskArray = [NSMutableArray array];
             }
