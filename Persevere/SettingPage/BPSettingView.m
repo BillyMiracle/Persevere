@@ -118,18 +118,23 @@ BPSettingSwitchTableViewCellDelegate
         
     } else if (section == 1 && row == 0) {
         // iCloud备份
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"iCloud备份"];
+        return cell;
     } else if (section == 1 && row == 1) {
         // 清理缓存
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"清理缓存"];
+        return cell;
     } else if (section == 2 && row == 0) {
-        // 字体
+        // 是否开启大字号
         BPSettingSwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
         [LocalSettingDataManager.sharedInstance getSettingFromName:BPLocalSettingBigFont succeeded:^(BOOL isOn) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [cell setSwitchStatus:isOn];
             });
         }];
+        [cell.textLabel setText:@"是否开启大字号"];
         return cell;
     } else if (section == 2 && row == 1) {
         // 动画效果
@@ -139,11 +144,14 @@ BPSettingSwitchTableViewCellDelegate
                 [cell setSwitchStatus:isOn];
             });
         }];
+        [cell.textLabel setText:@"动画效果"];
         cell.delegate = self;
         return cell;
     } else if (section == 3 && row == 0) {
         // 类别颜色备注
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"类别颜色备注"];
+        return cell;
     } else if (section == 3 && row == 1) {
         // 角标显示今日未完成任务数
         BPSettingSwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
@@ -152,9 +160,10 @@ BPSettingSwitchTableViewCellDelegate
                 [cell setSwitchStatus:isOn];
             });
         }];
+        [cell.textLabel setText:@"角标显示今日未完成任务数"];
         cell.delegate = self;
         return cell;
-    } else if (section == 3 && row == 1) {
+    } else if (section == 3 && row == 2) {
         // 首页自动刷新今日日期
         BPSettingSwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"switch" forIndexPath:indexPath];
         [LocalSettingDataManager.sharedInstance getSettingFromName:BPLocalSettingAutoRefreshTodayDate succeeded:^(BOOL isOn) {
@@ -162,20 +171,29 @@ BPSettingSwitchTableViewCellDelegate
                 [cell setSwitchStatus:isOn];
             });
         }];
+        [cell.textLabel setText:@"首页自动刷新今日日期"];
         cell.delegate = self;
         return cell;
     } else if (section == 4 && row == 0) {
         // 联系作者
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"联系作者"];
+        return cell;
     } else if (section == 4 && row == 1) {
         // 评价我们
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"评价我们"];
+        return cell;
     } else if (section == 4 && row == 2) {
         // 常见问题
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"常见问题"];
+        return cell;
     } else if (section == 4 && row == 3) {
         // 致谢
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"致谢"];
+        return cell;
     } else if (section == 5 && row == 0) {
         // 图标
         
