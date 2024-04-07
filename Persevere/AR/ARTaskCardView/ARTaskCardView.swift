@@ -12,9 +12,12 @@ class ARTaskCardView: UIView {
     private var task: TaskModel
     /// 展示列表
     private lazy var infoTableView: UITableView = {
-        let tableView = UITableView.init(frame: CGRect(x: 0, y: 0, width: self.bp_width, height: self.bp_height), style: .grouped)
+        let tableView = UITableView.init(frame: CGRect(x: 10, y: 10, width: self.bp_width - 20, height: self.bp_height - 20), style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.sectionHeaderHeight = 0
+        tableView.sectionFooterHeight = 0
+        tableView.isScrollEnabled = false
         tableView.register(ARCardIconAndLabelCell.self, forCellReuseIdentifier: "IconLabelCell")
         tableView.register(ARCardWeekdayCell.self, forCellReuseIdentifier: "WeekdayCell")
         return tableView
@@ -53,7 +56,7 @@ extension ARTaskCardView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40.0
+        return 36.0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -86,16 +89,22 @@ extension ARTaskCardView: UITableViewDelegate, UITableViewDataSource {
                 icon = iconArray[1]
                 title = ""
                 if let start = task.startDate as NSDate? {
-                    title?.appending(start.formattedDate(withFormat: BPTimeFormat))
+                    title = title?.appending(start.formattedDate(withFormat: BPDateFormat)) as NSString?
                 }
-                title?.appending(" 到 ")
+                title = title?.appending(" 到 ") as NSString?
                 if let end = task.endDate as NSDate? {
-                    title?.appending(end.formattedDate(withFormat: BPTimeFormat))
+                    title = title?.appending(end.formattedDate(withFormat: BPDateFormat)) as NSString?
                 } else {
-                    title?.appending("无限期")
+                    title = title?.appending("无限期") as NSString?
                 }
             } else if indexPath.row == 4 { // 备注
                 icon = iconArray[3]
+                if let memo = task.memo,
+                   !memo.isEmpty {
+                    title = memo as NSString
+                } else {
+                    title = "无备注"
+                }
             }
             cell.bindData(icon: icon, title: title)
             return cell

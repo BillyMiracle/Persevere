@@ -16,6 +16,7 @@ class ARCardIconAndLabelCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18.0)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
         
