@@ -41,6 +41,7 @@ class ARTaskCardView: UIView {
         self.task = task
         super.init(frame: frame)
         
+        self.backgroundColor = UIColor.bp_colorPickerColor(with: task.type).withAlphaComponent(0.7)
         self.addSubview(infoTableView)
     }
     
