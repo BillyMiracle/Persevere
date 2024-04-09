@@ -10,6 +10,7 @@
 #import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
 #import "BPSettingViewController.h"
+#import "DateTools.h"
 
 @interface BPTaskListViewController ()
 <BPNavigationTitleViewDelegate>
@@ -21,6 +22,11 @@
 @end
 
 @implementation BPTaskListViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.taskListPageView refreshAndLoadTasksWithDate:[NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]]];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

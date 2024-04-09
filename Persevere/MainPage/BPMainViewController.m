@@ -40,8 +40,6 @@
     self.navigationItem.rightBarButtonItem= self.settingButton;
     
     [self.view addSubview:self.mainPageView];
-    
-//    [self.mainPageView refreshAndLoadTasksWithDate:[NSDate dateWithYear:[[NSDate date] year] month:[[NSDate date] month] day:[[NSDate date] day]]];
 }
 
 // MARK: BPMainViewDelegate

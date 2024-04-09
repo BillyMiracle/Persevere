@@ -11,7 +11,7 @@
 
 + (NSArray *)sortTasks:(NSArray *)tasks withSortFactor:(NSString *)factor isAscend:(BOOL)isAscend {
     NSMutableArray *sortDescriptors = [[NSMutableArray alloc] init];
-    for(NSString *str in [factor componentsSeparatedByString:@"|"]){
+    for (NSString *str in [factor componentsSeparatedByString:@"|"]) {
         NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:str ascending:isAscend];
         [sortDescriptors addObject:sortDescriptor];
     }
@@ -25,6 +25,11 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.type == %ld", typeNum];
         return [NSMutableArray arrayWithArray:[tasks filteredArrayUsingPredicate:predicate]];
     }
+}
+
++ (NSArray *)filtrateTasks:(NSArray *)tasks withWeekdays:(NSArray *)weekdays {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY SELF.reminderDays in %@", weekdays];
+    return [NSMutableArray arrayWithArray:[tasks filteredArrayUsingPredicate:predicate]];
 }
 
 + (NSArray *)filtrateTasks:(NSArray *)tasks withString:(NSString *)str {

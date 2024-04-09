@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BPTaskListView : UIView
 
+/// 刷新数据
+- (void)refreshAndLoadTasksWithDate:(NSDate *)date;
 /// 导航栏标题点击
 - (void)navigationTitleViewTapped;
 

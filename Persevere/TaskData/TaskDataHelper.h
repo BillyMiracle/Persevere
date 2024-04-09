@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSArray *)sortTasks:(NSArray *)tasks withSortFactor:(NSString *)factor isAscend:(BOOL)isAscend;
 
++ (NSArray *)filtrateTasks:(NSArray *)tasks withWeekdays:(NSArray *)weekdays;
+
 + (NSArray *)filtrateTasks:(NSArray *)tasks withType:(NSInteger)typeNum;
 
 + (NSArray *)filtrateTasks:(NSArray *)tasks withString:(NSString *)str;

@@ -313,6 +313,7 @@
 		3A03CDE72AF3BF0F0001B562 /* TaskListPage */ = {
 			isa = PBXGroup;
 			children = (
+				3AF5071E2BC5A8CF00B4F393 /* Cells */,
 				3A03CDEB2AF3C2E90001B562 /* BPTaskListViewController.h */,
 				3A03CDEC2AF3C2E90001B562 /* BPTaskListViewController.m */,
 				3A03CE282AF692D40001B562 /* BPTaskListView.h */,
@@ -826,6 +827,13 @@
 				3AE824DE2B97895E00521E94 /* BPProgressView.m */,
 			);
 			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		3AF5071E2BC5A8CF00B4F393 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		E65204918685594D8F30E167 /* Pods */ = {

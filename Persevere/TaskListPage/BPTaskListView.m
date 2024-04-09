@@ -12,6 +12,9 @@
 #import "LocalTaskDataManager.h"
 #import "BPColorPickerView.h"
 #import "BPWeekDayPickerView.h"
+#import "TaskDataHelper.h"
+#import "DateTools.h"
+#import "BPMainPageTaskTableViewCell.h"
 
 static const CGFloat sectionHeaderHeight = 45.f;
 
@@ -30,6 +33,8 @@ BPColorPickerDelegate,
 BPWeekdayPickerDelegate
 >
 
+typedef void (^loadTasksFinishedBlock)(BOOL success);
+
 /// tableView
 @property (nonatomic, strong) UITableView *taskListTableView;
 /// 顶部星期日和颜色悬浮View
@@ -39,10 +44,15 @@ BPWeekdayPickerDelegate
 /// 颜色View
 @property (nonatomic, strong) BPColorPickerView *colorPickerView;
 
-/// 今日未完成数组
+/// 未结束数组
 @property (nonatomic, nonnull) NSMutableArray *unfinishedTaskArr;
-/// 今日已完成数组
+/// 已结束数组
 @property (nonatomic, nonnull) NSMutableArray *finishedTaskArr;
+/// 全部未结束数组
+@property (nonatomic, nonnull) NSMutableArray *allUnfinishedTaskArr;
+/// 全部已结束数组
+@property (nonatomic, nonnull) NSMutableArray *allFinishedTaskArr;
+
 /// 选择颜色num
 @property (nonatomic, assign) NSInteger selectedColorNum;
 /// weekday Array
@@ -78,10 +88,54 @@ BPWeekdayPickerDelegate
     }
 }
 
+- (void)refreshAndLoadTasksWithDate:(NSDate *)date {
+    [self loadTasksFinished:^(BOOL success) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.taskListTableView reloadData];
+        });
+    }];
+}
+
+/// 加载任务，重新刷新任务数据
+- (void)loadTasksFinished:(loadTasksFinishedBlock)finishedBlock {
+    [[LocalTaskDataManager sharedInstance] getTasksFinished:^(NSMutableArray * _Nonnull taskArray) {
+        [self.allFinishedTaskArr removeAllObjects];
+        [self.allUnfinishedTaskArr removeAllObjects];
+        [self.unfinishedTaskArr removeAllObjects];
+        [self.finishedTaskArr removeAllObjects];
+        for (TaskModel *task in taskArray) {
+            if ([task.endDate isEarlierThan:[NSDate date]]) {
+                [self.allFinishedTaskArr addObject:task];
+            } else {
+                [self.allUnfinishedTaskArr addObject:task];
+            }
+        }
+        // 筛选
+        [self filterTasksFinished:^(BOOL success) {
+            finishedBlock(success);
+        }];
+    } error:^(NSError * _Nonnull error) {}];
+}
+
+/// 筛选任务，无需重新刷新任务数据
+- (void)filterTasksFinished:(loadTasksFinishedBlock)finishedBlock {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.finishedTaskArr = self.allFinishedTaskArr;
+        self.unfinishedTaskArr = self.allUnfinishedTaskArr;
+        // 按选择的星期x筛选
+        self.unfinishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.unfinishedTaskArr withWeekdays:self.selectedWeekdayArray]];
+        self.finishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.finishedTaskArr withWeekdays:self.selectedWeekdayArray]];
+        // 按照颜色筛选
+        self.unfinishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.unfinishedTaskArr withType:self.selectedColorNum]];
+        self.finishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.finishedTaskArr withType:self.selectedColorNum]];
+        finishedBlock(YES);
+    });
+}
+
 // MARK: Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -143,7 +197,17 @@ BPWeekdayPickerDelegate
     if (indexPath.section == 0) {
         
     } else if (indexPath.section == 1) {
-        
+        BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+        cell.bp_indexPath = indexPath;
+        [cell bindTask:[self.unfinishedTaskArr objectAtIndex:indexPath.row]];
+        [cell setIsFinished:NO];
+        return cell;
+    } else if (indexPath.section == 2) {
+        BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+        cell.bp_indexPath = indexPath;
+        [cell bindTask:[self.finishedTaskArr objectAtIndex:indexPath.row]];
+        [cell setIsFinished:NO];
+        return cell;
     }
     return [UITableViewCell new];
 }
@@ -159,6 +223,17 @@ BPWeekdayPickerDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+// MARK: color与weekday选择
+
+- (void)didChangeWeekdays:(NSArray *_Nonnull)selectedWeekdays {
+    self.selectedWeekdayArray = [selectedWeekdays copy];
+    
+}
+
+- (void)didChangeColor:(NSInteger)selectedColorIndex {
+    self.selectedColorNum = selectedColorIndex;
 }
 
 // MARK: Getters
@@ -197,7 +272,7 @@ BPWeekdayPickerDelegate
         _taskListTableView.delegate = self;
         _taskListTableView.dataSource = self;
         _taskListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+        [_taskListTableView registerClass:[BPMainPageTaskTableViewCell class] forCellReuseIdentifier:@"taskCell"];        
     }
     return _taskListTableView;
 }
@@ -207,6 +282,34 @@ BPWeekdayPickerDelegate
         _selectedWeekdayArray = [[NSMutableArray alloc] initWithArray:@[@1, @2, @3, @4, @5, @6, @7]];
     }
     return _selectedWeekdayArray;
+}
+
+- (NSMutableArray *)finishedTaskArr {
+    if (!_finishedTaskArr) {
+        _finishedTaskArr = [[NSMutableArray alloc] init];
+    }
+    return _finishedTaskArr;
+}
+
+- (NSMutableArray *)unfinishedTaskArr {
+    if (!_unfinishedTaskArr) {
+        _unfinishedTaskArr = [[NSMutableArray alloc] init];
+    }
+    return _unfinishedTaskArr;
+}
+
+- (NSMutableArray *)allFinishedTaskArr {
+    if (!_allFinishedTaskArr) {
+        _allFinishedTaskArr = [[NSMutableArray alloc] init];
+    }
+    return _allFinishedTaskArr;
+}
+
+- (NSMutableArray *)allUnfinishedTaskArr {
+    if (!_allUnfinishedTaskArr) {
+        _allUnfinishedTaskArr = [[NSMutableArray alloc] init];
+    }
+    return _allUnfinishedTaskArr;
 }
 
 @end
