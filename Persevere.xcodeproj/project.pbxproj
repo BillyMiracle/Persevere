@@ -89,6 +89,7 @@
 		3AE824DB2B963A0A00521E94 /* DetailPageAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AE824DA2B963A0900521E94 /* DetailPageAsset.xcassets */; };
 		3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824DE2B97895E00521E94 /* BPProgressView.m */; };
 		3AE824E22B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824E12B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m */; };
+		3AF507212BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */; };
 		6C665E1B675DD9599822C2BB /* libPods-Persevere.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C75144AAB11619FA957E932 /* libPods-Persevere.a */; };
 /* End PBXBuildFile section */
 
@@ -246,6 +247,8 @@
 		3AE824DE2B97895E00521E94 /* BPProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPProgressView.m; sourceTree = "<group>"; };
 		3AE824E02B98E7BF00521E94 /* IconAndWeekdayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconAndWeekdayTableViewCell.h; sourceTree = "<group>"; };
 		3AE824E12B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndWeekdayTableViewCell.m; sourceTree = "<group>"; };
+		3AF5071F2BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskListPageTaskTableViewCell.h; sourceTree = "<group>"; };
+		3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskListPageTaskTableViewCell.m; sourceTree = "<group>"; };
 		B01DE06BDFA83D354F730C54 /* Pods-Persevere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Persevere.debug.xcconfig"; path = "Target Support Files/Pods-Persevere/Pods-Persevere.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -832,6 +835,8 @@
 		3AF5071E2BC5A8CF00B4F393 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3AF5071F2BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.h */,
+				3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1042,6 +1047,7 @@
 				3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */,
 				3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */,
 				3A3373B82BB98DB6002131C4 /* LocalSettingDataManager.m in Sources */,
+				3AF507212BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m in Sources */,
 				3ADE1F292BA8ADD300D7558D /* ARImageRecognizeViewController.swift in Sources */,
 				3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */,
 				3A03CDED2AF3C2E90001B562 /* BPTaskListViewController.m in Sources */,
