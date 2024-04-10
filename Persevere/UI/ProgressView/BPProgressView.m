@@ -31,18 +31,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.clipsToBounds = YES;
-        
-        [self setBackgroundColor:[UIColor clearColor]];
-        [self createSubViews];
-        
-        // 初始化值
-        self.backgroundLineWidth = kDefaultLineWidth;
-        self.progressLineWidth = kDefaultLineWidth;
-        self.percentage = 0;
-        self.offset = 0;
-        self.sumSteps = 0;
-        self.step = 0.1;
+        [self commonInit];
     }
     return self;
 }
@@ -50,22 +39,23 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.clipsToBounds = YES;
-        
-        [self setBackgroundColor:[UIColor clearColor]];
-        [self createSubViews];
-        
-        // 初始化值
-        self.backgroundLineWidth = kDefaultLineWidth;
-        self.progressLineWidth = kDefaultLineWidth;
-        self.percentage = 0;
-        self.offset = 0;
-        self.sumSteps = 0;
-        self.step = 0.1;
-        
+        [self commonInit];
         [self refreshWithFrame:frame];
     }
     return self;
+}
+
+- (void)commonInit {
+    self.clipsToBounds = YES;
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self createSubViews];
+    // 初始化值
+    self.backgroundLineWidth = kDefaultLineWidth;
+    self.progressLineWidth = kDefaultLineWidth;
+    self.percentage = 0;
+    self.offset = 0;
+    self.sumSteps = 0;
+    self.step = 0.1;
 }
 
 - (void)createSubViews {
