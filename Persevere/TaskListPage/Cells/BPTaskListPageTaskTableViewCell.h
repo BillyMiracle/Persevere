@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TaskModel;
+
 @interface BPTaskListPageTaskTableViewCell : BPTaskBaseTableViewCell
 
 - (void)bindTask:(TaskModel *)task;
