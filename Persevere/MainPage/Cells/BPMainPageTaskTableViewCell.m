@@ -9,6 +9,7 @@
 #import "TaskModel.h"
 #import "BPUIHelper.h"
 #import "BEMCheckBox.h"
+#import <Masonry.h>
 
 static const CGFloat checkBoxWidth = 35.f;
 
@@ -39,12 +40,20 @@ BEMCheckBoxDelegate
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     [self.bp_backgroundView addSubview:self.bp_titleLabel];
+    [self.bp_backgroundView addSubview:self.colorImageView];
     [self.bp_backgroundView addSubview:self.doneCheckBox];
     return self;
 }
 
 - (void)bindTask:(TaskModel *)task {
     self.bp_titleLabel.text = task.name;
+    UIColor *tintColor = [UIColor bp_colorPickerColorWithIndex:task.type];
+    if (tintColor) {
+        self.colorImageView.tintColor = tintColor;
+        self.colorImageView.hidden = NO;
+    } else {
+        self.colorImageView.hidden = YES;
+    }
 }
 
 - (void)setIsFinished:(BOOL)isFinished {
@@ -53,10 +62,23 @@ BEMCheckBoxDelegate
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGSize textSize = [self.bp_titleLabel.text textSizeWithFont:self.bp_titleLabel.font];
-    self.bp_titleLabel.frame = CGRectMake(hPadding, (self.bp_backgroundView.bp_height - textSize.height) / 2, textSize.width, textSize.height);
-    self.doneCheckBox.frame = CGRectMake(0, 0, checkBoxWidth, checkBoxWidth);
-    self.doneCheckBox.center = CGPointMake(self.bp_backgroundView.bp_width - checkBoxWidth / 2 - hPadding, self.bp_backgroundView.bp_height / 2);
+    [self.bp_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(hPadding);
+        make.centerY.mas_equalTo(self);
+    }];
+    
+    [self.colorImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.width.mas_equalTo(10);
+        make.left.mas_equalTo(self.bp_titleLabel.mas_right).offset(5);
+        make.right.mas_lessThanOrEqualTo(self.doneCheckBox.mas_left).offset(-50);
+        make.centerY.mas_equalTo(self.bp_titleLabel.mas_centerY);
+    }];
+    
+    [self.doneCheckBox mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(-hPadding);
+        make.width.height.mas_equalTo(checkBoxWidth);
+        make.centerY.mas_equalTo(self);
+    }];
 }
 
 // MARK: BEMCheckBoxDelegate
@@ -79,6 +101,16 @@ BEMCheckBoxDelegate
         _bp_titleLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _bp_titleLabel;
+}
+
+- (UIImageView *)colorImageView {
+    if (!_colorImageView) {
+        _colorImageView = [[UIImageView alloc] init];
+        UIImage *img = [UIImage imageNamed:@"NavType"];
+        img = [img imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        _colorImageView.image = img;
+    }
+    return _colorImageView;
 }
 
 - (BEMCheckBox *)doneCheckBox {
