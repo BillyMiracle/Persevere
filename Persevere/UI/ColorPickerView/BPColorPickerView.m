@@ -97,9 +97,14 @@ static const NSInteger colorButtonCount = 7;
     [self refreshColorButtons];
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self refreshWithFrame:frame];
+//- (void)setFrame:(CGRect)frame {
+//    [super setFrame:frame];
+//    [self refreshWithFrame:frame];
+//}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self refreshWithFrame:self.frame];
 }
 
 - (void)refreshWithFrame:(CGRect)frame {

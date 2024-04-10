@@ -72,8 +72,13 @@ static const NSInteger buttonCount = 3;
     [self refreshButtonState];
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
+//- (void)setFrame:(CGRect)frame {
+//    [super setFrame:frame];
+//    [self refreshUI];
+//}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
     [self refreshUI];
 }
 

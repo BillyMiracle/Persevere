@@ -28,6 +28,11 @@ static const NSInteger weekdayButtonCount = 7;
 
 @implementation BPWeekDayPickerView
 
+- (instancetype)init {
+    self = [self initWithFrame:CGRectZero];
+    return self;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [self initWithFrame:frame andShowSelectAllButton:NO];
     return self;
@@ -112,9 +117,14 @@ static const NSInteger weekdayButtonCount = 7;
     [self refreshWeekdayButtons];
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self refreshWithFrame:frame];
+//- (void)setFrame:(CGRect)frame {
+//    [super setFrame:frame];
+//    [self refreshWithFrame:frame];
+//}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self refreshWithFrame:self.frame];
 }
 
 - (void)refreshWithFrame:(CGRect)frame {

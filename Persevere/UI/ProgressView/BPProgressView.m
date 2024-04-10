@@ -68,9 +68,14 @@
     self.progressLabel.font = [UIFont fontWithName:@"Futura" size:size];
 }
 
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
-    [self refreshWithFrame:frame];
+//- (void)setFrame:(CGRect)frame {
+//    [super setFrame:frame];
+//    [self refreshWithFrame:frame];
+//}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    [self refreshWithFrame:self.frame];
 }
 
 - (void)refreshWithFrame:(CGRect)frame {
