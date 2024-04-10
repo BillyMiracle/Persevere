@@ -14,7 +14,7 @@
 #import "BPWeekDayPickerView.h"
 #import "TaskDataHelper.h"
 #import "DateTools.h"
-#import "BPMainPageTaskTableViewCell.h"
+#import "BPTaskListPageTaskTableViewCell.h"
 
 static const CGFloat sectionHeaderHeight = 45.f;
 
@@ -197,16 +197,14 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     if (indexPath.section == 0) {
         
     } else if (indexPath.section == 1) {
-        BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+        BPTaskListPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
         [cell bindTask:[self.unfinishedTaskArr objectAtIndex:indexPath.row]];
-        [cell setIsFinished:NO];
         return cell;
     } else if (indexPath.section == 2) {
-        BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
+        BPTaskListPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
         [cell bindTask:[self.finishedTaskArr objectAtIndex:indexPath.row]];
-        [cell setIsFinished:NO];
         return cell;
     }
     return [UITableViewCell new];
@@ -272,7 +270,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         _taskListTableView.delegate = self;
         _taskListTableView.dataSource = self;
         _taskListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_taskListTableView registerClass:[BPMainPageTaskTableViewCell class] forCellReuseIdentifier:@"taskCell"];        
+        [_taskListTableView registerClass:[BPTaskListPageTaskTableViewCell class] forCellReuseIdentifier:@"taskCell"];
     }
     return _taskListTableView;
 }
