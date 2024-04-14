@@ -227,7 +227,11 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    if (indexPath.section == 0) {
+        if ([self.delegate respondsToSelector:@selector(pushToSearchPage)]) {
+            [self.delegate pushToSearchPage];
+        }
+    }
 }
 
 // MARK: color与weekday选择

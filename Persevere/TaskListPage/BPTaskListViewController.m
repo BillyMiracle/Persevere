@@ -11,9 +11,11 @@
 #import "BPUIHelper.h"
 #import "BPSettingViewController.h"
 #import "DateTools.h"
+#import "BPSearchViewController.h"
 
 @interface BPTaskListViewController ()
-<BPNavigationTitleViewDelegate>
+<BPNavigationTitleViewDelegate, BPTaskListViewDelegate>
+
 @property (nonatomic, strong) BPNavigationTitleView *taskNavigationTitleView;
 @property (nonatomic, strong) BPTaskListView *taskListPageView;
 /// 设置按钮
@@ -55,6 +57,14 @@
     [self.navigationController pushViewController:settingPage animated:YES];
 }
 
+// MARK: BPTaskListViewDelegate
+
+- (void)pushToSearchPage {
+    BPSearchViewController *searchPage = [[BPSearchViewController alloc] init];
+    searchPage.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchPage animated:YES];
+}
+
 // MARK: Getters
 
 - (BPNavigationTitleView *)taskNavigationTitleView {
@@ -68,6 +78,7 @@
 - (BPTaskListView *)taskListPageView {
     if (!_taskListPageView) {
         _taskListPageView = [[BPTaskListView alloc] initWithFrame:CGRectMake(0, [UIDevice bp_navigationFullHeight], self.bp_width, self.bp_height - [UIDevice bp_navigationFullHeight] - [UIDevice bp_tabBarFullHeight])];
+        _taskListPageView.delegate = self;
     }
     return _taskListPageView;
 }

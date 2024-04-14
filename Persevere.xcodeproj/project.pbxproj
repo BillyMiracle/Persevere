@@ -54,6 +54,8 @@
 		3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680B2B0233AB00B2FF86 /* UITextField+BPIndexPath.m */; };
 		3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */; };
 		3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DE9E22B0D0205006D91A4 /* BPTaskDisplayViewController.m */; };
+		3A582AD62BCC465A00B6362B /* BPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A582AD52BCC465A00B6362B /* BPSearchViewController.m */; };
+		3A582ADC2BCC46E400B6362B /* BPSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A582ADB2BCC46E400B6362B /* BPSearchViewModel.m */; };
 		3A5EAC0F2BA2D16700336664 /* BPInfoTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */; };
 		3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AB2B05370D006AA569 /* BPTableViewHoverView.m */; };
 		3AA8C6AE2B06848A006AA569 /* TodayPage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AD2B068489006AA569 /* TodayPage.xcassets */; };
@@ -185,6 +187,10 @@
 		3A4D680E2B0233BE00B2FF86 /* UITextView+BPIndexPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextView+BPIndexPath.m"; sourceTree = "<group>"; };
 		3A4DE9E12B0D0205006D91A4 /* BPTaskDisplayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskDisplayViewController.h; sourceTree = "<group>"; };
 		3A4DE9E22B0D0205006D91A4 /* BPTaskDisplayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskDisplayViewController.m; sourceTree = "<group>"; };
+		3A582AD42BCC465A00B6362B /* BPSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSearchViewController.h; sourceTree = "<group>"; };
+		3A582AD52BCC465A00B6362B /* BPSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSearchViewController.m; sourceTree = "<group>"; };
+		3A582ADA2BCC46E400B6362B /* BPSearchViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSearchViewModel.h; sourceTree = "<group>"; };
+		3A582ADB2BCC46E400B6362B /* BPSearchViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSearchViewModel.m; sourceTree = "<group>"; };
 		3A5EAC0D2BA2D16700336664 /* BPInfoTabView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInfoTabView.h; sourceTree = "<group>"; };
 		3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoTabView.m; sourceTree = "<group>"; };
 		3AA8C6AA2B05370D006AA569 /* BPTableViewHoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewHoverView.h; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 				3A03CDDE2AF3B4000001B562 /* MainPage */,
 				3A03CDE72AF3BF0F0001B562 /* TaskListPage */,
 				3A03CE1D2AF64D8D0001B562 /* TaskDetailPage */,
+				3AF5072A2BCC45E400B4F393 /* Search */,
 				3ADE1F232BA8AC8C00D7558D /* AR */,
 				3A4A25E12BB4942400246792 /* SettingPage */,
 				3A03CE2C2AF6C4820001B562 /* TaskData */,
@@ -867,6 +874,17 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		3AF5072A2BCC45E400B4F393 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				3A582AD42BCC465A00B6362B /* BPSearchViewController.h */,
+				3A582AD52BCC465A00B6362B /* BPSearchViewController.m */,
+				3A582ADA2BCC46E400B6362B /* BPSearchViewModel.h */,
+				3A582ADB2BCC46E400B6362B /* BPSearchViewModel.m */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 		E65204918685594D8F30E167 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1091,6 +1109,8 @@
 				3A3373BE2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
+				3A582ADC2BCC46E400B6362B /* BPSearchViewModel.m in Sources */,
+				3A582AD62BCC465A00B6362B /* BPSearchViewController.m in Sources */,
 				3A4A25E72BB4946900246792 /* BPSettingViewController.m in Sources */,
 				3AE824D32B91041400521E94 /* BPInfoDisplayTableView.m in Sources */,
 				3AE824C72B90E4D200521E94 /* BPInfoCardTableViewCell.m in Sources */,
