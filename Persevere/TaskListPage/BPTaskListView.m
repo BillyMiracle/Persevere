@@ -15,6 +15,7 @@
 #import "TaskDataHelper.h"
 #import "DateTools.h"
 #import "BPTaskListPageTaskTableViewCell.h"
+#import "BPSearchTableViewCell.h"
 
 static const CGFloat sectionHeaderHeight = 45.f;
 
@@ -140,6 +141,8 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
+        case 0:
+            return 1;
         case 1:
             return self.unfinishedTaskArr.count;
         case 2:
@@ -195,7 +198,8 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        
+        BPSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+        return cell;
     } else if (indexPath.section == 1) {
         BPTaskListPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
@@ -211,6 +215,9 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return 60;
+    }
     return 70;
 }
 
@@ -271,6 +278,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         _taskListTableView.dataSource = self;
         _taskListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_taskListTableView registerClass:[BPTaskListPageTaskTableViewCell class] forCellReuseIdentifier:@"taskCell"];
+        [_taskListTableView registerClass:[BPSearchTableViewCell class] forCellReuseIdentifier:@"searchCell"];
     }
     return _taskListTableView;
 }

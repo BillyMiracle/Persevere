@@ -90,6 +90,8 @@
 		3AE824DF2B97895E00521E94 /* BPProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824DE2B97895E00521E94 /* BPProgressView.m */; };
 		3AE824E22B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE824E12B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m */; };
 		3AF507212BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */; };
+		3AF507242BC853BD00B4F393 /* BPSearchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF507232BC853BD00B4F393 /* BPSearchTableViewCell.m */; };
+		3AF507292BCB9C7D00B4F393 /* BPSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF507282BCB9C7D00B4F393 /* BPSearchView.m */; };
 		6C665E1B675DD9599822C2BB /* libPods-Persevere.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C75144AAB11619FA957E932 /* libPods-Persevere.a */; };
 /* End PBXBuildFile section */
 
@@ -249,6 +251,10 @@
 		3AE824E12B98E7BF00521E94 /* IconAndWeekdayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IconAndWeekdayTableViewCell.m; sourceTree = "<group>"; };
 		3AF5071F2BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTaskListPageTaskTableViewCell.h; sourceTree = "<group>"; };
 		3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTaskListPageTaskTableViewCell.m; sourceTree = "<group>"; };
+		3AF507222BC853BD00B4F393 /* BPSearchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSearchTableViewCell.h; sourceTree = "<group>"; };
+		3AF507232BC853BD00B4F393 /* BPSearchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSearchTableViewCell.m; sourceTree = "<group>"; };
+		3AF507272BCB9C7D00B4F393 /* BPSearchView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSearchView.h; sourceTree = "<group>"; };
+		3AF507282BCB9C7D00B4F393 /* BPSearchView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSearchView.m; sourceTree = "<group>"; };
 		B01DE06BDFA83D354F730C54 /* Pods-Persevere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Persevere.debug.xcconfig"; path = "Target Support Files/Pods-Persevere/Pods-Persevere.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -328,6 +334,7 @@
 		3A03CDFD2AF4A7A20001B562 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3AF507252BC85C8100B4F393 /* SearchView */,
 				3A03CDDA2AF3B24C0001B562 /* UIHelper */,
 				3A03CE392AF7BBC10001B562 /* PublishTabBar */,
 				3A03CE3A2AF7BBD60001B562 /* NavigationTitleView */,
@@ -835,10 +842,29 @@
 		3AF5071E2BC5A8CF00B4F393 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3AF507262BCB9C5700B4F393 /* Search */,
 				3AF5071F2BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.h */,
 				3AF507202BC5BBAC00B4F393 /* BPTaskListPageTaskTableViewCell.m */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		3AF507252BC85C8100B4F393 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
+		3AF507262BCB9C5700B4F393 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				3AF507222BC853BD00B4F393 /* BPSearchTableViewCell.h */,
+				3AF507232BC853BD00B4F393 /* BPSearchTableViewCell.m */,
+				3AF507272BCB9C7D00B4F393 /* BPSearchView.h */,
+				3AF507282BCB9C7D00B4F393 /* BPSearchView.m */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		E65204918685594D8F30E167 /* Pods */ = {
@@ -1043,6 +1069,7 @@
 				3ADE1F1C2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.m in Sources */,
 				3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */,
 				3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */,
+				3AF507292BCB9C7D00B4F393 /* BPSearchView.m in Sources */,
 				3A03CE062AF63FF40001B562 /* UIColor+BPAddtion.m in Sources */,
 				3AE37CB72AFF9BA8000CA19D /* BPSectionHeaderView.m in Sources */,
 				3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */,
@@ -1060,6 +1087,7 @@
 				3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */,
 				3A3373BB2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m in Sources */,
 				3A4DE9E32B0D0205006D91A4 /* BPTaskDisplayViewController.m in Sources */,
+				3AF507242BC853BD00B4F393 /* BPSearchTableViewCell.m in Sources */,
 				3A3373BE2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
