@@ -15,6 +15,7 @@
 #import "DateTools.h"
 #import "TaskDataHelper.h"
 #import "BPDateAndProgressTableViewCell.h"
+#import "BPARInteractTableViewCell.h"
 #import "BPMainPageTaskTableViewCell.h"
 
 static const CGFloat sectionHeaderHeight = 45.f;
@@ -35,7 +36,8 @@ FSCalendarDataSource,
 FSCalendarDelegate,
 BPColorPickerDelegate,
 BPMainPageTaskTableViewCellDelegate,
-MGSwipeTableCellDelegate
+MGSwipeTableCellDelegate,
+BPARInteractTableViewCellDelegate
 >
 
 typedef void (^loadTasksFinishedBlock)(BOOL success);
@@ -129,10 +131,6 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     } error:^(NSError * _Nonnull error) {}];
 }
 
-//- (void)refreshProgressAndDateLabel {
-//    [self.mainTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
-//}
-
 // MARK: Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -142,10 +140,9 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
+            return 2;
         case 1:
             return self.unfinishedTaskArr.count;
-//            return 100;
         case 2:
             return self.finishedTaskArr.count;
         default:
@@ -206,6 +203,10 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
             [cell.dateView addGestureRecognizer:self.tapDateViewGesture];
         }
         return cell;
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        BPARInteractTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ar" forIndexPath:indexPath];
+        cell.delegate = self;
+        return cell;
     } else if (indexPath.section == 1) {
         BPMainPageTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"taskCell" forIndexPath:indexPath];
         cell.bp_indexPath = indexPath;
@@ -227,8 +228,10 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && indexPath.row == 0) {
         return timeAndProgressViewHeight;
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        return 60;
     }
     return 70;
 }
@@ -280,6 +283,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 }
 
 // MARK: MGSwipeCellDelegate
+
 - (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
     NSIndexPath *indexPath = [self.mainTableView indexPathForCell:cell];
     switch (direction) {
@@ -342,8 +346,6 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
             });
         }
     }];
-    
-    
 }
 
 // MARK: 找到任务
@@ -396,7 +398,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     [self.fsCalendarView setCurrentPage:previousMonth animated:YES];
 }
 
-// 下一月
+/// 下一月
 - (void)nextClicked:(id)sender {
     NSDate *currentMonth = self.fsCalendarView.currentPage;
     NSDate *nextMonth = [self.gregorian dateByAddingUnit:NSCalendarUnitMonth value:1 toDate:currentMonth options:0];
@@ -414,6 +416,15 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
     }];
 }
 
+// MARK: BPARInteractTableViewCellDelegate
+
+- (void)didSelectAutoAddTask {
+    NSLog(@"didSelectAutoAddTask");
+}
+
+- (void)didSelectManualAddTask {
+    NSLog(@"didSelectManualAddTask");
+}
 
 // MARK: Getters
 
@@ -506,6 +517,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         _mainTableView.dataSource = self;
         _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_mainTableView registerClass:[BPDateAndProgressTableViewCell class] forCellReuseIdentifier:@"dateAndProgress"];
+        [_mainTableView registerClass:[BPARInteractTableViewCell class] forCellReuseIdentifier:@"ar"];
         [_mainTableView registerClass:[BPMainPageTaskTableViewCell class] forCellReuseIdentifier:@"taskCell"];
     }
     return _mainTableView;
