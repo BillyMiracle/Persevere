@@ -44,9 +44,9 @@ static const CGFloat padding = 10.0f;
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.automaticallyAddTaskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentView).offset(padding / 2);
-        make.bottom.mas_equalTo(self.contentView).offset(-padding / 2);
-        make.left.mas_equalTo(self.contentView).offset(padding);
+        make.top.mas_equalTo(padding / 2);
+        make.bottom.mas_equalTo(-padding / 2);
+        make.left.mas_equalTo(padding);
         make.right.mas_equalTo(self.contentView.mas_centerX).offset(-padding / 2);
     }];
     [self.manuallyAddTaskView mas_makeConstraints:^(MASConstraintMaker *make) {
