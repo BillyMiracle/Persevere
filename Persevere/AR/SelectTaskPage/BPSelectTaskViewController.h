@@ -6,12 +6,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BPSelectTaskViewController : UIViewController
 
-// 根据单选多选初始化、最大选择个数、ar类型 初始化
+// 根据类型初始化
+- (instancetype)initWithType:(BPARType)type;
 
 @end
 

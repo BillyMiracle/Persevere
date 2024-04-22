@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARUtility.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 跳转到taskDisplay
 - (void)displayTask:(TaskModel *)task;
+
+/// 跳转到AR
+- (void)interactWithARwithType:(BPARType)type;
 
 @end
 

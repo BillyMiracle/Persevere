@@ -11,6 +11,9 @@ import ARKit
 @objcMembers
 @objc(BPARShowTaskViewController)
 class ARShowTaskViewController: UIViewController {
+    // MARK: 声明属性
+    /// 任务数组
+    private var taskArray: [TaskModel]
     /// 返回按钮
     var backButton: UIBarButtonItem {
         let backButton = UIBarButtonItem(image: UIImage(named: "NavBack"), style: .plain, target: self, action: #selector(pressBackButton))
@@ -20,6 +23,16 @@ class ARShowTaskViewController: UIViewController {
     /// 标题
     var titleView: BPNavigationTitleView {
         BPNavigationTitleView(title: "AR展示任务", andColor: nil, andShouldShowType: false)
+    }
+    
+    // MARK: 初始化
+    public init(taskArray: [TaskModel]) {
+        self.taskArray = taskArray
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: 生命周期方法

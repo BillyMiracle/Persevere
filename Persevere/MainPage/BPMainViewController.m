@@ -12,6 +12,7 @@
 #import "DateTools.h"
 #import "BPTaskDisplayViewController.h"
 #import "BPSettingViewController.h"
+#import "BPSelectTaskViewController.h"
 
 @interface BPMainViewController ()
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
@@ -52,6 +53,13 @@
     BPTaskDisplayViewController *displayViewController = [[BPTaskDisplayViewController alloc] initWithTask:task];
     displayViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:displayViewController animated:YES];
+}
+
+/// 跳转到AR
+- (void)interactWithARwithType:(BPARType)type {
+    BPSelectTaskViewController *selectViewController = [[BPSelectTaskViewController alloc] initWithType:type];
+    selectViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectViewController animated:YES];
 }
 
 // MARK: BPNavigationTitleViewDelegate

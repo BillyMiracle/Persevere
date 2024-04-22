@@ -419,11 +419,15 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 // MARK: BPARInteractTableViewCellDelegate
 
 - (void)didSelectAutoAddTask {
-    NSLog(@"didSelectAutoAddTask");
+    if ([self.delegate respondsToSelector:@selector(interactWithARwithType:)]) {
+        [self.delegate interactWithARwithType:BPARTypeAutomatically];
+    }
 }
 
 - (void)didSelectManualAddTask {
-    NSLog(@"didSelectManualAddTask");
+    if ([self.delegate respondsToSelector:@selector(interactWithARwithType:)]) {
+        [self.delegate interactWithARwithType:BPARTypeManually];
+    }
 }
 
 // MARK: Getters

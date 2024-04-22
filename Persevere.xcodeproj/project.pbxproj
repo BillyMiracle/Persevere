@@ -30,6 +30,7 @@
 		3A03CE382AF7BBBB0001B562 /* BPColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A03CE372AF7BBBB0001B562 /* BPColorPickerView.m */; };
 		3A03CE442AF7C6CB0001B562 /* BPDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A03CE432AF7C6CB0001B562 /* BPDateHelper.m */; };
 		3A03CE462AF7CF7E0001B562 /* WeekDayAsset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A03CE452AF7CF7E0001B562 /* WeekDayAsset.xcassets */; };
+		3A0D22D72BD5708B00E610CA /* BPSelectTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D22D62BD5708B00E610CA /* BPSelectTaskTableViewCell.m */; };
 		3A0DD2572B04EB8F00F2DAC6 /* LocalTaskDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD2562B04EB8F00F2DAC6 /* LocalTaskDataManager.m */; };
 		3A0DD25A2B04F5F600F2DAC6 /* DataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD2592B04F5F600F2DAC6 /* DataBaseManager.m */; };
 		3A0DD25E2B051F9F00F2DAC6 /* UserNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DD25D2B051F9F00F2DAC6 /* UserNotificationManager.m */; };
@@ -61,6 +62,7 @@
 		3A582AE52BCC4CC600B6362B /* BPSelectTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A582AE42BCC4CC600B6362B /* BPSelectTaskViewController.m */; };
 		3A582AE82BCC4CF600B6362B /* BPSelectTaskViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A582AE72BCC4CF600B6362B /* BPSelectTaskViewModel.m */; };
 		3A5EAC0F2BA2D16700336664 /* BPInfoTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */; };
+		3A61CF892BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CF882BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m */; };
 		3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AB2B05370D006AA569 /* BPTableViewHoverView.m */; };
 		3AA8C6AE2B06848A006AA569 /* TodayPage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA8C6AD2B068489006AA569 /* TodayPage.xcassets */; };
 		3AA8C6B32B079991006AA569 /* TaskDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6B22B079991006AA569 /* TaskDataHelper.m */; };
@@ -147,6 +149,8 @@
 		3A03CE422AF7C6CB0001B562 /* BPDateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPDateHelper.h; sourceTree = "<group>"; };
 		3A03CE432AF7C6CB0001B562 /* BPDateHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPDateHelper.m; sourceTree = "<group>"; };
 		3A03CE452AF7CF7E0001B562 /* WeekDayAsset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = WeekDayAsset.xcassets; sourceTree = "<group>"; };
+		3A0D22D52BD5708B00E610CA /* BPSelectTaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSelectTaskTableViewCell.h; sourceTree = "<group>"; };
+		3A0D22D62BD5708B00E610CA /* BPSelectTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSelectTaskTableViewCell.m; sourceTree = "<group>"; };
 		3A0DD2552B04EB8F00F2DAC6 /* LocalTaskDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalTaskDataManager.h; sourceTree = "<group>"; };
 		3A0DD2562B04EB8F00F2DAC6 /* LocalTaskDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalTaskDataManager.m; sourceTree = "<group>"; };
 		3A0DD2582B04F5F600F2DAC6 /* DataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataBaseManager.h; sourceTree = "<group>"; };
@@ -202,8 +206,11 @@
 		3A582AE42BCC4CC600B6362B /* BPSelectTaskViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSelectTaskViewController.m; sourceTree = "<group>"; };
 		3A582AE62BCC4CF600B6362B /* BPSelectTaskViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSelectTaskViewModel.h; sourceTree = "<group>"; };
 		3A582AE72BCC4CF600B6362B /* BPSelectTaskViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSelectTaskViewModel.m; sourceTree = "<group>"; };
+		3A582AE92BD4A46D00B6362B /* ARUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARUtility.h; sourceTree = "<group>"; };
 		3A5EAC0D2BA2D16700336664 /* BPInfoTabView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInfoTabView.h; sourceTree = "<group>"; };
 		3A5EAC0E2BA2D16700336664 /* BPInfoTabView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInfoTabView.m; sourceTree = "<group>"; };
+		3A61CF872BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSelectTableViewCellModel.h; sourceTree = "<group>"; };
+		3A61CF882BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSelectTableViewCellModel.m; sourceTree = "<group>"; };
 		3AA8C6AA2B05370D006AA569 /* BPTableViewHoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTableViewHoverView.h; sourceTree = "<group>"; };
 		3AA8C6AB2B05370D006AA569 /* BPTableViewHoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPTableViewHoverView.m; sourceTree = "<group>"; };
 		3AA8C6AD2B068489006AA569 /* TodayPage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TodayPage.xcassets; sourceTree = "<group>"; };
@@ -625,6 +632,7 @@
 		3A582ADF2BCC4BA200B6362B /* SelectTaskPage */ = {
 			isa = PBXGroup;
 			children = (
+				3A61CF862BD6A9940042CCE3 /* SelectTaskCell */,
 				3A582AE32BCC4CC600B6362B /* BPSelectTaskViewController.h */,
 				3A582AE42BCC4CC600B6362B /* BPSelectTaskViewController.m */,
 				3A582AE62BCC4CF600B6362B /* BPSelectTaskViewModel.h */,
@@ -641,6 +649,17 @@
 				3ADE1F1E2BA34AA900D7558D /* InfoTabAsset.xcassets */,
 			);
 			path = InfoTabView;
+			sourceTree = "<group>";
+		};
+		3A61CF862BD6A9940042CCE3 /* SelectTaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A0D22D52BD5708B00E610CA /* BPSelectTaskTableViewCell.h */,
+				3A0D22D62BD5708B00E610CA /* BPSelectTaskTableViewCell.m */,
+				3A61CF872BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.h */,
+				3A61CF882BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m */,
+			);
+			path = SelectTaskCell;
 			sourceTree = "<group>";
 		};
 		3AA8C6B42B07C17B006AA569 /* ProgressLabel */ = {
@@ -754,6 +773,7 @@
 		3ADE1F232BA8AC8C00D7558D /* AR */ = {
 			isa = PBXGroup;
 			children = (
+				3A582AE92BD4A46D00B6362B /* ARUtility.h */,
 				3A582ADF2BCC4BA200B6362B /* SelectTaskPage */,
 				3ADE1F2C2BAB4DD300D7558D /* ARTaskCardView */,
 				3ADE1F282BA8ADD300D7558D /* ARImageRecognizeViewController.swift */,
@@ -1107,6 +1127,7 @@
 				3ADE1F192B9E24BA00D7558D /* BPDeleteTaskTableViewCell.m in Sources */,
 				3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */,
 				3A0DD25E2B051F9F00F2DAC6 /* UserNotificationManager.m in Sources */,
+				3A0D22D72BD5708B00E610CA /* BPSelectTaskTableViewCell.m in Sources */,
 				3A03CDD92AF3B22B0001B562 /* BPMainTabBarController.m in Sources */,
 				3AA8C6B32B079991006AA569 /* TaskDataHelper.m in Sources */,
 				3A03CE322AF776490001B562 /* BPTaskDetailView.m in Sources */,
@@ -1137,6 +1158,7 @@
 				3A3373BE2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m in Sources */,
 				3A582ADE2BCC4A2C00B6362B /* ARShowTaskViewController.swift in Sources */,
 				3A03CE222AF65C200001B562 /* BPNavifationBarAppearance.m in Sources */,
+				3A61CF892BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m in Sources */,
 				3ADE1F222BA34E8200D7558D /* BPExtraInfoTableViewCell.m in Sources */,
 				3A582ADC2BCC46E400B6362B /* BPSearchViewModel.m in Sources */,
 				3A582AD62BCC465A00B6362B /* BPSearchViewController.m in Sources */,
