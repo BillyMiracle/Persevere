@@ -238,11 +238,24 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)didChangeWeekdays:(NSArray *_Nonnull)selectedWeekdays {
     self.selectedWeekdayArray = [selectedWeekdays copy];
-    
+    [self filterTasksFinished:^(BOOL success) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.taskListTableView reloadData];
+            });
+        }
+    }];
 }
 
 - (void)didChangeColor:(NSInteger)selectedColorIndex {
     self.selectedColorNum = selectedColorIndex;
+    [self filterTasksFinished:^(BOOL success) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.taskListTableView reloadData];
+            });
+        }
+    }];
 }
 
 // MARK: Getters
