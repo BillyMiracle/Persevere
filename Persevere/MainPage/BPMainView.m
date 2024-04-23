@@ -249,9 +249,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if(indexPath.section != 0 && indexPath.section != 0) {
-        
-    }
+    
 }
 
 // MARK: TaskCell代理方法
@@ -291,7 +289,9 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         {
             // 右滑，点击详情
             TaskModel *task = [self taskAtIndexPath:indexPath];
-            [self.delegate displayTask:task];
+            if ([self.delegate respondsToSelector:@selector(displayTask:)]) {
+                [self.delegate displayTask:task];
+            }
         }
             break;
         case MGSwipeDirectionRightToLeft:
