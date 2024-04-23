@@ -9,9 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TaskModel;
+
 @protocol BPTaskListViewDelegate <NSObject>
 
+/// 跳转到搜索页
 - (void)pushToSearchPage;
+/// 跳转到taskDisplay
+- (void)displayTask:(TaskModel *)task;
 
 @end
 

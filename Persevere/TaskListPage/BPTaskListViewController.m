@@ -12,6 +12,7 @@
 #import "BPSettingViewController.h"
 #import "DateTools.h"
 #import "BPSearchViewController.h"
+#import "BPTaskDisplayViewController.h"
 
 @interface BPTaskListViewController ()
 <BPNavigationTitleViewDelegate, BPTaskListViewDelegate>
@@ -64,6 +65,13 @@
     searchPage.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:searchPage animated:YES];
 }
+
+- (void)displayTask:(TaskModel *)task {
+    BPTaskDisplayViewController *displayViewController = [[BPTaskDisplayViewController alloc] initWithTask:task];
+    displayViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:displayViewController animated:YES];
+}
+
 
 // MARK: Getters
 

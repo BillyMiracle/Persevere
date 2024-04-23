@@ -231,7 +231,54 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         if ([self.delegate respondsToSelector:@selector(pushToSearchPage)]) {
             [self.delegate pushToSearchPage];
         }
+    } else if (indexPath.section == 1 || indexPath.section == 2) {
+        TaskModel *task = [self taskAtIndexPath:indexPath];
+        if ([self.delegate respondsToSelector:@selector(displayTask:)]) {
+            [self.delegate displayTask:task];
+        }
     }
+}
+
+// MARK: MGSwipeCellDelegate
+
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell tappedButtonAtIndex:(NSInteger) index direction:(MGSwipeDirection)direction fromExpansion:(BOOL) fromExpansion {
+    NSIndexPath *indexPath = [self.taskListTableView indexPathForCell:cell];
+    switch (direction) {
+        case MGSwipeDirectionLeftToRight:
+        {
+            // 右滑，点击详情
+            TaskModel *task = [self taskAtIndexPath:indexPath];
+            if ([self.delegate respondsToSelector:@selector(displayTask:)]) {
+                [self.delegate displayTask:task];
+            }
+        }
+            break;
+        case MGSwipeDirectionRightToLeft:
+        {
+            // 左滑，点击删除
+            
+        }
+            break;
+        default:
+            break;
+    }
+    return YES;
+}
+
+- (BOOL)swipeTableCell:(MGSwipeTableCell *)cell canSwipe:(MGSwipeDirection)direction fromPoint:(CGPoint)point {
+    return YES;
+}
+
+// MARK: 找到任务
+
+- (TaskModel *)taskAtIndexPath:(NSIndexPath *)indexPath {
+    TaskModel *task = nil;
+    if (indexPath.section == 1) {
+        task = self.unfinishedTaskArr[indexPath.row];
+    } else if(indexPath.section == 2) {
+        task = self.finishedTaskArr[indexPath.row];
+    }
+    return task;
 }
 
 // MARK: color与weekday选择
