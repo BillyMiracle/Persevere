@@ -108,6 +108,11 @@
 
 - (void)didSelectTaskAtIndexPath:(NSIndexPath *)indexPath {
     [self.selectTaskTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    if (self.type == BPARTypeManually
+        && self.selectTaskViewModel.selectedTasksArray.count == 1) {
+        BPARShowTaskViewController *showTaskViewController = [[BPARShowTaskViewController alloc] initWithTaskArray:self.selectTaskViewModel.selectedTasksArray];
+        [self.navigationController pushViewController:showTaskViewController animated:YES];
+    }
 }
 
 // MARK: UISearchBarDelegate

@@ -35,16 +35,13 @@
             if (self.type == BPARTypeManually) {
                 if (![task.endDate isEarlierThan:[NSDate date]]) {
                     [self.allTaskArray addObject:task];
-                    [self.isSelectedArray addObject:@(false)];
                 }
             } else if (self.type == BPARTypeAutomatically) {
                 if (![task.endDate isEarlierThan:[NSDate date]]
                     && task.imageData != nil) {
                     [self.allTaskArray addObject:task];
-                    [self.isSelectedArray addObject:@(false)];
                 }
             }
-            
         }
         // 筛选
         [self filterTasksFinished:^(BOOL success) {
@@ -59,6 +56,10 @@
 - (void)filterTasksFinished:(loadTasksFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.filteredTasks = self.allTaskArray;
+        [self.isSelectedArray removeAllObjects];
+        for (int i = 0; i < self.filteredTasks.count; i++) {
+            [self.isSelectedArray addObject:@(false)];
+        }
         finishedBlock(YES);
     });
 }
@@ -92,10 +93,13 @@
     NSNumber *num = [self.isSelectedArray objectAtIndex:indexPath.row];
     BOOL selected = !num.boolValue;
     if (selected) {
+        // TODO: 暂时手动添加只允许单选
+        if (self.type == BPARTypeManually) {
+            [self.selectedTasks removeAllObjects];
+        }
         [self.selectedTasks addObject:task];
     } else {
         [self.selectedTasks removeObject:task];
-
     }
     self.isSelectedArray[indexPath.row] = @(selected);
     if ([self.delegate respondsToSelector:@selector(didSelectTaskAtIndexPath:)]) {
