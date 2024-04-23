@@ -92,9 +92,10 @@
     NSNumber *num = [self.isSelectedArray objectAtIndex:indexPath.row];
     BOOL selected = !num.boolValue;
     if (selected) {
-        [self.selectedTasks removeObject:task];
-    } else {
         [self.selectedTasks addObject:task];
+    } else {
+        [self.selectedTasks removeObject:task];
+
     }
     self.isSelectedArray[indexPath.row] = @(selected);
     if ([self.delegate respondsToSelector:@selector(didSelectTaskAtIndexPath:)]) {

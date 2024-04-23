@@ -85,12 +85,23 @@
 }
 
 - (void)pressDoneButton {
+    if (self.selectTaskViewModel.selectedTasksArray.count == 0) {
+        [self presentErrorAlert];
+        return;
+    }
     if (self.type == BPARTypeAutomatically) {
         BPARImageRecognizeViewController *imageRecognizeViewController = [[BPARImageRecognizeViewController alloc] initWithTaskArray:self.selectTaskViewModel.selectedTasksArray];
         [self.navigationController pushViewController:imageRecognizeViewController animated:YES];
     } else if (self.type == BPARTypeManually) {
         
     }
+}
+
+- (void)presentErrorAlert {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请选择任务" message:@"选中任务不能为空" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:cancelAction];
+    [self.parentViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 // MARK: BPSelectTaskViewModelDelegate
@@ -124,6 +135,14 @@
         _backButton.tintColor = [UIColor whiteColor];
     }
     return _backButton;
+}
+
+- (UIBarButtonItem *)doneButton {
+    if (!_doneButton) {
+        _doneButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavDone"] style:UIBarButtonItemStylePlain target:self action:@selector(pressDoneButton)];
+        _doneButton.tintColor = [UIColor whiteColor];
+    }
+    return _doneButton;
 }
 
 - (UISearchBar *)searchBar {

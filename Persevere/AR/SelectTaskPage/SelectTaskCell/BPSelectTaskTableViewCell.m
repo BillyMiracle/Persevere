@@ -38,6 +38,7 @@ static const CGFloat checkBoxWidth = 35.f;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.contentView addSubview:self.bp_titleLabel];
     [self.contentView addSubview:self.colorImageView];
     [self.contentView addSubview:self.doneCheckBox];
