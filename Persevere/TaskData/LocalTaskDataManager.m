@@ -292,6 +292,20 @@ static LocalTaskDataManager* _instance = nil;
                     NSLog(@"punch %@", taskid);
                 
                     succeeded = [db executeUpdate:@"update task_table set punchDateArr = ?, punchSkipArr = ? where id = ?;", punchJsonStr, skipJsonStr, taskid];
+                    
+                } else {
+                    NSMutableArray *punchArray = [[NSMutableArray alloc] init];
+                    [punchArray addObject:[BPDateHelper transformDateToyyyyMMdd:date]];
+                    NSError *err = nil;
+                    NSString *punchJsonStr;
+                    if ([punchArray count] > 0 || punchArray != NULL) {
+                        NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchArray options:NSJSONWritingPrettyPrinted error:&err];
+                        punchJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
+                    } else {
+                        punchJsonStr = nil;
+                    }
+                    NSLog(@"punch %@", taskid);
+                    succeeded = [db executeUpdate:@"update task_table set punchDateArr = ?, punchSkipArr = ? where id = ?;", punchJsonStr, skipJsonStr, taskid];
                 }
             }
             finishedBlock(succeeded);
