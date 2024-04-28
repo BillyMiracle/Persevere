@@ -36,9 +36,14 @@ typedef void (^errorBlock)(NSError * _Nonnull error);
 /// 获取一天的全部任务
 - (void)getTasksOfDate:(NSDate *_Nonnull)date finished:(getTaskArraysucceededBlock)successBlock error:(errorBlock)errorBlock;
 - (void)getTasksOfWeekdays:(NSArray *_Nonnull)weekdays finished:(getTaskArraysucceededBlock)successBlock error:(errorBlock)errorBlock;
-
+/// 为某个任务某天打卡
 - (void)punchForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock;
+/// 为某个任务某天取消打卡
 - (void)unpunchForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock;
+/// 某个任务跳过某天
+- (void)skipForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock;
+/// 某个任务取消跳过某天
+- (void)unskipForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock;
 
 /// 一共需要打卡的天数（截至当天）
 - (NSInteger)totalDayCountOfTask:(TaskModel *)task;

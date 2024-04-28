@@ -350,6 +350,90 @@ static LocalTaskDataManager* _instance = nil;
     });
 }
 
+// MARK: 跳过
+- (void)skipForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+            FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", taskid];
+            BOOL succeeded = NO;
+            while ([resultSet next]) {
+                NSString *punchJsonStr = [resultSet stringForColumn:@"punchSkipArr"];
+                if (punchJsonStr != NULL) {
+                    NSData *punchData = [punchJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                    NSMutableArray *punchArray = [[NSJSONSerialization JSONObjectWithData:punchData options:NSJSONReadingAllowFragments error:nil] mutableCopy];
+                    if ([punchArray count] <= 0) {
+                        punchArray = [[NSMutableArray alloc] init];
+                    }
+                    if (![punchArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+                        [punchArray addObject:[BPDateHelper transformDateToyyyyMMdd:date]];
+                    }
+                    NSError *err = nil;
+                    NSString *punchJsonStr;
+                    if ([punchArray count] > 0 || punchArray != NULL) {
+                        NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchArray options:NSJSONWritingPrettyPrinted error:&err];
+                        punchJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
+                    } else {
+                        punchJsonStr = nil;
+                    }
+                    NSLog(@"skip %@", taskid);
+                    succeeded = [db executeUpdate:@"update task_table set punchSkipArr = ? where id = ?;", punchJsonStr, taskid];
+                } else {
+                    NSMutableArray *punchArray = [[NSMutableArray alloc] init];
+                    [punchArray addObject:[BPDateHelper transformDateToyyyyMMdd:date]];
+                    NSError *err = nil;
+                    NSString *punchJsonStr;
+                    if ([punchArray count] > 0 || punchArray != NULL) {
+                        NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchArray options:NSJSONWritingPrettyPrinted error:&err];
+                        punchJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
+                    } else {
+                        punchJsonStr = nil;
+                    }
+                    NSLog(@"skip %@", taskid);
+                    succeeded = [db executeUpdate:@"update task_table set punchSkipArr = ? where id = ?;", punchJsonStr, taskid];
+                }
+            }
+            finishedBlock(succeeded);
+        }];
+    });
+}
+
+// MARK: 取消跳过
+- (void)unskipForTaskWithID:(NSNumber *)taskid onDate:(NSDate *)date finished:(updateTaskFinishedBlock)finishedBlock {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+            FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", taskid];
+            BOOL succeeded = NO;
+            while ([resultSet next]) {
+                NSString *punchJsonStr = [resultSet stringForColumn:@"punchSkipArr"];
+                if (punchJsonStr != NULL) {
+                    NSData *punchData = [punchJsonStr dataUsingEncoding:NSUTF8StringEncoding];
+                    NSMutableArray *punchArray = [[NSJSONSerialization JSONObjectWithData:punchData options:NSJSONReadingAllowFragments error:nil] mutableCopy];
+                
+                    if ([punchArray count] <= 0) {
+                        punchArray = [[NSMutableArray alloc] init];
+                    }
+                
+                    if ([punchArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+                        [punchArray removeObject:[BPDateHelper transformDateToyyyyMMdd:date]];
+                    }
+                
+                    NSError *err = nil;
+                    NSString *punchJsonStr;
+                    if ([punchArray count] > 0 || punchArray != NULL) {
+                        NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchArray options:NSJSONWritingPrettyPrinted error:&err];
+                        punchJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
+                    } else {
+                        punchJsonStr = nil;
+                    }
+                
+                    succeeded = [db executeUpdate:@"update task_table set punchSkipArr = ? where id = ?;", punchJsonStr, taskid];
+                }
+            }
+            finishedBlock(succeeded);
+        }];
+    });
+}
+
 // MARK: 数据计算
 - (NSInteger)totalDayCountOfTask:(TaskModel *)task {
     NSDate *date = task.startDate;
