@@ -167,7 +167,7 @@ static LocalTaskDataManager* _instance = nil;
     });
 }
 
-- (void)getTasksOfID:(int)taskId finished:(getTasksucceededBlock)successBlock error:(errorBlock)errorBlock {
+- (void)getTasksOfID:(NSInteger)taskId finished:(getTasksucceededBlock)successBlock error:(errorBlock)errorBlock {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
         [self.taskArray removeAllObjects];
         FMResultSet *resultSet = [db executeQuery:@"select * from task_table where id = ?;", @(taskId)];
