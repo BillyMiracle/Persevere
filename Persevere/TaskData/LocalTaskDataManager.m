@@ -53,25 +53,25 @@ static LocalTaskDataManager* _instance = nil;
         NSError *err = nil;
         NSArray *daysArr = task.reminderDays;
         NSString *daysJsonStr = nil;
-        if([daysArr count] > 0 || daysArr != NULL){
+        if ([daysArr count] > 0 || daysArr != NULL) {
             NSData *daysJsonData = [NSJSONSerialization dataWithJSONObject:daysArr options:NSJSONWritingPrettyPrinted error:&err];
             daysJsonStr = [[NSString alloc] initWithData:daysJsonData encoding:NSUTF8StringEncoding];
         }
         NSArray *punchArr = task.punchDateArray;
         NSString *punchJsonStr = nil;
-        if([punchArr count] > 0 || punchArr != NULL){
+        if ([punchArr count] > 0 || punchArr != NULL) {
             NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchArr options:NSJSONWritingPrettyPrinted error:&err];
             punchJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
         }
         NSArray *punchMemoArr = task.punchMemoArray;
         NSString *punchMemoJsonStr = nil;
-        if([punchMemoArr count] > 0 || punchMemoArr != NULL){
+        if ([punchMemoArr count] > 0 || punchMemoArr != NULL) {
             NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchMemoArr options:NSJSONWritingPrettyPrinted error:&err];
             punchMemoJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
         }
         NSArray *punchSkipArr = task.punchSkipArray;
         NSString *punchSkipJsonStr = nil;
-        if([punchSkipArr count] > 0 || punchSkipArr != NULL){
+        if ([punchSkipArr count] > 0 || punchSkipArr != NULL) {
             NSData *punchJsonData = [NSJSONSerialization dataWithJSONObject:punchSkipArr options:NSJSONWritingPrettyPrinted error:&err];
             punchSkipJsonStr = [[NSString alloc] initWithData:punchJsonData encoding:NSUTF8StringEncoding];
         }
