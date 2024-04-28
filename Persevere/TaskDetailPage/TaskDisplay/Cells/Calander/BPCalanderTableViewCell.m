@@ -67,7 +67,11 @@ FSCalendarDelegateAppearance
 // MARK: 日历相关
 
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
-    
+    [calendar deselectDate:date];
+    [calendar reloadData];
+    if ([self.delegate respondsToSelector:@selector(didSelectDate:)]) {
+        [self.delegate didSelectDate:date];
+    }
 }
 
 - (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar {

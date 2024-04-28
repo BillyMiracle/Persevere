@@ -103,6 +103,87 @@ UIGestureRecognizerDelegate
     return _task;
 }
 
+- (void)fixPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished {
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    NSBlockOperation *updateOperation = [self updateOperationWithFinishedBlock:finished];
+    NSBlockOperation *punchOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [[LocalTaskDataManager sharedInstance] punchForTaskWithID:@(self.task.taskId) onDate:date finished:^(BOOL succeeded) {
+            if (succeeded) {
+                [queue addOperation:updateOperation];
+            } else {
+                finished(false);
+            }
+        }];
+    }];
+    [updateOperation addDependency:punchOperation];
+    [queue addOperation:punchOperation];
+}
+
+- (void)unpunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished {
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    NSBlockOperation *updateOperation = [self updateOperationWithFinishedBlock:finished];
+    NSBlockOperation *unpunchOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [[LocalTaskDataManager sharedInstance] unpunchForTaskWithID:@(self.task.taskId) onDate:date finished:^(BOOL succeeded) {
+            if (succeeded) {
+                [queue addOperation:updateOperation];
+            } else {
+                finished(false);
+            }
+        }];
+    }];
+    [updateOperation addDependency:unpunchOperation];
+    [queue addOperation:unpunchOperation];
+}
+
+- (void)skipPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished {
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    NSBlockOperation *updateOperation = [self updateOperationWithFinishedBlock:finished];
+    NSBlockOperation *skipOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [[LocalTaskDataManager sharedInstance] skipForTaskWithID:@(self.task.taskId) onDate:date finished:^(BOOL succeeded) {
+            if (succeeded) {
+                [queue addOperation:updateOperation];
+            } else {
+                finished(false);
+            }
+        }];
+    }];
+    [updateOperation addDependency:skipOperation];
+    [queue addOperation:skipOperation];
+}
+
+- (void)cancelSkipPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished {
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    NSBlockOperation *updateOperation = [self updateOperationWithFinishedBlock:finished];
+    NSBlockOperation *cancelSkipOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [[LocalTaskDataManager sharedInstance] unskipForTaskWithID:@(self.task.taskId) onDate:date finished:^(BOOL succeeded) {
+            if (succeeded) {
+                [queue addOperation:updateOperation];
+            } else {
+                finished(false);
+            }
+        }];
+    }];
+    [updateOperation addDependency:cancelSkipOperation];
+    [queue addOperation:cancelSkipOperation];
+}
+
+- (void)updateCurrentTaskFinished:(UpdateTaskFinishedBlock)finished {
+    [[LocalTaskDataManager sharedInstance] getTasksOfID:self.task.taskId finished:^(TaskModel * _Nonnull task) {
+        self.task = task;
+        finished(true);
+    } error:^(NSError * _Nonnull error) {
+        finished(false);
+    }];
+}
+
+- (NSBlockOperation *)updateOperationWithFinishedBlock:(UpdateTaskFinishedBlock)finished {
+    NSBlockOperation *updateOperation = [NSBlockOperation blockOperationWithBlock:^{
+        [self updateCurrentTaskFinished:^(BOOL succeeded) {
+            finished(succeeded);
+        }];
+    }];
+    return updateOperation;
+}
 
 // MARK: Getters
 

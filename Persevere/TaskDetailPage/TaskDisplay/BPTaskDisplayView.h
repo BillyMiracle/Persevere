@@ -16,6 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) TaskModel *task;
 
+typedef void (^UpdateTaskFinishedBlock)(BOOL succeeded);
+/// 补打卡
+- (void)fixPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished;
+/// 取消打卡
+- (void)unpunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished;
+/// 跳过打卡
+- (void)skipPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished;
+/// 取消跳过打卡
+- (void)cancelSkipPunchOnDate:(NSDate *)date finished:(UpdateTaskFinishedBlock)finished;
+
 @end
 
 @protocol BPTaskDisplayViewDelegate <NSObject>

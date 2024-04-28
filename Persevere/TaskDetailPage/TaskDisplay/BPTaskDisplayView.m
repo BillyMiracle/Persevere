@@ -14,6 +14,9 @@
 #import "BPProgressTableViewCell.h"
 #import "BPCalanderTableViewCell.h"
 #import "BPDeleteTaskTableViewCell.h"
+#import "BPDateHelper.h"
+#import "NSDate+DateTools.h"
+#import "LocalTaskDataManager.h"
 
 static const CGFloat sectionHeaderViewHeight = 45.0f;
 //static const CGFloat calendarViewHeight = 250.f;
@@ -21,7 +24,8 @@ static const CGFloat sectionHeaderViewHeight = 45.0f;
 @interface BPTaskDisplayView()
 <
 UITableViewDelegate,
-UITableViewDataSource
+UITableViewDataSource,
+BPCalanderTableViewCellDelegate
 >
 
 /// 任务信息 tableView
@@ -112,6 +116,149 @@ UITableViewDataSource
     }
 }
 
+// MARK: BPCalanderTableViewCellDelegate
+
+- (void)didSelectDate:(NSDate *)date {
+    if (self.dataSource.task == nil) {
+        return;
+    }
+    [self presentAlertForDate:date];
+}
+
+// MARK: 日期操作
+
+/// 选中 date 后弹窗
+- (void)presentAlertForDate:(NSDate *)date {
+    
+//    NSString *memo = [[LocalTaskDataManager sharedInstance] getPunchMemoOfTask:self.task onDate:date];
+    NSString *memo = @"";
+    NSString *displayMemo;
+    NSString *buttonMemoText;
+    if (memo == nil || [memo isEqualToString:@""]) {
+        displayMemo = @"当日无备注";
+        buttonMemoText = @"添加当日备注";
+    } else {
+        displayMemo = [NSString stringWithFormat:@"%@：%@", @"当日备注：", memo];
+        buttonMemoText = @"修改当日备注";
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[date formattedDateWithFormat:(NSString *)BPDateFormat] message:displayMemo preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *memoAction = [UIAlertAction actionWithTitle:buttonMemoText style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self memoActionOnDate:date];
+    }];
+    [alert addAction:memoAction];
+    
+    // 补打卡
+    if ([self canFixPunch:date]) {
+        UIAlertAction *fixPunchAction = [UIAlertAction actionWithTitle:@"打卡" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self fixPunchOnDate:date];
+        }];
+        [alert addAction:fixPunchAction];
+    }
+    // 取消打卡
+    if ([self.dataSource.task.punchDateArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+        UIAlertAction *cancelPunchAction = [UIAlertAction actionWithTitle:@"取消打卡" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self unpunchOnDate:date];
+        }];
+        [alert addAction:cancelPunchAction];
+    }
+    
+    // 跳过打卡
+    if ([self canSkipTask:date] && [self canFixPunch:date]) {
+        UIAlertAction *skipPunchAction = [UIAlertAction actionWithTitle:@"标记跳过" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self skipPunchOnDate:date];
+        }];
+        [alert addAction:skipPunchAction];
+    }
+    // 取消跳过打卡
+    if ([self.dataSource.task.punchSkipArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]) {
+        UIAlertAction *unskipPunchAction = [UIAlertAction actionWithTitle:@"取消标记跳过" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self cancelSkipPunchOnDate:date];
+        }];
+        [alert addAction:unskipPunchAction];
+    }
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    
+    [self.parentViewController presentViewController:alert animated:YES completion:nil];
+}
+
+- (BOOL)canFixPunch:(NSDate *)date {
+    if ([[NSDate date] isEarlierThanOrEqualTo:date]) {
+        return NO;
+    }
+    if (self.dataSource.task.endDate != nil
+        && [self.dataSource.task.endDate isEarlierThan:date]) {
+        return NO;
+    } else {
+        return ![self.dataSource.task.punchDateArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]
+                && [self.dataSource.task.reminderDays containsObject:@(BPConvertToMondayBasedWeekday(date.weekday))]
+                && [self.dataSource.task.startDate isEarlierThanOrEqualTo:date];
+    }
+}
+
+- (BOOL)canSkipTask:(NSDate *)date {
+    if ([[NSDate date] isEarlierThanOrEqualTo:date]) {
+        return NO;
+    }
+    if (self.dataSource.task.endDate != nil
+        && [self.dataSource.task.endDate isEarlierThan:date]) {
+        return NO;
+    } else {
+        return ![self.dataSource.task.punchSkipArray containsObject:[BPDateHelper transformDateToyyyyMMdd:date]]
+                && [self.dataSource.task.reminderDays containsObject:@(BPConvertToMondayBasedWeekday(date.weekday))]
+                && [self.dataSource.task.startDate isEarlierThanOrEqualTo:date];
+    }
+}
+
+/// 补打卡
+- (void)fixPunchOnDate:(NSDate *)date {
+    [self.dataSource fixPunchOnDate:date finished:^(BOOL succeeded) {
+        if (succeeded) {
+            [self mainThreadReloadCalendar];
+        }
+    }];
+}
+
+/// 取消打卡
+- (void)unpunchOnDate:(NSDate *)date {
+    [self.dataSource unpunchOnDate:date finished:^(BOOL succeeded) {
+        if (succeeded) {
+            [self mainThreadReloadCalendar];
+        }
+    }];
+}
+
+/// 跳过打卡
+- (void)skipPunchOnDate:(NSDate *)date {
+    [self.dataSource skipPunchOnDate:date finished:^(BOOL succeeded) {
+        if (succeeded) {
+            [self mainThreadReloadCalendar];
+        }
+    }];
+}
+
+/// 取消跳过打卡
+- (void)cancelSkipPunchOnDate:(NSDate *)date {
+    [self.dataSource cancelSkipPunchOnDate:date finished:^(BOOL succeeded) {
+        if (succeeded) {
+            [self mainThreadReloadCalendar];
+        }
+    }];
+}
+
+- (void)memoActionOnDate:(NSDate *)date {
+    
+}
+
+- (void)mainThreadReloadCalendar {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.displayTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+    });
+}
+
+// MARK: 删除
+
 /// 弹出确认删除弹窗
 - (void)presentAlertToDeleteTask {
     UIAlertController *deleteAlertController = [UIAlertController alertControllerWithTitle:@"是否确认删除任务" message:@"此操作不可逆" preferredStyle:UIAlertControllerStyleAlert];
@@ -187,6 +334,7 @@ UITableViewDataSource
         // 2-2 日历
         BPCalanderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"calander" forIndexPath:indexPath];
         [cell bindTask:self.dataSource.task];
+        cell.delegate = self;
         return cell;
         
     } else if (indexPath.section == 1 && indexPath.row == 2) {
