@@ -69,6 +69,7 @@
 		3AA8C6B72B07C197006AA569 /* BPProgressLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6B62B07C197006AA569 /* BPProgressLabel.m */; };
 		3AA8C6BA2B07C2B9006AA569 /* BPMaskLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6B92B07C2B9006AA569 /* BPMaskLabel.m */; };
 		3AA8C6C12B07D306006AA569 /* BPDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8C6C02B07D306006AA569 /* BPDateView.m */; };
+		3AB15E0C2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB15E0B2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.m */; };
 		3AB33E782AFA3C610023575F /* BPInputLongTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB33E772AFA3C610023575F /* BPInputLongTextTableViewCell.m */; };
 		3AB33E7B2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB33E7A2AFA3C750023575F /* BPSelectDateOrTimeTableViewCell.m */; };
 		3AB33E7E2AFA3CA80023575F /* BPSelectWeekdayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB33E7D2AFA3CA80023575F /* BPSelectWeekdayTableViewCell.m */; };
@@ -222,6 +223,8 @@
 		3AA8C6B92B07C2B9006AA569 /* BPMaskLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMaskLabel.m; sourceTree = "<group>"; };
 		3AA8C6BF2B07D306006AA569 /* BPDateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPDateView.h; sourceTree = "<group>"; };
 		3AA8C6C02B07D306006AA569 /* BPDateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPDateView.m; sourceTree = "<group>"; };
+		3AB15E0A2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSearchTaskTableViewCell.h; sourceTree = "<group>"; };
+		3AB15E0B2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSearchTaskTableViewCell.m; sourceTree = "<group>"; };
 		3AB33E762AFA3C610023575F /* BPInputLongTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPInputLongTextTableViewCell.h; sourceTree = "<group>"; };
 		3AB33E772AFA3C610023575F /* BPInputLongTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPInputLongTextTableViewCell.m; sourceTree = "<group>"; };
 		3AB33E792AFA3C740023575F /* BPSelectDateOrTimeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSelectDateOrTimeTableViewCell.h; sourceTree = "<group>"; };
@@ -682,6 +685,15 @@
 			path = DateView;
 			sourceTree = "<group>";
 		};
+		3AB15E092BEB5A14003A24C1 /* SearchTaskCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AB15E0A2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.h */,
+				3AB15E0B2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.m */,
+			);
+			path = SearchTaskCell;
+			sourceTree = "<group>";
+		};
 		3AB33E752AFA3B2D0023575F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +935,7 @@
 		3AF5072A2BCC45E400B4F393 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				3AB15E092BEB5A14003A24C1 /* SearchTaskCell */,
 				3A582AD42BCC465A00B6362B /* BPSearchViewController.h */,
 				3A582AD52BCC465A00B6362B /* BPSearchViewController.m */,
 				3A582ADA2BCC46E400B6362B /* BPSearchViewModel.h */,
@@ -1117,6 +1130,7 @@
 				3AA8C6BA2B07C2B9006AA569 /* BPMaskLabel.m in Sources */,
 				3A3373B32BB98424002131C4 /* BPSettingSectionView.m in Sources */,
 				3AB33E842AFA3DD80023575F /* BPSelectImageTableViewCell.m in Sources */,
+				3AB15E0C2BEB5BD5003A24C1 /* BPSearchTaskTableViewCell.m in Sources */,
 				3A0DD2572B04EB8F00F2DAC6 /* LocalTaskDataManager.m in Sources */,
 				3A03CE382AF7BBBB0001B562 /* BPColorPickerView.m in Sources */,
 				3A3C8F1A2AF146FE00AF62E4 /* main.m in Sources */,
