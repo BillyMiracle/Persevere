@@ -70,6 +70,12 @@
         NSString *lower = [NSString changetoLower:text];
         [self.filteredCellModelArray removeAllObjects];
         for (BPSelectTableViewCellModel *model in self.allCellModelArray) {
+            if (!model.task.name) {
+                model.task.name = @"";
+            }
+            if (!model.task.memo) {
+                model.task.memo = @"";
+            }
             NSString *nameInPinyin = [NSString transformToPinyin:model.task.name];
             NSString *memoInPinyin = [NSString transformToPinyin:model.task.memo];
             if ([nameInPinyin containsString:lower] || [memoInPinyin containsString:lower]) {

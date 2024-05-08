@@ -125,7 +125,9 @@
     // text did end editing
     [self.selectTaskViewModel searchTasksWithText:searchBar.text finished:^(BOOL success) {
         if (success) {
-            [self.selectTaskTableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.selectTaskTableView reloadData];
+            });
         }
     }];
 }
