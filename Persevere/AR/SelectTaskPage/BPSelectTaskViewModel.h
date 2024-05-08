@@ -16,6 +16,8 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)didSelectTaskAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)setIsDataEmpty:(BOOL)isEmpty;
+
 @end
 
 @interface BPSelectTaskViewModel : NSObject
@@ -27,7 +29,7 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)loadTasksFinished:(loadTasksFinishedBlock)finishedBlock;
 
-
+- (void)searchTasksWithText:(NSString *)text finished:(loadTasksFinishedBlock)finishedBlock;
 
 @end
 

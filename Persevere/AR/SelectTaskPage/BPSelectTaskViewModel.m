@@ -10,17 +10,18 @@
 #import "DateTools.h"
 #import "BPSelectTaskTableViewCell.h"
 #import "BPSelectTableViewCellModel.h"
+#import "NSString+BPAddition.h"
 
 @interface BPSelectTaskViewModel()
 
 /// 全部任务数组
 @property (nonatomic, nonnull) NSMutableArray *allTaskArray;
+/// 全部数据数组
+@property (nonatomic, nonnull) NSMutableArray *allCellModelArray;
 /// 展示任务数组
-@property (nonatomic, strong) NSMutableArray *filteredTasks;
+@property (nonatomic, strong) NSMutableArray *filteredCellModelArray;
 /// 已选择数组
-@property (nonatomic, strong) NSMutableArray *selectedTasks;
-/// 是否选择数组
-@property (nonatomic, strong) NSMutableArray *isSelectedArray;
+@property (nonatomic, strong) NSMutableArray *selectedCellModelArray;
 
 @end
 
@@ -30,7 +31,7 @@
 - (void)loadTasksFinished:(loadTasksFinishedBlock)finishedBlock {
     [[LocalTaskDataManager sharedInstance] getTasksFinished:^(NSMutableArray * _Nonnull taskArray) {
         [self.allTaskArray removeAllObjects];
-        [self.filteredTasks removeAllObjects];
+        [self.filteredCellModelArray removeAllObjects];
         for (TaskModel *task in taskArray) {
             if (self.type == BPARTypeManually) {
                 if (![task.endDate isEarlierThan:[NSDate date]]) {
@@ -55,10 +56,34 @@
 /// 筛选任务，无需重新刷新任务数据
 - (void)filterTasksFinished:(loadTasksFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.filteredTasks = self.allTaskArray;
-        [self.isSelectedArray removeAllObjects];
-        for (int i = 0; i < self.filteredTasks.count; i++) {
-            [self.isSelectedArray addObject:@(false)];
+        for (int i = 0; i < self.allTaskArray.count; i++) {
+            BPSelectTableViewCellModel *model = [[BPSelectTableViewCellModel alloc] initWithTask:self.allTaskArray[i] selected:false];
+            [self.allCellModelArray addObject:model];
+            [self.filteredCellModelArray addObject:model];
+        }
+        finishedBlock(YES);
+    });
+}
+
+- (void)searchTasksWithText:(NSString *)text finished:(loadTasksFinishedBlock)finishedBlock {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *lower = [NSString changetoLower:text];
+        [self.filteredCellModelArray removeAllObjects];
+        for (BPSelectTableViewCellModel *model in self.allCellModelArray) {
+            NSString *nameInPinyin = [NSString transformToPinyin:model.task.name];
+            NSString *memoInPinyin = [NSString transformToPinyin:model.task.memo];
+            if ([nameInPinyin containsString:lower] || [memoInPinyin containsString:lower]) {
+                [self.filteredCellModelArray addObject:model];
+            }
+        }
+        if (self.filteredCellModelArray.count == 0) {
+            [self.filteredCellModelArray addObjectsFromArray:self.allCellModelArray];
+        } else {
+            for (BPSelectTableViewCellModel *model in self.selectedCellModelArray) {
+                if (![self.filteredCellModelArray containsObject:model]) {
+                    [self.filteredCellModelArray addObject:model];
+                }
+            }
         }
         finishedBlock(YES);
     });
@@ -67,10 +92,7 @@
 // MARK: UITableViewDelegate, UITableViewDataSource
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    NSNumber *num = [self.isSelectedArray objectAtIndex:indexPath.row];
-    TaskModel *task = [self.filteredTasks objectAtIndex:indexPath.row];
-    BOOL selected = num.boolValue;
-    BPSelectTableViewCellModel *model = [[BPSelectTableViewCellModel alloc] initWithTask:task selected:selected];
+    BPSelectTableViewCellModel *model = [self.filteredCellModelArray objectAtIndex:indexPath.row];
     BPSelectTaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"task" forIndexPath:indexPath];
     [cell bindModel:model];
     return cell;
@@ -81,7 +103,7 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.filteredTasks.count;
+    return self.filteredCellModelArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -89,19 +111,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    TaskModel *task = [self.filteredTasks objectAtIndex:indexPath.row];
-    NSNumber *num = [self.isSelectedArray objectAtIndex:indexPath.row];
-    BOOL selected = !num.boolValue;
-    if (selected) {
+    BPSelectTableViewCellModel *model = [self.filteredCellModelArray objectAtIndex:indexPath.row];
+    model.selected = !model.selected;
+    if (model.selected) {
         // TODO: 暂时手动添加只允许单选
         if (self.type == BPARTypeManually) {
-            [self.selectedTasks removeAllObjects];
+            [self.selectedCellModelArray removeAllObjects];
         }
-        [self.selectedTasks addObject:task];
+        [self.selectedCellModelArray addObject:model];
     } else {
-        [self.selectedTasks removeObject:task];
+        [self.selectedCellModelArray removeObject:model];
     }
-    self.isSelectedArray[indexPath.row] = @(selected);
     if ([self.delegate respondsToSelector:@selector(didSelectTaskAtIndexPath:)]) {
         [self.delegate didSelectTaskAtIndexPath:indexPath];
     }
@@ -109,11 +129,11 @@
 
 // MARK: Getters
 
-- (NSMutableArray *)filteredTasks {
-    if (!_filteredTasks) {
-        _filteredTasks = [[NSMutableArray alloc] init];
+- (NSMutableArray *)filteredCellModelArray {
+    if (!_filteredCellModelArray) {
+        _filteredCellModelArray = [[NSMutableArray alloc] init];
     }
-    return _filteredTasks;
+    return _filteredCellModelArray;
 }
 
 - (NSMutableArray *)allTaskArray {
@@ -123,22 +143,26 @@
     return _allTaskArray;
 }
 
-- (NSMutableArray *)selectedTasks {
-    if (!_selectedTasks) {
-        _selectedTasks = [[NSMutableArray alloc] init];
+- (NSMutableArray *)selectedCellModelArray {
+    if (!_selectedCellModelArray) {
+        _selectedCellModelArray = [[NSMutableArray alloc] init];
     }
-    return _selectedTasks;
+    return _selectedCellModelArray;
 }
 
-- (NSMutableArray *)isSelectedArray {
-    if (!_isSelectedArray) {
-        _isSelectedArray = [[NSMutableArray alloc] init];
+- (NSMutableArray *)allCellModelArray {
+    if (!_allCellModelArray) {
+        _allCellModelArray = [[NSMutableArray alloc] init];
     }
-    return _isSelectedArray;
+    return _allCellModelArray;
 }
 
 - (NSArray *)selectedTasksArray {
-    return [self.selectedTasks copy];
+    NSMutableArray *tasks = [[NSMutableArray alloc] init];
+    for (BPSelectTableViewCellModel *model in self.selectedCellModelArray) {
+        [tasks addObject:model.task];
+    }
+    return [tasks copy];
 }
 
 @end

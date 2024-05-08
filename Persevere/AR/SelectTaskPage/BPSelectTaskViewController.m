@@ -117,6 +117,22 @@
 
 // MARK: UISearchBarDelegate
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    // text did end editing
+    [self.selectTaskViewModel searchTasksWithText:searchBar.text finished:^(BOOL success) {
+        if (success) {
+            [self.selectTaskTableView reloadData];
+        }
+    }];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    // text did change
+}
 
 // MARK: BPNavigationTitleViewDelegate
 
