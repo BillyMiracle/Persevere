@@ -13,6 +13,8 @@
 #import "BPTaskDisplayViewController.h"
 #import "BPSettingViewController.h"
 #import "BPSelectTaskViewController.h"
+#import "BPSearchViewController.h"
+#import "TaskDataHelper.h"
 
 @interface BPMainViewController ()
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
@@ -22,6 +24,9 @@
 @property (nonatomic, strong) UIBarButtonItem *moreButton;
 /// 设置按钮
 @property (nonatomic, strong) UIBarButtonItem *settingButton;
+
+@property (nonatomic, strong, nonnull) NSString *sortFactor;
+@property (nonatomic, assign) BOOL isAscend;
 
 @end
 
@@ -38,7 +43,8 @@
     // Do any additional setup after loadingN the view.
     
     self.navigationItem.titleView = self.mainNavigationTitleView;
-    self.navigationItem.rightBarButtonItem= self.settingButton;
+    self.navigationItem.rightBarButtonItem = self.settingButton;
+    self.navigationItem.leftBarButtonItem = self.moreButton;
     
     [self.view addSubview:self.mainPageView];
 }
@@ -71,7 +77,68 @@
 // MARK: Button Actions
 
 - (void)pressMoreButton {
+    [self presentMoreSheetAlert];
+}
+
+- (void)presentMoreSheetAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择操作" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *searchAction = [UIAlertAction actionWithTitle:@"搜索任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self pushToSearchPage];
+    }];
+    [alert addAction:searchAction];
+    UIAlertAction *sortAction = [UIAlertAction actionWithTitle:@"改变任务排序方式" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self presentSortSheetAlert];
+    }];
+    [alert addAction:sortAction];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)pushToSearchPage {
+    BPSearchViewController *searchPage = [[BPSearchViewController alloc] init];
+    searchPage.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:searchPage animated:YES];
+}
+
+- (void)presentSortSheetAlert {
     
+    NSDictionary *sortDict = [[NSUserDefaults standardUserDefaults] valueForKey:@"sort"];
+    self.sortFactor = sortDict.allKeys[0];
+    NSNumber *isAscend = sortDict.allValues[0];
+    self.isAscend = isAscend.boolValue;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"请选择排序方式" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    NSDictionary *dict = [TaskDataHelper getTaskSortArray];
+    for (NSString *key in dict.allKeys) {
+        NSMutableString *displayKey = key.mutableCopy;
+        if ([self.sortFactor isEqualToString:dict[displayKey]]) {
+            if (self.isAscend) {
+                [displayKey appendString:@" ↑"];
+            } else {
+                [displayKey appendString:@" ↓"];
+            }
+        }
+        UIAlertAction *action = [UIAlertAction actionWithTitle:displayKey style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if ([self.sortFactor isEqualToString:dict[key]]) {
+                // 反转
+                self.isAscend = !self.isAscend;
+            } else {
+                self.sortFactor = dict[key];
+                self.isAscend = true;
+            }
+            [[NSUserDefaults standardUserDefaults] setValue:@{
+                self.sortFactor : @(self.isAscend)
+            } forKey:@"sort"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            // 刷新列表
+            [self.mainPageView sortTasksAndReloadTableView];
+        }];
+        [alert addAction:action];
+    }
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)pressSettingButton {
@@ -101,7 +168,7 @@
 
 - (UIBarButtonItem *)moreButton {
     if (!_moreButton) {
-        _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressMoreButton)];
+        _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavMore"] style:UIBarButtonItemStylePlain target:self action:@selector(pressMoreButton)];
         _moreButton.tintColor = [UIColor whiteColor];
     }
     return _moreButton;

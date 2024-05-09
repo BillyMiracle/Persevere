@@ -17,6 +17,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // 冷启动，初始化数据
+    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"sort"] == nil) {
+        [[NSUserDefaults standardUserDefaults] setValue:@{
+            @"sortName" : @true
+        } forKey:@"sort"];
+    }
+    
     return YES;
 }
 

@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshAndLoadTasksWithDate:(NSDate *)date;
 /// 导航栏标题点击
 - (void)navigationTitleViewTapped;
+/// 排序刷新
+- (void)sortTasksAndReloadTableView;
 
 @end
 

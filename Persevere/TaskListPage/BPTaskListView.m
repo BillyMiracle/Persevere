@@ -129,8 +129,35 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
         // 按照颜色筛选
         self.unfinishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.unfinishedTaskArr withType:self.selectedColorNum]];
         self.finishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper filtrateTasks:self.finishedTaskArr withType:self.selectedColorNum]];
+        // 排序
+        [self sortTasks];
         finishedBlock(YES);
     });
+}
+
+- (void)sortTasksAndReloadTableView {
+    [self sortTasksFinished:^(BOOL success) {
+        if (success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.taskListTableView reloadData];
+            });
+        }
+    }];
+}
+
+- (void)sortTasksFinished:(loadTasksFinishedBlock)finishedBlock {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self sortTasks];
+        finishedBlock(YES);
+    });
+}
+
+- (void)sortTasks {
+    NSDictionary *sortDict = [[NSUserDefaults standardUserDefaults] valueForKey:@"sort"];
+    NSString *sortFactor = sortDict.allKeys[0];
+    NSNumber *isAscend = sortDict.allValues[0];
+    self.unfinishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper sortTasks:self.unfinishedTaskArr withSortFactor:sortFactor isAscend:isAscend.boolValue]];
+    self.finishedTaskArr = [NSMutableArray arrayWithArray:[TaskDataHelper sortTasks:self.finishedTaskArr withSortFactor:sortFactor isAscend:isAscend.boolValue]];
 }
 
 // MARK: Table view data source

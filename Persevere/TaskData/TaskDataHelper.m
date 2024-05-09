@@ -9,6 +9,16 @@
 
 @implementation TaskDataHelper
 
++ (NSDictionary *)getTaskSortArray {
+    return @{
+        @"任务名" : @"sortName",
+        @"任务开始时间" : @"startDate",
+        @"任务结束时间" : @"endDate",
+        @"提醒时间" : @"reminderTime.hour|reminderTime.minute",
+        @"完成进度" : @"progress"
+    };
+}
+
 + (NSArray *)sortTasks:(NSArray *)tasks withSortFactor:(NSString *)factor isAscend:(BOOL)isAscend {
     NSMutableArray *sortDescriptors = [[NSMutableArray alloc] init];
     for (NSString *str in [factor componentsSeparatedByString:@"|"]) {

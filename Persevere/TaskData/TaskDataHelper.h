@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TaskDataHelper : NSObject
 
++ (NSDictionary *)getTaskSortArray;
+
 + (NSArray *)sortTasks:(NSArray *)tasks withSortFactor:(NSString *)factor isAscend:(BOOL)isAscend;
 
 + (NSArray *)filtrateTasks:(NSArray *)tasks withWeekdays:(NSArray *)weekdays;
