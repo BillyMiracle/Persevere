@@ -216,6 +216,7 @@ BPCalanderTableViewCellDelegate
     [self.dataSource fixPunchOnDate:date finished:^(BOOL succeeded) {
         if (succeeded) {
             [self mainThreadReloadCalendar];
+            [self mainThreadReloadProgress];
         }
     }];
 }
@@ -225,6 +226,7 @@ BPCalanderTableViewCellDelegate
     [self.dataSource unpunchOnDate:date finished:^(BOOL succeeded) {
         if (succeeded) {
             [self mainThreadReloadCalendar];
+            [self mainThreadReloadProgress];
         }
     }];
 }
@@ -254,6 +256,12 @@ BPCalanderTableViewCellDelegate
 - (void)mainThreadReloadCalendar {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.displayTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+    });
+}
+
+- (void)mainThreadReloadProgress {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.displayTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     });
 }
 

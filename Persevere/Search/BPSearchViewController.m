@@ -25,6 +25,8 @@
 @property (nonatomic, strong) UISearchBar *searchBar;
 
 @property (nonatomic, strong) UITableView *searchTaskTableView;
+/// 空view
+@property (nonatomic, strong) UILabel *emptyLabel;
 
 @end
 
@@ -36,8 +38,18 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     [self.viewModel loadTasksFinished:^(BOOL success) {
         if (success) {
+            // 有数据
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.searchTaskTableView reloadData];
+                self.emptyLabel.hidden = YES;
+                self.searchTaskTableView.scrollEnabled = YES;
+            });
+        } else {
+            // 无数据
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.searchTaskTableView reloadData];
+                self.emptyLabel.hidden = NO;
+                self.searchTaskTableView.scrollEnabled = NO;
             });
         }
     }];
@@ -63,6 +75,10 @@
     self.searchTaskTableView.frame = CGRectMake(0, [UIDevice bp_navigationFullHeight], self.bp_width, self.bp_height - [UIDevice bp_navigationFullHeight]);
     self.searchTaskTableView.tableHeaderView = self.searchBar;
     self.searchBar.frame = CGRectMake(0, 0, self.bp_width, 50);
+    
+    [self.view addSubview:self.emptyLabel];
+    [self.emptyLabel sizeToFit];
+    self.emptyLabel.center = self.view.center;
 }
 
 // MARK: Button Actions
@@ -81,8 +97,18 @@
     // text did end editing
     [self.viewModel searchTasksWithText:searchBar.text finished:^(BOOL success) {
         if (success) {
+            // 有数据
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.searchTaskTableView reloadData];
+                self.emptyLabel.hidden = YES;
+                self.searchTaskTableView.scrollEnabled = YES;
+            });
+        } else {
+            // 无数据
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.searchTaskTableView reloadData];
+                self.emptyLabel.hidden = NO;
+                self.searchTaskTableView.scrollEnabled = NO;
             });
         }
     }];
@@ -146,6 +172,17 @@
     return _searchTaskTableView;
 }
 
+- (UILabel *)emptyLabel {
+    if (!_emptyLabel) {
+        _emptyLabel = [[UILabel alloc] init];
+        _emptyLabel.font = [UIFont systemFontOfSize:20];
+        _emptyLabel.textColor = [UIColor blackColor];
+        _emptyLabel.textAlignment = NSTextAlignmentCenter;
+        _emptyLabel.text = @"无搜索结果";
+    }
+    return _emptyLabel;
+}
+
 - (BPSearchViewModel *)viewModel {
     if (!_viewModel) {
         _viewModel = [[BPSearchViewModel alloc] init];
@@ -153,6 +190,5 @@
     }
     return _viewModel;
 }
-
 
 @end

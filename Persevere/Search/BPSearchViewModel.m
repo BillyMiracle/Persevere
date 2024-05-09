@@ -51,22 +51,33 @@
 
 - (void)searchTasksWithText:(NSString *)text finished:(loadTasksFinishedBlock)finishedBlock {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *lower = [NSString changetoLower:text];
-        [self.filteredTaskArray removeAllObjects];
-        for (TaskModel *task in self.allTaskArray) {
-            if (!task.name) {
-                task.name = @"";
-            }
-            if (!task.memo) {
-                task.memo = @"";
-            }
-            NSString *nameInPinyin = [NSString transformToPinyin:task.name];
-            NSString *memoInPinyin = [NSString transformToPinyin:task.memo];
-            if ([nameInPinyin containsString:lower] || [memoInPinyin containsString:lower]) {
+        if (!text || [text isEqualToString:@""]) {
+            for (int i = 0; i < self.allTaskArray.count; i++) {
+                TaskModel *task = self.allTaskArray[i];
                 [self.filteredTaskArray addObject:task];
             }
+        } else {
+            NSString *lower = [NSString changetoLower:text];
+            [self.filteredTaskArray removeAllObjects];
+            for (TaskModel *task in self.allTaskArray) {
+                if (!task.name) {
+                    task.name = @"";
+                }
+                if (!task.memo) {
+                    task.memo = @"";
+                }
+                NSString *nameInPinyin = [NSString transformToPinyin:task.name];
+                NSString *memoInPinyin = [NSString transformToPinyin:task.memo];
+                if ([nameInPinyin containsString:lower] || [memoInPinyin containsString:lower]) {
+                    [self.filteredTaskArray addObject:task];
+                }
+            }
         }
-        finishedBlock(YES);
+        if (self.filteredTaskArray.count > 0) {
+            finishedBlock(YES);
+        } else {
+            finishedBlock(NO);
+        }
     });
 }
 

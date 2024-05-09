@@ -78,6 +78,7 @@ BPPublishTabBarDelegate
         _mainNavigationController.tabBarItem.selectedImage = [UIImage imageNamed:@"TabTodaySelected"];
         _mainNavigationController.navigationBar.standardAppearance = [[BPNavifationBarAppearance alloc] init];
         _mainNavigationController.navigationBar.scrollEdgeAppearance = [[BPNavifationBarAppearance alloc] init];
+        [_mainNavigationController.interactivePopGestureRecognizer setEnabled:NO];
     }
     return _mainNavigationController;
 }
@@ -90,6 +91,7 @@ BPPublishTabBarDelegate
         _taskNavigationController.tabBarItem.selectedImage = [UIImage imageNamed:@"TabListSelected"];
         _taskNavigationController.navigationBar.standardAppearance = [[BPNavifationBarAppearance alloc] init];
         _taskNavigationController.navigationBar.scrollEdgeAppearance = [[BPNavifationBarAppearance alloc] init];
+        [_taskNavigationController.interactivePopGestureRecognizer setEnabled:NO];
     }
     return _taskNavigationController;
 }

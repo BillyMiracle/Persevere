@@ -17,8 +17,6 @@ typedef void (^loadTasksFinishedBlock)(BOOL success);
 
 - (void)didSelectTask:(TaskModel *)task;
 
-- (void)setIsDataEmpty:(BOOL)isEmpty;
-
 @end
 
 @interface BPSearchViewModel : NSObject
