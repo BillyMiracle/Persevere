@@ -101,7 +101,7 @@
 
 - (UIBarButtonItem *)moreButton {
     if (!_moreButton) {
-        _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressSortButton)];
+        _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressMoreButton)];
         _moreButton.tintColor = [UIColor whiteColor];
     }
     return _moreButton;
