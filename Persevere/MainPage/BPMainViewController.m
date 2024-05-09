@@ -18,8 +18,8 @@
 <BPNavigationTitleViewDelegate,BPMainViewDelegate>
 @property (nonatomic, strong) BPMainView *mainPageView;
 @property (nonatomic, strong) BPNavigationTitleView *mainNavigationTitleView;
-/// 排序按钮
-@property (nonatomic, strong) UIBarButtonItem *sortButton;
+/// 更多按钮
+@property (nonatomic, strong) UIBarButtonItem *moreButton;
 /// 设置按钮
 @property (nonatomic, strong) UIBarButtonItem *settingButton;
 
@@ -70,7 +70,7 @@
 
 // MARK: Button Actions
 
-- (void)pressSortButton {
+- (void)pressMoreButton {
     
 }
 
@@ -99,12 +99,12 @@
     return _mainPageView;
 }
 
-- (UIBarButtonItem *)sortButton {
-    if (!_sortButton) {
-        _sortButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressSortButton)];
-        _sortButton.tintColor = [UIColor whiteColor];
+- (UIBarButtonItem *)moreButton {
+    if (!_moreButton) {
+        _moreButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"NavBack"] style:UIBarButtonItemStylePlain target:self action:@selector(pressSortButton)];
+        _moreButton.tintColor = [UIColor whiteColor];
     }
-    return _sortButton;
+    return _moreButton;
 }
 
 - (UIBarButtonItem *)settingButton {
