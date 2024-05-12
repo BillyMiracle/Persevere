@@ -7,10 +7,12 @@
 
 #import "SceneDelegate.h"
 #import "BPMainTabBarController.h"
+#import "BPLoginViewController.h"
 
 @interface SceneDelegate ()
 
 @property (nonatomic, strong) BPMainTabBarController *mainTabBarController;
+@property (nonatomic, strong) BPLoginViewController *loginViewController;
 
 @end
 
@@ -24,6 +26,7 @@
     
     // 切换rootVC
     self.window.rootViewController = self.mainTabBarController;
+//    self.window.rootViewController = self.loginViewController;
 }
 
 
@@ -65,6 +68,13 @@
         _mainTabBarController = [[BPMainTabBarController alloc] init];
     }
     return _mainTabBarController;
+}
+
+- (BPLoginViewController *)loginViewController {
+    if (!_loginViewController) {
+        _loginViewController = [[BPLoginViewController alloc] init];
+    }
+    return _loginViewController;
 }
 
 @end
