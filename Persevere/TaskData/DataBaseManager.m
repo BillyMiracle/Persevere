@@ -75,6 +75,32 @@ static DataBaseManager* _instance = nil;
 //                NSLog(@"删除 setting_color_table 失败");
 //            }
         }
+        if (![db tableExists:@"current_user_table"]) {
+            BOOL result = [db executeUpdate: @"create table if not exists current_user_table(id integer primary key autoincrement,phone_number text,nick_name text,password text,head_image bolb,user_id text,head_image_path text,login_status integer,token text)"];
+            if (result) {
+                NSLog(@"创建表成功");
+            }
+        } else {
+            NSLog(@"表已存在");
+        }
+//        [db executeUpdate:@"DROP TABLE IF EXISTS user_table"];
+        if (![db tableExists:@"user_table"]) {
+            BOOL result = [db executeUpdate: @"create table if not exists user_table(id integer primary key autoincrement,phone_number text,password text)"];
+            if (result) {
+                NSLog(@"创建表成功");
+            }
+        } else {
+            NSLog(@"表已存在");
+        }
+//        [db executeUpdate:@"DROP TABLE IF EXISTS user_info_table"];
+        if (![db tableExists:@"user_info_table"]) {
+            BOOL result = [db executeUpdate: @"create table if not exists user_info_table(id integer primary key autoincrement,user_id text,nick_name text,head_image bolb,head_image_path text)"];
+            if (result) {
+                NSLog(@"创建表成功");
+            }
+        } else {
+            NSLog(@"表已存在");
+        }
     }];
 }
 

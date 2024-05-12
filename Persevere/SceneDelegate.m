@@ -8,6 +8,7 @@
 #import "SceneDelegate.h"
 #import "BPMainTabBarController.h"
 #import "BPLoginViewController.h"
+#import "LocalUserDataManager.h"
 
 @interface SceneDelegate ()
 
@@ -25,8 +26,16 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     
     // 切换rootVC
-    self.window.rootViewController = self.mainTabBarController;
+//    self.window.rootViewController = self.mainTabBarController;
 //    self.window.rootViewController = self.loginViewController;
+    [[LocalUserDataManager sharedInstance] fetchCurrentUserFinished:^(UserModel * _Nullable user) {
+        if (!user) {
+            self.window.rootViewController = self.loginViewController;
+        } else {
+            NSLog(@"user: %@", user);
+            self.window.rootViewController = self.mainTabBarController;
+        }
+    }];
 }
 
 

@@ -7,17 +7,11 @@
 
 #import "BPLoginViewController.h"
 #import "BPUIHelper.h"
+#import "BPPasswordTextField.h"
 #import <Masonry.h>
-
-@interface PasswordTextField : UITextField
-@end
-
-@implementation PasswordTextField
-// 密码输入框，不能够粘贴
-- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    return NO;
-}
-@end
+#import "BPRegisterViewController.h"
+#import "BPMainTabBarController.h"
+#import "BPLoginViewModel.h"
 
 static const int textFieldFontSize = 23; //字体大小
 static const int PHONEMAXLENGTH = 11;    //电话号码长度
@@ -37,7 +31,7 @@ static int amountOfTimeLeft = 60;        //倒计时
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 电话号码和密码（验证码）输入框
 @property (nonatomic, strong) UITextField *phoneNumberTextField;
-@property (nonatomic, strong) UITextField *passwordTextField;
+@property (nonatomic, strong) BPPasswordTextField *passwordTextField;
 
 
 @property (nonatomic, strong) UIButton *agreementButton;
@@ -49,6 +43,8 @@ static int amountOfTimeLeft = 60;        //倒计时
 
 @property (nonatomic, copy) NSString *phoneNumber;
 @property (nonatomic, copy) NSString *password;
+
+@property (nonatomic, strong) BPLoginViewModel *viewModel;
 
 @end
 
@@ -125,7 +121,9 @@ static int amountOfTimeLeft = 60;        //倒计时
         make.centerX.mas_equalTo(self.view);
     }];
 }
-#pragma mark - 切换登录模式
+
+// MARK: 切换登录模式
+
 - (void)pressSwitch {
     // 密码登陆切换成验证码登陆
     if ([self.switchButton.titleLabel.text isEqualToString:@"密码登录"]) {
@@ -138,7 +136,8 @@ static int amountOfTimeLeft = 60;        //倒计时
     self.passwordTextField.text = @"";
 }
 
-#pragma mark - 验证码框输入
+// MARK: 验证码框输入
+
 - (void)useMessage {
     self.sendCodeButton.hidden = NO;
     [self setSendButtonOff];
@@ -152,7 +151,8 @@ static int amountOfTimeLeft = 60;        //倒计时
     [self.switchButton setTitle:@"密码登录" forState:UIControlStateNormal];
     [self.titleLabel setText:@"手机号登录/注册"];
 }
-#pragma mark - 密码框输入，禁止粘贴
+
+// MARK: 密码框输入，禁止粘贴
 
 - (void)usePassword {
     [self setLoginButtonOff];
@@ -172,7 +172,9 @@ static int amountOfTimeLeft = 60;        //倒计时
     self.passwordTextField.placeholder = @"请输入密码";
     self.passwordTextField.secureTextEntry = YES;
 }
-#pragma mark - 限制密码框输入内容
+
+// MARK: 限制密码框输入内容
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     if (range.length + range.location > textField.text.length) {
         return NO;
@@ -196,7 +198,8 @@ static int amountOfTimeLeft = 60;        //倒计时
     }
     return YES;
 }
-#pragma mark - 输入结束，更改按钮与输入框状态
+// MARK: 输入结束，更改按钮与输入框状态
+
 - (void)textFieldDidChangeSelection:(UITextField *)textField {
     //密码框在输入
     if (textField == self.passwordTextField) {
@@ -233,7 +236,7 @@ static int amountOfTimeLeft = 60;        //倒计时
     }
 }
 
-#pragma mark - 按发送验证码按钮
+// MARK: 按发送验证码按钮
 - (void)pressSendCodeButton {
     [self creatTimerFunction];
     self.passwordTextField.enabled = YES;
@@ -241,10 +244,9 @@ static int amountOfTimeLeft = 60;        //倒计时
     [self.sendCodeButton setTitle:[NSString stringWithFormat:@"%02ds", amountOfTimeLeft] forState:UIControlStateNormal];
     self.phoneNumberTextField.enabled = NO;
     self.phoneNumber = self.phoneNumberTextField.text;
-    
 }
 
-#pragma mark - 生成计时器
+// MARK: 生成计时器
 - (void)creatTimerFunction {
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerCountDown) userInfo:nil repeats:YES];
     NSRunLoop* mainloop = [NSRunLoop mainRunLoop];
@@ -267,21 +269,24 @@ static int amountOfTimeLeft = 60;        //倒计时
     }
 }
 
-#pragma mark- 判断手机号码
+// MARK: 判断手机号码
+
 - (BOOL)CheckPhoneNumInput:(NSString *)phone {
     NSString *Regex = @"(13[0-9]|14[57]|15[012356789]|18[012356789])\\d{8}";
     NSPredicate *mobileTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", Regex];
     return [mobileTest evaluateWithObject:phone];
 }
 
-#pragma mark- 判断验证码
+// MARK: 判断验证码
+
 - (BOOL)CheckVerificationCodeInput:(NSString *)code {
     NSString *Regex = @"\\d{6}";
     NSPredicate *mobileTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", Regex];
     return [mobileTest evaluateWithObject:code];
 }
 
-#pragma mark- 更改登录按钮状态
+// MARK: 更改登录按钮状态
+
 - (void)setLoginButtonOn {
     self.loginButton.backgroundColor = [UIColor colorWithRed:0.55 green:0.5 blue:0.9 alpha:1];
     [self.loginButton setTintColor:[UIColor blackColor]];
@@ -294,7 +299,8 @@ static int amountOfTimeLeft = 60;        //倒计时
     self.loginButton.userInteractionEnabled = NO;
 }
 
-#pragma mark - 更改验证码按钮状态
+// MARK: 更改验证码按钮状态
+
 - (void)setSendButtonOn {
     [self.sendCodeButton setTintColor:[UIColor blackColor]];
     self.sendCodeButton.userInteractionEnabled = YES;
@@ -305,7 +311,7 @@ static int amountOfTimeLeft = 60;        //倒计时
     self.sendCodeButton.userInteractionEnabled = NO;
 }
 
-#pragma mark - 监听函数，控制电话框输入长度
+// MARK: 监听函数，控制电话框输入长度
 //包括粘贴的长度也可以控制
 - (void)limit:(UITextField *)textField {
     if (textField == self.phoneNumberTextField) {
@@ -317,6 +323,68 @@ static int amountOfTimeLeft = 60;        //倒计时
             textField.text = [textField.text substringToIndex:CODEMAXLENGTH];
         }
     }
+}
+
+// MARK: Button Action
+
+- (void)pressLoginButton {
+    self.loginButton.userInteractionEnabled = NO;
+    if ([self.loginButton.titleLabel.text isEqualToString:@"登录"]) {
+        //账号密码登录
+        NSString *phoneNumber = self.phoneNumberTextField.text;
+        NSString *password = self.passwordTextField.text;
+        [self.viewModel loginWithPhoneNumber:phoneNumber password:password finished:^(BOOL isRegistered, BOOL isCodeCorrect) {
+            if (isRegistered && isCodeCorrect) {
+                [self presentRegisterPage];
+            }
+        }];
+    } else {
+        //验证验证码
+        [self verificationCodeValid];
+    }
+}
+
+- (void)verificationCodeValid {
+    NSString *phoneNumber = self.phoneNumberTextField.text;
+    NSString *code = self.passwordTextField.text;
+    [self.viewModel loginWithPhoneNumber:phoneNumber code:code finished:^(BOOL isRegistered, BOOL isCodeCorrect) {
+        if (!isCodeCorrect) {
+            // 验证码不正确
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.passwordTextField.text = nil;
+                self.loginButton.userInteractionEnabled = YES;
+            });
+        } else {
+            if (isRegistered) {
+                // 已注册验证码正确
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentMainPage];
+                });
+            } else {
+                // 未注册验证码正确
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentRegisterPage];
+                });
+            }
+        }
+    }];
+}
+
+- (void)pressTouristButton {
+    
+}
+
+- (void)presentRegisterPage {
+    BPRegisterViewController *reg = [[BPRegisterViewController alloc] init];
+    reg.modalPresentationStyle = UIModalPresentationFullScreen;
+    reg.phoneNumber = self.phoneNumber;
+    [self presentViewController:reg animated:YES completion:nil];
+}
+
+- (void)presentMainPage {
+    BPMainTabBarController *main = [[BPMainTabBarController alloc] init];
+    main.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:main animated:YES completion:nil];
 }
 
 // MARK: Getters
@@ -370,9 +438,9 @@ static int amountOfTimeLeft = 60;        //倒计时
     return _passwordView;
 }
 
-- (UITextField *)passwordTextField {
+- (BPPasswordTextField *)passwordTextField {
     if (!_passwordTextField) {
-        _passwordTextField = [[PasswordTextField alloc] init];
+        _passwordTextField = [[BPPasswordTextField alloc] init];
         _passwordTextField.font = [UIFont systemFontOfSize:textFieldFontSize];
         _passwordTextField.borderStyle = UITextBorderStyleNone;
         _passwordTextField.delegate = self;
@@ -390,6 +458,7 @@ static int amountOfTimeLeft = 60;        //倒计时
         _loginButton.layer.borderWidth = 0;
         _loginButton.layer.cornerRadius = self.textFieldHeight / 2;
         [_loginButton setTitle:@"一键登录/注册" forState:UIControlStateNormal];
+        [_loginButton addTarget:self action:@selector(pressLoginButton) forControlEvents:UIControlEventTouchUpInside];
     }
     return _loginButton;
 }
@@ -399,6 +468,7 @@ static int amountOfTimeLeft = 60;        //倒计时
         _touristButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_touristButton setTitle:@"随便逛逛" forState:UIControlStateNormal];
         [_touristButton setTintColor:[UIColor colorWithRed:0.55 green:0.5 blue:0.9 alpha:1]];
+        [_touristButton addTarget:self action:@selector(pressTouristButton) forControlEvents:UIControlEventTouchUpInside];
     }
     return _touristButton;
 }
@@ -415,6 +485,13 @@ static int amountOfTimeLeft = 60;        //倒计时
         [_sendCodeButton addTarget:self action:@selector(pressSendCodeButton) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sendCodeButton;
+}
+
+- (BPLoginViewModel *)viewModel {
+    if (!_viewModel) {
+        _viewModel = [[BPLoginViewModel alloc] init];
+    }
+    return _viewModel;
 }
 
 @end

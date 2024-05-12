@@ -9,7 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^LoginFinishedBlock)(BOOL isRegistered, BOOL isCodeCorrect);
+
 @interface BPLoginViewModel : NSObject
+
+- (void)loginWithPhoneNumber:(NSString *)phoneNumber password:(NSString *)password finished:(LoginFinishedBlock)finished;
+
+- (void)loginWithPhoneNumber:(NSString *)phoneNumber code:(NSString *)code finished:(LoginFinishedBlock)finished;
 
 @end
 
