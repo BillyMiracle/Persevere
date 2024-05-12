@@ -127,15 +127,11 @@ static int amountOfTimeLeft = 60;        //倒计时
 }
 #pragma mark - 切换登录模式
 - (void)pressSwitch {
+    // 密码登陆切换成验证码登陆
     if ([self.switchButton.titleLabel.text isEqualToString:@"密码登录"]) {
         [self usePassword];
-        self.sendCodeButton.hidden = YES;
-        [self setSendButtonOn];
-        [self.sendCodeButton setTitle:@"发送" forState:UIControlStateNormal];
-        [self.countDownTimer invalidate];
     } else {
         [self useMessage];
-        self.sendCodeButton.hidden = NO;
     }
     self.phoneNumberTextField.enabled = YES;
     self.phoneNumberTextField.text = @"";
@@ -144,27 +140,36 @@ static int amountOfTimeLeft = 60;        //倒计时
 
 #pragma mark - 验证码框输入
 - (void)useMessage {
+    self.sendCodeButton.hidden = NO;
     [self setSendButtonOff];
+    
     [self setLoginButtonOff];
+    [self.loginButton setTitle:@"一键登录/注册" forState:UIControlStateNormal];
     
     self.passwordTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.passwordTextField.placeholder = @"请输入验证码";
 
     [self.switchButton setTitle:@"密码登录" forState:UIControlStateNormal];
     [self.titleLabel setText:@"手机号登录/注册"];
-    self.passwordTextField.placeholder = @"请输入验证码";
-    [self.loginButton setTitle:@"一键登录/注册" forState:UIControlStateNormal];
 }
 #pragma mark - 密码框输入，禁止粘贴
 
 - (void)usePassword {
     [self setLoginButtonOff];
+    [self.loginButton setTitle:@"登录" forState:UIControlStateNormal];
+    
+    self.sendCodeButton.hidden = YES;
+    [self setSendButtonOn];
+    [self.sendCodeButton setTitle:@"发送" forState:UIControlStateNormal];
+    
+    [self.countDownTimer invalidate];
     
     self.passwordTextField.keyboardType = UIKeyboardTypeAlphabet;
     
     [self.switchButton setTitle:@"验证码登录" forState:UIControlStateNormal];
     [self.titleLabel setText:@"密码登录"];
+    
     self.passwordTextField.placeholder = @"请输入密码";
-    [self.loginButton setTitle:@"登录" forState:UIControlStateNormal];
     self.passwordTextField.secureTextEntry = YES;
 }
 #pragma mark - 限制密码框输入内容
@@ -323,10 +328,8 @@ static int amountOfTimeLeft = 60;        //倒计时
 - (UIButton *)switchButton {
     if (!_switchButton) {
         _switchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        
         [_switchButton setTitle:@"密码登录" forState:UIControlStateNormal];
         _switchButton.tintColor = [UIColor blackColor];
-        
         [_switchButton addTarget:self action:@selector(pressSwitch) forControlEvents:UIControlEventTouchUpInside];
     }
     return _switchButton;
