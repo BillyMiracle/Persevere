@@ -13,13 +13,16 @@
 #import "BPChangeNameViewController.h"
 #import "BPChangePhoneNumberViewController.h"
 #import "BPChangePasswordViewController.h"
+#import "HXPhotoPicker.h"
+#import "LocalUserDataManager.h"
 
 static const CGFloat sectionHeaderViewHeight = 40.0f;
 
 @interface BPPersonalViewController ()
 <
 UITableViewDelegate,
-UITableViewDataSource
+UITableViewDataSource,
+HXCustomNavigationControllerDelegate
 >
 
 @property (nonatomic, strong) BPNavigationTitleView *navigationTitleView;
@@ -28,6 +31,11 @@ UITableViewDataSource
 
 @property (nonatomic, strong) UITableView *settingTableView;
 @property (nonatomic, strong) NSArray *sectionHeaderTitleArray;
+
+/// 相册页配置
+@property (nonatomic, strong) HXPhotoManager *hxPhotoManager;
+/// 相册页
+@property (nonatomic, strong) HXCustomNavigationController *hxPhotoNavigationController;
 
 @end
 
@@ -100,7 +108,7 @@ UITableViewDataSource
         [self pushToChangeNameViewController];
     } else if (section == 0 && row == 1) {
         // 更换头像
-        
+        [self selectNewHeadImage];
     } else if (section == 1 && row == 0) {
         // 更换手机号
         [self pushToChangePhoneViewController];
@@ -178,6 +186,52 @@ UITableViewDataSource
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (void)selectNewHeadImage {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选取图片" message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self selectImageFromCamera];
+    }];
+    UIAlertAction *photosAlbumAction = [UIAlertAction actionWithTitle:@"图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self selectImageFromAlbum];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    // 判断是否支持相机
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [alert addAction:cameraAction];
+    }
+    [alert addAction:photosAlbumAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)selectImageFromAlbum {
+    [self presentViewController:self.hxPhotoNavigationController animated:YES completion:nil];
+}
+
+- (void)selectImageFromCamera {
+    
+}
+
+// 选择照片后
+
+- (void)photoNavigationViewController:(HXCustomNavigationController *)photoNavigationViewController didDoneAllList:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photoList videos:(NSArray<HXPhotoModel *> *)videoList original:(BOOL)original {
+    if (photoList.count == 1) {
+        UIImage *image = photoList.firstObject.previewPhoto;
+        NSData *imageData = UIImageJPEGRepresentation(image, 1);
+        [[LocalUserDataManager sharedInstance] updateUserHeadImage:imageData finished:^(BOOL succeeded) {
+            if (succeeded) {
+                NSLog(@"更新成功");
+            } else {
+                NSLog(@"更新失败");
+            }
+        }];
+    }
+}
+
+- (void)photoNavigationViewControllerDidCancel:(HXCustomNavigationController *)photoNavigationViewController {
+    
+}
+
 // MARK: Button Actions
 
 - (void)pressBackButton {
@@ -196,6 +250,26 @@ UITableViewDataSource
         [_settingTableView registerClass:[BPPersonalBaseTableViewCell class] forCellReuseIdentifier:@"base"];
     }
     return _settingTableView;
+}
+
+- (HXPhotoManager *)hxPhotoManager {
+    if (!_hxPhotoManager) {
+        _hxPhotoManager = [[HXPhotoManager alloc] initWithType:HXPhotoManagerSelectedTypePhoto];
+        _hxPhotoManager.configuration.singleSelected = YES;
+        _hxPhotoManager.configuration.singleJumpEdit = YES;
+        _hxPhotoManager.configuration.photoEditConfigur.onlyCliping = YES;
+        _hxPhotoManager.configuration.photoEditConfigur.aspectRatio = HXPhotoEditAspectRatioType_1x1;
+        _hxPhotoManager.configuration.themeColor = [UIColor bp_defaultThemeColor];
+        _hxPhotoManager.configuration.navBarBackgroudColor = [UIColor whiteColor];
+    }
+    return _hxPhotoManager;
+}
+
+- (HXCustomNavigationController *)hxPhotoNavigationController {
+    if (!_hxPhotoNavigationController) {
+        _hxPhotoNavigationController = [[HXCustomNavigationController alloc] initWithManager:self.hxPhotoManager delegate:self];
+    }
+    return _hxPhotoNavigationController;
 }
 
 - (NSArray *)sectionHeaderTitleArray {

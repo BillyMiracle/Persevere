@@ -33,7 +33,7 @@ typedef void (^UserDataFetchFinishedBlock)(UserModel *_Nullable user);
 - (void)updateUserName:(NSString *)name finished:(UserDataProcessFinishedBlock)finished;
 - (void)updateUserPhoneNumber:(NSString *)phoneNumber finished:(UserDataProcessFinishedBlock)finished;
 - (void)updateUserPassword:(NSString *)password finished:(UserDataProcessFinishedBlock)finished;
-- (void)updateUserHeadImage:(NSDate *)imageData finished:(UserDataProcessFinishedBlock)finished;
+- (void)updateUserHeadImage:(NSData *)imageData finished:(UserDataProcessFinishedBlock)finished;
 
 - (void)closeCurrentAccountFinished:(UserDataProcessFinishedBlock)finished;
 

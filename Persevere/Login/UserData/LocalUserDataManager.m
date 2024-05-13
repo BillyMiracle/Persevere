@@ -187,9 +187,20 @@ static LocalUserDataManager* _instance = nil;
     }];
 }
 
-- (void)updateUserHeadImage:(NSDate *)imageData finished:(UserDataProcessFinishedBlock)finished {
+- (void)updateUserHeadImage:(NSData *)imageData finished:(UserDataProcessFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        
+        NSString *updateSQL = @"UPDATE user_info_table SET head_image=? WHERE id=?";
+        BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, imageData, self.currentUser.userID];
+        if (updateUserInfoSuccess) {
+            NSString *updateSQL2 = @"UPDATE current_user_table SET head_image=? WHERE id=1";
+            BOOL updateCurrentUserInfoSuccess = [db executeUpdate:updateSQL2, imageData];
+            if (updateCurrentUserInfoSuccess) {
+                self.currentUser.imageData = imageData;
+                finished(YES);
+            }
+        } else {
+            finished(NO);
+        }
     }];
 }
 
