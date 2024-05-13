@@ -261,7 +261,10 @@ BPCalanderTableViewCellDelegate
 
 - (void)mainThreadReloadProgress {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.displayTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0], [NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+        [self.displayTableView reloadRowsAtIndexPaths:@[
+            [NSIndexPath indexPathForRow:0 inSection:0],
+            [NSIndexPath indexPathForRow:0 inSection:1]
+        ] withRowAnimation:UITableViewRowAnimationNone];
     });
 }
 
