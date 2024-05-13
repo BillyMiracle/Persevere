@@ -65,6 +65,8 @@
 		3A61CF892BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A61CF882BD6AA9C0042CCE3 /* BPSelectTableViewCellModel.m */; };
 		3A69411E2BF1232000C8947B /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69411D2BF1232000C8947B /* UserModel.m */; };
 		3A6941212BF125B100C8947B /* LocalUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941202BF125B100C8947B /* LocalUserDataManager.m */; };
+		3A6941252BF1F85300C8947B /* BPPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941242BF1F85200C8947B /* BPPersonalViewController.m */; };
+		3A69412A2BF2070000C8947B /* BPPersonalBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */; };
 		3A94470B2BF0D19000003E7E /* BPRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */; };
 		3A94470E2BF0D1CF00003E7E /* BPRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470D2BF0D1CF00003E7E /* BPRegisterViewModel.m */; };
 		3A9447142BF0E1FD00003E7E /* BPPasswordTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9447132BF0E1FD00003E7E /* BPPasswordTextField.m */; };
@@ -223,6 +225,10 @@
 		3A69411D2BF1232000C8947B /* UserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
 		3A69411F2BF125B100C8947B /* LocalUserDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalUserDataManager.h; sourceTree = "<group>"; };
 		3A6941202BF125B100C8947B /* LocalUserDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalUserDataManager.m; sourceTree = "<group>"; };
+		3A6941232BF1F85200C8947B /* BPPersonalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPersonalViewController.h; sourceTree = "<group>"; };
+		3A6941242BF1F85200C8947B /* BPPersonalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPersonalViewController.m; sourceTree = "<group>"; };
+		3A6941282BF2070000C8947B /* BPPersonalBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPersonalBaseTableViewCell.h; sourceTree = "<group>"; };
+		3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPersonalBaseTableViewCell.m; sourceTree = "<group>"; };
 		3A9447092BF0D19000003E7E /* BPRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewController.h; sourceTree = "<group>"; };
 		3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPRegisterViewController.m; sourceTree = "<group>"; };
 		3A94470C2BF0D1CF00003E7E /* BPRegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewModel.h; sourceTree = "<group>"; };
@@ -541,13 +547,13 @@
 			path = HoverView;
 			sourceTree = "<group>";
 		};
-		3A3373B02BB9830B002131C4 /* SectionHeaderView */ = {
+		3A3373B02BB9830B002131C4 /* SettingSectionHeaderView */ = {
 			isa = PBXGroup;
 			children = (
 				3A3373B12BB98424002131C4 /* BPSettingSectionView.h */,
 				3A3373B22BB98424002131C4 /* BPSettingSectionView.m */,
 			);
-			path = SectionHeaderView;
+			path = SettingSectionHeaderView;
 			sourceTree = "<group>";
 		};
 		3A3373B42BB98732002131C4 /* Cells */ = {
@@ -607,6 +613,7 @@
 				3AF5072A2BCC45E400B4F393 /* Search */,
 				3ADE1F232BA8AC8C00D7558D /* AR */,
 				3A4A25E12BB4942400246792 /* SettingPage */,
+				3A6941222BF1F81900C8947B /* PersonalPage */,
 				3A03CE2C2AF6C4820001B562 /* TaskData */,
 				3A03CDFD2AF4A7A20001B562 /* UI */,
 				3A4D67FD2B02064100B2FF86 /* TextFieldAndViewWithIndexPath */,
@@ -640,7 +647,6 @@
 			children = (
 				3A3373B52BB98D0E002131C4 /* SettingData */,
 				3A3373B42BB98732002131C4 /* Cells */,
-				3A3373B02BB9830B002131C4 /* SectionHeaderView */,
 				3A4A25E52BB4946900246792 /* BPSettingViewController.h */,
 				3A4A25E62BB4946900246792 /* BPSettingViewController.m */,
 				3A4A25E82BB4947E00246792 /* BPSettingView.h */,
@@ -702,6 +708,25 @@
 				3A6941202BF125B100C8947B /* LocalUserDataManager.m */,
 			);
 			path = UserData;
+			sourceTree = "<group>";
+		};
+		3A6941222BF1F81900C8947B /* PersonalPage */ = {
+			isa = PBXGroup;
+			children = (
+				3A6941272BF206DC00C8947B /* Cells */,
+				3A6941232BF1F85200C8947B /* BPPersonalViewController.h */,
+				3A6941242BF1F85200C8947B /* BPPersonalViewController.m */,
+			);
+			path = PersonalPage;
+			sourceTree = "<group>";
+		};
+		3A6941272BF206DC00C8947B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3A6941282BF2070000C8947B /* BPPersonalBaseTableViewCell.h */,
+				3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		3A9447082BF0D16500003E7E /* Register */ = {
@@ -869,6 +894,7 @@
 			children = (
 				3AE37CB52AFF9BA8000CA19D /* BPSectionHeaderView.h */,
 				3AE37CB62AFF9BA8000CA19D /* BPSectionHeaderView.m */,
+				3A3373B02BB9830B002131C4 /* SettingSectionHeaderView */,
 			);
 			path = SectionHeaderView;
 			sourceTree = "<group>";
@@ -1209,6 +1235,7 @@
 				3A03CE322AF776490001B562 /* BPTaskDetailView.m in Sources */,
 				3ADE1F122B9A3A9900D7558D /* BPProgressTableViewCell.m in Sources */,
 				3ADE1F1C2B9F6CE300D7558D /* BPTaskDetailTitleTableViewCell.m in Sources */,
+				3A69412A2BF2070000C8947B /* BPPersonalBaseTableViewCell.m in Sources */,
 				3AE824D92B92419800521E94 /* IconAndLabelTableViewCell.m in Sources */,
 				3AE37CB12AFCDA58000CA19D /* BPInputShortTextTableViewCell.m in Sources */,
 				3AF507292BCB9C7D00B4F393 /* BPSearchView.m in Sources */,
@@ -1230,6 +1257,7 @@
 				3AB33E812AFA3CBB0023575F /* BPSelectColorTableViewCell.m in Sources */,
 				3AB33E7E2AFA3CA80023575F /* BPSelectWeekdayTableViewCell.m in Sources */,
 				3A03CE002AF4A7F20001B562 /* BPPublishTabBar.m in Sources */,
+				3A6941252BF1F85300C8947B /* BPPersonalViewController.m in Sources */,
 				3A94470B2BF0D19000003E7E /* BPRegisterViewController.m in Sources */,
 				3A4D680F2B0233BE00B2FF86 /* UITextView+BPIndexPath.m in Sources */,
 				3A3373BB2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m in Sources */,

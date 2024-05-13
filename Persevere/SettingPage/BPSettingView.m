@@ -101,6 +101,11 @@ BPSettingSwitchTableViewCellDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0 && indexPath.section == 0) {
+        if ([self.delegate respondsToSelector:@selector(pushToPersonalPage)]) {
+            [self.delegate pushToPersonalPage];
+        }
+    }
 }
 
 - (UIView *)sectionHeaderViewWithTitle:(NSString *)title {
@@ -115,7 +120,9 @@ BPSettingSwitchTableViewCellDelegate
     
     if (section == 0 && row == 0) {
         // 个人信息
-        
+        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setText:@"个人中心"];
+        return cell;
     } else if (section == 1 && row == 0) {
         // iCloud备份
         BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
@@ -238,6 +245,7 @@ BPSettingSwitchTableViewCellDelegate
 - (UITableView *)settingTableView {
     if (!_settingTableView) {
         _settingTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.bp_width, self.bp_height) style:UITableViewStyleGrouped];
+        _settingTableView.sectionFooterHeight = 0;
         _settingTableView.delegate = self;
         _settingTableView.dataSource = self;
         

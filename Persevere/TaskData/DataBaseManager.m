@@ -75,6 +75,7 @@ static DataBaseManager* _instance = nil;
 //                NSLog(@"删除 setting_color_table 失败");
 //            }
         }
+//        [db executeUpdate:@"DROP TABLE IF EXISTS current_user_table"];
         if (![db tableExists:@"current_user_table"]) {
             BOOL result = [db executeUpdate: @"create table if not exists current_user_table(id integer primary key autoincrement,phone_number text,nick_name text,password text,head_image bolb,user_id text,head_image_path text,login_status integer,token text)"];
             if (result) {

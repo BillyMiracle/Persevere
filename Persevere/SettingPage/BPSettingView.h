@@ -9,8 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol BPSettingViewDelegate <NSObject>
+
+- (void)pushToPersonalPage;
+
+@end
+
 @interface BPSettingView : UIView
 
+@property (nonatomic, weak) id<BPSettingViewDelegate> delegate;
 @property (nonatomic, weak) UIViewController *parentViewController;
 
 @end

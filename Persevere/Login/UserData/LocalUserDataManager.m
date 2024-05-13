@@ -64,6 +64,13 @@ static LocalUserDataManager* _instance = nil;
             user.token = [resultSet stringForColumn:@"token"];
             user.headImagePath = [resultSet stringForColumn:@"head_image_path"];
             if ([user.passWord isEqualToString:password]) {
+                BOOL updateCurrentUserScuuess = [db executeUpdate:@"INSERT INTO current_user_table (phone_number, nick_name, password, head_image, user_id, head_image_path, login_status, token, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", user.phoneNumber, user.nickName, user.passWord, user.imageData, user.userID, user.headImagePath, @(user.loginStatus), user.token, @(1)];
+                if (updateCurrentUserScuuess) {
+                    NSLog(@"用户信息保存成功");
+                    self.currentUser = user;
+                } else {
+                    NSLog(@"用户信息保存失败");
+                }
                 finished(YES, YES);
             } else {
                 finished(YES, NO);

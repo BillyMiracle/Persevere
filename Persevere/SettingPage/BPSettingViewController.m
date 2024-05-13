@@ -9,9 +9,10 @@
 #import "BPSettingView.h"
 #import "BPNavigationTitleView.h"
 #import "BPUIHelper.h"
+#import "BPPersonalViewController.h"
 
 @interface BPSettingViewController ()
-<UIGestureRecognizerDelegate>
+<UIGestureRecognizerDelegate, BPSettingViewDelegate>
 
 @property (nonatomic, strong) BPSettingView *settingView;
 @property (nonatomic, strong) BPNavigationTitleView *settingNavigationTitleView;
@@ -43,11 +44,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+// MARK: BPSettingViewDelegate
+
+- (void)pushToPersonalPage {
+    BPPersonalViewController *personalViewController = [[BPPersonalViewController alloc] init];
+    [self.navigationController pushViewController:personalViewController animated:YES];
+}
+
 // MARK: Getters
 
 - (BPSettingView *)settingView {
     if (!_settingView) {
         _settingView = [[BPSettingView alloc] initWithFrame:CGRectMake(0, [UIDevice bp_navigationFullHeight], self.bp_width, self.bp_height - [UIDevice bp_navigationFullHeight])];
+        _settingView.delegate = self;
     }
     return _settingView;
 }
