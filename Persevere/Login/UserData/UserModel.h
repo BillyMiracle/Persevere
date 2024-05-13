@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *phoneNumber;
 @property (nonatomic, copy) NSString *nickName;
-@property (nonatomic, copy) NSString *passWord;
+@property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSData *imageData;
 // 0：未登录
 // 1：已登录

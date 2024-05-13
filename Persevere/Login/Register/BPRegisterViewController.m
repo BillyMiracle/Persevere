@@ -235,7 +235,7 @@ static const NSString *nicknameSetting = @"设置一个适合你的昵称吧";
         [self setConfirmButtonOff];
         UserModel *user = [[UserModel alloc] init];
         user.phoneNumber = self.phoneNumber;
-        user.passWord = self.password;
+        user.password = self.password;
         user.nickName = self.nickName;
         user.imageData = self.imageData;
         [self.viewModel registerWithUser:user finished:^(BOOL succeeded) {

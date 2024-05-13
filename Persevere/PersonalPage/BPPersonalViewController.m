@@ -10,6 +10,9 @@
 #import "BPNavigationTitleView.h"
 #import "BPPersonalBaseTableViewCell.h"
 #import "BPSettingSectionView.h"
+#import "BPChangeNameViewController.h"
+#import "BPChangePhoneNumberViewController.h"
+#import "BPChangePasswordViewController.h"
 
 static const CGFloat sectionHeaderViewHeight = 40.0f;
 
@@ -60,7 +63,6 @@ UITableViewDataSource
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     return 70;
 }
 
@@ -91,6 +93,27 @@ UITableViewDataSource
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if (section == 0 && row == 0) {
+        // 修改用户名
+        [self pushToChangeNameViewController];
+    } else if (section == 0 && row == 1) {
+        // 更换头像
+        
+    } else if (section == 1 && row == 0) {
+        // 更换手机号
+        [self pushToChangePhoneViewController];
+    } else if (section == 1 && row == 1) {
+        // 修改密码
+        [self pushToChangePasswordViewController];
+    } else if (section == 1 && row == 2) {
+        // 注销账号
+        
+    } else if (section == 2 && row == 0) {
+        // 退出登录
+        
+    }
 }
 
 - (UIView *)sectionHeaderViewWithTitle:(NSString *)title {
@@ -128,13 +151,31 @@ UITableViewDataSource
         BPPersonalBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
         [cell.textLabel setText:@"注销账号"];
         return cell;
-    } else if (section == 2 && row == 1) {
+    } else if (section == 2 && row == 0) {
         // 退出登录
         BPPersonalBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
+        [cell.textLabel setTextColor:[UIColor redColor]];
         [cell.textLabel setText:@"退出登录"];
         return cell;
     }
     return [[UITableViewCell alloc] init];
+}
+
+// MARK: 界面跳转与处理
+
+- (void)pushToChangeNameViewController {
+    BPChangeNameViewController *viewController = [[BPChangeNameViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)pushToChangePasswordViewController {
+    BPChangePasswordViewController *viewController = [[BPChangePasswordViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)pushToChangePhoneViewController {
+    BPChangePhoneNumberViewController *viewController = [[BPChangePhoneNumberViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 // MARK: Button Actions
@@ -142,7 +183,6 @@ UITableViewDataSource
 - (void)pressBackButton {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 // MARK: Getters
 

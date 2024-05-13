@@ -67,6 +67,9 @@
 		3A6941212BF125B100C8947B /* LocalUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941202BF125B100C8947B /* LocalUserDataManager.m */; };
 		3A6941252BF1F85300C8947B /* BPPersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941242BF1F85200C8947B /* BPPersonalViewController.m */; };
 		3A69412A2BF2070000C8947B /* BPPersonalBaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */; };
+		3A69412E2BF2237600C8947B /* BPChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69412D2BF2237600C8947B /* BPChangeNameViewController.m */; };
+		3A6941342BF223BA00C8947B /* BPChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941332BF223BA00C8947B /* BPChangePasswordViewController.m */; };
+		3A6941382BF223D900C8947B /* BPChangePhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941372BF223D900C8947B /* BPChangePhoneNumberViewController.m */; };
 		3A94470B2BF0D19000003E7E /* BPRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */; };
 		3A94470E2BF0D1CF00003E7E /* BPRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470D2BF0D1CF00003E7E /* BPRegisterViewModel.m */; };
 		3A9447142BF0E1FD00003E7E /* BPPasswordTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9447132BF0E1FD00003E7E /* BPPasswordTextField.m */; };
@@ -229,6 +232,12 @@
 		3A6941242BF1F85200C8947B /* BPPersonalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPersonalViewController.m; sourceTree = "<group>"; };
 		3A6941282BF2070000C8947B /* BPPersonalBaseTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPPersonalBaseTableViewCell.h; sourceTree = "<group>"; };
 		3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPPersonalBaseTableViewCell.m; sourceTree = "<group>"; };
+		3A69412C2BF2237600C8947B /* BPChangeNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPChangeNameViewController.h; sourceTree = "<group>"; };
+		3A69412D2BF2237600C8947B /* BPChangeNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPChangeNameViewController.m; sourceTree = "<group>"; };
+		3A6941322BF223BA00C8947B /* BPChangePasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPChangePasswordViewController.h; sourceTree = "<group>"; };
+		3A6941332BF223BA00C8947B /* BPChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPChangePasswordViewController.m; sourceTree = "<group>"; };
+		3A6941362BF223D900C8947B /* BPChangePhoneNumberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPChangePhoneNumberViewController.h; sourceTree = "<group>"; };
+		3A6941372BF223D900C8947B /* BPChangePhoneNumberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPChangePhoneNumberViewController.m; sourceTree = "<group>"; };
 		3A9447092BF0D19000003E7E /* BPRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewController.h; sourceTree = "<group>"; };
 		3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPRegisterViewController.m; sourceTree = "<group>"; };
 		3A94470C2BF0D1CF00003E7E /* BPRegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewModel.h; sourceTree = "<group>"; };
@@ -713,6 +722,7 @@
 		3A6941222BF1F81900C8947B /* PersonalPage */ = {
 			isa = PBXGroup;
 			children = (
+				3A69412F2BF2237B00C8947B /* ChangeInfo */,
 				3A6941272BF206DC00C8947B /* Cells */,
 				3A6941232BF1F85200C8947B /* BPPersonalViewController.h */,
 				3A6941242BF1F85200C8947B /* BPPersonalViewController.m */,
@@ -727,6 +737,43 @@
 				3A6941292BF2070000C8947B /* BPPersonalBaseTableViewCell.m */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		3A69412F2BF2237B00C8947B /* ChangeInfo */ = {
+			isa = PBXGroup;
+			children = (
+				3A6941352BF223BF00C8947B /* ChangePhone */,
+				3A6941302BF2238B00C8947B /* ChangeName */,
+				3A6941312BF2239600C8947B /* ChangePassword */,
+			);
+			path = ChangeInfo;
+			sourceTree = "<group>";
+		};
+		3A6941302BF2238B00C8947B /* ChangeName */ = {
+			isa = PBXGroup;
+			children = (
+				3A69412C2BF2237600C8947B /* BPChangeNameViewController.h */,
+				3A69412D2BF2237600C8947B /* BPChangeNameViewController.m */,
+			);
+			path = ChangeName;
+			sourceTree = "<group>";
+		};
+		3A6941312BF2239600C8947B /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				3A6941322BF223BA00C8947B /* BPChangePasswordViewController.h */,
+				3A6941332BF223BA00C8947B /* BPChangePasswordViewController.m */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		3A6941352BF223BF00C8947B /* ChangePhone */ = {
+			isa = PBXGroup;
+			children = (
+				3A6941362BF223D900C8947B /* BPChangePhoneNumberViewController.h */,
+				3A6941372BF223D900C8947B /* BPChangePhoneNumberViewController.m */,
+			);
+			path = ChangePhone;
 			sourceTree = "<group>";
 		};
 		3A9447082BF0D16500003E7E /* Register */ = {
@@ -1207,6 +1254,8 @@
 				3AA8C6C12B07D306006AA569 /* BPDateView.m in Sources */,
 				3A4A25E02BB092BC00246792 /* BPShowARTableViewCell.m in Sources */,
 				3AB7356B2B08A46C00FE6975 /* BPDateAndProgressTableViewCell.m in Sources */,
+				3A6941342BF223BA00C8947B /* BPChangePasswordViewController.m in Sources */,
+				3A6941382BF223D900C8947B /* BPChangePhoneNumberViewController.m in Sources */,
 				3AB15E082BD75ACE003A24C1 /* BPLoginViewModel.m in Sources */,
 				3A03CDFC2AF3F0E20001B562 /* UIDevice+BPAddition.m in Sources */,
 				3A0DD25A2B04F5F600F2DAC6 /* DataBaseManager.m in Sources */,
@@ -1228,6 +1277,7 @@
 				3A6941212BF125B100C8947B /* LocalUserDataManager.m in Sources */,
 				3ADE1F192B9E24BA00D7558D /* BPDeleteTaskTableViewCell.m in Sources */,
 				3AA8C6AC2B05370D006AA569 /* BPTableViewHoverView.m in Sources */,
+				3A69412E2BF2237600C8947B /* BPChangeNameViewController.m in Sources */,
 				3A0DD25E2B051F9F00F2DAC6 /* UserNotificationManager.m in Sources */,
 				3A0D22D72BD5708B00E610CA /* BPSelectTaskTableViewCell.m in Sources */,
 				3A03CDD92AF3B22B0001B562 /* BPMainTabBarController.m in Sources */,

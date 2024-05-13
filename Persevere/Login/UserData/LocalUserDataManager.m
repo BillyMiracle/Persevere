@@ -57,14 +57,14 @@ static LocalUserDataManager* _instance = nil;
             UserModel *user = [[UserModel alloc] init];
             user.userID = [resultSet stringForColumn:@"id"];
             user.phoneNumber = [resultSet stringForColumn:@"phone_number"];
-            user.passWord = [resultSet stringForColumn:@"password"];
+            user.password = [resultSet stringForColumn:@"password"];
             user.nickName = [resultSet stringForColumn:@"nick_name"];
             user.imageData = [resultSet dataForColumn:@"head_image"];
             user.loginStatus = [resultSet intForColumn:@"login_status"];
             user.token = [resultSet stringForColumn:@"token"];
             user.headImagePath = [resultSet stringForColumn:@"head_image_path"];
-            if ([user.passWord isEqualToString:password]) {
-                BOOL updateCurrentUserScuuess = [db executeUpdate:@"INSERT INTO current_user_table (phone_number, nick_name, password, head_image, user_id, head_image_path, login_status, token, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", user.phoneNumber, user.nickName, user.passWord, user.imageData, user.userID, user.headImagePath, @(user.loginStatus), user.token, @(1)];
+            if ([user.password isEqualToString:password]) {
+                BOOL updateCurrentUserScuuess = [db executeUpdate:@"INSERT INTO current_user_table (phone_number, nick_name, password, head_image, user_id, head_image_path, login_status, token, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", user.phoneNumber, user.nickName, user.password, user.imageData, user.userID, user.headImagePath, @(user.loginStatus), user.token, @(1)];
                 if (updateCurrentUserScuuess) {
                     NSLog(@"用户信息保存成功");
                     self.currentUser = user;
@@ -83,7 +83,7 @@ static LocalUserDataManager* _instance = nil;
 
 - (void)registerWithUserModel:(UserModel *)user finished:(UserDataProcessFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        BOOL success = [db executeUpdate:@"INSERT INTO user_table (phone_number, password) VALUES (?, ?)", user.phoneNumber, user.passWord];
+        BOOL success = [db executeUpdate:@"INSERT INTO user_table (phone_number, password) VALUES (?, ?)", user.phoneNumber, user.password];
         if (success) {
             NSInteger lastInsertedRowID = [db lastInsertRowId];
             NSLog(@"新用户的user_id是：%ld", lastInsertedRowID);
@@ -92,7 +92,9 @@ static LocalUserDataManager* _instance = nil;
                 NSLog(@"新建用户信息成功");
                 user.loginStatus = 1;
 //                user.token = nil;
-                BOOL updateCurrentUserScuuess = [db executeUpdate:@"INSERT INTO current_user_table (phone_number, nick_name, password, head_image, user_id, head_image_path, login_status, token, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", user.phoneNumber, user.nickName, user.passWord, user.imageData, @(lastInsertedRowID), user.headImagePath, @(user.loginStatus), user.token, @(1)];
+                NSString *updateSQL = @"UPDATE current_user_table SET phone_number=?,nick_name=?,password=?,head_image=?,user_id=?,head_image_path=?,login_status=?,token=?  WHERE id=1";
+//                BOOL updateCurrentUserScuuess = [db executeUpdate:@"INSERT INTO current_user_table (phone_number, nick_name, password, head_image, user_id, head_image_path, login_status, token, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", user.phoneNumber, user.nickName, user.passWord, user.imageData, @(lastInsertedRowID), user.headImagePath, @(user.loginStatus), user.token, @(1)];
+                BOOL updateCurrentUserScuuess = [db executeUpdate:updateSQL, user.phoneNumber, user.nickName, user.password, user.imageData, @(lastInsertedRowID), user.headImagePath, @(user.loginStatus), user.token];
                 if (updateCurrentUserScuuess) {
                     NSLog(@"用户信息保存成功");
                     self.currentUser = user;
@@ -120,7 +122,7 @@ static LocalUserDataManager* _instance = nil;
             UserModel *user = [[UserModel alloc] init];
             user.userID = [resultSet stringForColumn:@"id"];
             user.phoneNumber = [resultSet stringForColumn:@"phone_number"];
-            user.passWord = [resultSet stringForColumn:@"password"];
+            user.password = [resultSet stringForColumn:@"password"];
             user.nickName = [resultSet stringForColumn:@"nick_name"];
             user.imageData = [resultSet dataForColumn:@"head_image"];
             user.loginStatus = [resultSet intForColumn:@"login_status"];
@@ -131,6 +133,75 @@ static LocalUserDataManager* _instance = nil;
         } else {
             finished(nil);
         }
+    }];
+}
+
+- (void)updateUserName:(NSString *)name finished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *updateSQL = @"UPDATE user_info_table SET nick_name=? WHERE user_id=?";
+        BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, name, self.currentUser.userID];
+        if (updateUserInfoSuccess) {
+            NSString *updateSQL2 = @"UPDATE current_user_table SET nick_name=? WHERE id=1";
+            BOOL updateCurrentUserInfoSuccess = [db executeUpdate:updateSQL2, name];
+            if (updateCurrentUserInfoSuccess) {
+                self.currentUser.nickName = name;
+                finished(YES);
+            }
+        } else {
+            finished(NO);
+        }
+    }];
+}
+
+- (void)updateUserPhoneNumber:(NSString *)phoneNumber finished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *updateSQL = @"UPDATE user_table SET phone_number=? WHERE user_id=?";
+        BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, phoneNumber, self.currentUser.userID];
+        if (updateUserInfoSuccess) {
+            NSString *updateSQL2 = @"UPDATE current_user_table SET phone_number=? WHERE id=1";
+            BOOL updateCurrentUserInfoSuccess = [db executeUpdate:updateSQL2, phoneNumber];
+            if (updateCurrentUserInfoSuccess) {
+                self.currentUser.phoneNumber = phoneNumber;
+                finished(YES);
+            }
+        } else {
+            finished(NO);
+        }
+    }];
+}
+
+- (void)updateUserPassword:(NSString *)password finished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        NSString *updateSQL = @"UPDATE user_table SET password=? WHERE user_id=?";
+        BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, password, self.currentUser.userID];
+        if (updateUserInfoSuccess) {
+            NSString *updateSQL2 = @"UPDATE current_user_table SET password=? WHERE id=1";
+            BOOL updateCurrentUserInfoSuccess = [db executeUpdate:updateSQL2, password];
+            if (updateCurrentUserInfoSuccess) {
+                self.currentUser.password = password;
+                finished(YES);
+            }
+        } else {
+            finished(NO);
+        }
+    }];
+}
+
+- (void)updateUserHeadImage:(NSDate *)imageData finished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        
+    }];
+}
+
+- (void)closeCurrentAccountFinished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        
+    }];
+}
+
+- (void)logoutFinished:(UserDataProcessFinishedBlock)finished {
+    [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
+        
     }];
 }
 
