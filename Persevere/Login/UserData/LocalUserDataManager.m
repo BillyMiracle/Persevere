@@ -155,7 +155,7 @@ static LocalUserDataManager* _instance = nil;
 
 - (void)updateUserPhoneNumber:(NSString *)phoneNumber finished:(UserDataProcessFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *updateSQL = @"UPDATE user_table SET phone_number=? WHERE user_id=?";
+        NSString *updateSQL = @"UPDATE user_table SET phone_number=? WHERE id=?";
         BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, phoneNumber, self.currentUser.userID];
         if (updateUserInfoSuccess) {
             NSString *updateSQL2 = @"UPDATE current_user_table SET phone_number=? WHERE id=1";
@@ -172,7 +172,7 @@ static LocalUserDataManager* _instance = nil;
 
 - (void)updateUserPassword:(NSString *)password finished:(UserDataProcessFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *updateSQL = @"UPDATE user_table SET password=? WHERE user_id=?";
+        NSString *updateSQL = @"UPDATE user_table SET password=? WHERE id=?";
         BOOL updateUserInfoSuccess = [db executeUpdate:updateSQL, password, self.currentUser.userID];
         if (updateUserInfoSuccess) {
             NSString *updateSQL2 = @"UPDATE current_user_table SET password=? WHERE id=1";
@@ -201,7 +201,12 @@ static LocalUserDataManager* _instance = nil;
 
 - (void)logoutFinished:(UserDataProcessFinishedBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        
+        NSString *updateSQL = @"UPDATE current_user_table SET login_status=? WHERE id=1";
+        BOOL updateCurrentUserInfoSuccess = [db executeUpdate:updateSQL, @(0)];
+        if (updateCurrentUserInfoSuccess) {
+            self.currentUser = nil;
+            finished(YES);
+        }
     }];
 }
 
