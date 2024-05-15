@@ -6,6 +6,7 @@
 //
 
 #import "TaskModel.h"
+#import "BPExtraInfoTableViewCell.h"
 
 #import <UIKit/UIKit.h>
 
@@ -28,7 +29,7 @@ typedef void (^UpdateTaskFinishedBlock)(BOOL succeeded);
 
 @end
 
-@protocol BPTaskDisplayViewDelegate <NSObject>
+@protocol BPTaskDisplayViewDelegate <BPExtraInfoTableViewCellDelegate>
 
 - (void)currentTaskInteractWithAR;
 - (void)deleteCurrentTask;
@@ -40,7 +41,6 @@ typedef void (^UpdateTaskFinishedBlock)(BOOL succeeded);
 @property (nonatomic, weak) UIViewController *parentViewController;
 @property (nonatomic, weak) id<BPTaskDisplayViewDataSource> dataSource;
 @property (nonatomic, weak) id<BPTaskDisplayViewDelegate> delegate;
-- (TaskModel *)getCurrentTaskInfo;
 
 @end
 

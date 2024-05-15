@@ -25,7 +25,8 @@ static const CGFloat sectionHeaderViewHeight = 45.0f;
 <
 UITableViewDelegate,
 UITableViewDataSource,
-BPCalanderTableViewCellDelegate
+BPCalanderTableViewCellDelegate,
+BPExtraInfoTableViewCellDelegate
 >
 
 /// 任务信息 tableView
@@ -324,6 +325,7 @@ BPCalanderTableViewCellDelegate
         TaskModel *task = self.dataSource.task;
         UIImage *image = task.imageData != nil ? [UIImage imageWithData:task.imageData] : nil;
         [cell bindWithModel:[[BPInfoTabViewModel alloc] initWithLink:task.link image:image memo:task.memo]];
+        cell.delegate = self.delegate;
         return cell;
         
     } else if (indexPath.section == 0 && indexPath.row == 2) {

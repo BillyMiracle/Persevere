@@ -48,11 +48,15 @@
 // MARK: BPInfoTabViewDelegate
 
 - (void)didSelectLink {
-    
+    if ([self.delegate respondsToSelector:@selector(didSelectLink)]) {
+        
+    }
 }
 
 - (void)didSelectImage {
-    
+    if ([self.delegate respondsToSelector:@selector(didSelectImage)]) {
+        [self.delegate didSelectImage];
+    }
 }
 
 - (void)didSelectMemo {

@@ -10,7 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol BPExtraInfoTableViewCellDelegate <NSObject>
+
+- (void)didSelectLink;
+- (void)didSelectImage;
+- (void)didSelectMemo;
+
+@end
+
 @interface BPExtraInfoTableViewCell : BPTaskDetailBaseTableViewCell
+
+@property (nonatomic, weak) id<BPExtraInfoTableViewCellDelegate> delegate;
 
 - (void)bindWithModel:(BPInfoTabViewModel *)model;
 

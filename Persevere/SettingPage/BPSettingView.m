@@ -11,6 +11,8 @@
 #import "BPSettingSwitchTableViewCell.h"
 #import "BPSettingBaseTableViewCell.h"
 #import "LocalSettingDataManager.h"
+#import "BPSettingPersonalInfoTableViewCell.h"
+#import "LocalUserDataManager.h"
 
 static const CGFloat sectionHeaderViewHeight = 40.0f;
 
@@ -35,6 +37,10 @@ BPSettingSwitchTableViewCellDelegate
         [self addSubview:self.settingTableView];
     }
     return self;
+}
+
+- (void)reloadList {
+    [self.settingTableView reloadData];
 }
 
 // MARK: Table view data source
@@ -63,7 +69,9 @@ BPSettingSwitchTableViewCellDelegate
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        return 100;
+    }
     return 70;
 }
 
@@ -120,8 +128,8 @@ BPSettingSwitchTableViewCellDelegate
     
     if (section == 0 && row == 0) {
         // 个人信息
-        BPSettingBaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"base" forIndexPath:indexPath];
-        [cell.textLabel setText:@"个人中心"];
+        BPSettingPersonalInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"person" forIndexPath:indexPath];
+        [cell bindUser:[[LocalUserDataManager sharedInstance] currentUser]];
         return cell;
     } else if (section == 1 && row == 0) {
         // iCloud备份
@@ -251,6 +259,7 @@ BPSettingSwitchTableViewCellDelegate
         
         [_settingTableView registerClass:[BPSettingBaseTableViewCell class] forCellReuseIdentifier:@"base"];
         [_settingTableView registerClass:[BPSettingSwitchTableViewCell class] forCellReuseIdentifier:@"switch"];
+        [_settingTableView registerClass:[BPSettingPersonalInfoTableViewCell class] forCellReuseIdentifier:@"person"];
     }
     return _settingTableView;
 }

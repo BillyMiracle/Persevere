@@ -51,7 +51,7 @@ static LocalUserDataManager* _instance = nil;
 
 - (void)loginWithPhoneNumber:(NSString *)phoneNumber password:(NSString *)password finished:(LoginBlock)finished {
     [[[DataBaseManager sharedInstance] databaseQueue] inDatabase:^(FMDatabase * _Nonnull db) {
-        NSString *query = @"SELECT u.id, u.phone_number, u.password, i.nick_name, i.head_image, i.token, i.head_image_path FROM user_table u LEFT JOIN user_info_table i ON u.id = i.user_id WHERE u.phone_number = ?";
+        NSString *query = @"SELECT user_table.id, user_table.phone_number, user_table.password, user_info_table.user_id, user_info_table.nick_name, user_info_table.head_image, user_info_table.head_image_path FROM user_table JOIN user_info_table ON user_table.id = user_info_table.user_id WHERE user_table.phone_number = ?";
         FMResultSet *resultSet = [db executeQuery:query, phoneNumber];
         if ([resultSet next]) {
             UserModel *user = [[UserModel alloc] init];

@@ -70,6 +70,7 @@
 		3A69412E2BF2237600C8947B /* BPChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69412D2BF2237600C8947B /* BPChangeNameViewController.m */; };
 		3A6941342BF223BA00C8947B /* BPChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941332BF223BA00C8947B /* BPChangePasswordViewController.m */; };
 		3A6941382BF223D900C8947B /* BPChangePhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6941372BF223D900C8947B /* BPChangePhoneNumberViewController.m */; };
+		3A69413C2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A69413B2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.m */; };
 		3A94470B2BF0D19000003E7E /* BPRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */; };
 		3A94470E2BF0D1CF00003E7E /* BPRegisterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A94470D2BF0D1CF00003E7E /* BPRegisterViewModel.m */; };
 		3A9447142BF0E1FD00003E7E /* BPPasswordTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9447132BF0E1FD00003E7E /* BPPasswordTextField.m */; };
@@ -238,6 +239,8 @@
 		3A6941332BF223BA00C8947B /* BPChangePasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPChangePasswordViewController.m; sourceTree = "<group>"; };
 		3A6941362BF223D900C8947B /* BPChangePhoneNumberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPChangePhoneNumberViewController.h; sourceTree = "<group>"; };
 		3A6941372BF223D900C8947B /* BPChangePhoneNumberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPChangePhoneNumberViewController.m; sourceTree = "<group>"; };
+		3A69413A2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPSettingPersonalInfoTableViewCell.h; sourceTree = "<group>"; };
+		3A69413B2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPSettingPersonalInfoTableViewCell.m; sourceTree = "<group>"; };
 		3A9447092BF0D19000003E7E /* BPRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewController.h; sourceTree = "<group>"; };
 		3A94470A2BF0D19000003E7E /* BPRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPRegisterViewController.m; sourceTree = "<group>"; };
 		3A94470C2BF0D1CF00003E7E /* BPRegisterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPRegisterViewModel.h; sourceTree = "<group>"; };
@@ -572,6 +575,8 @@
 				3A3373BA2BBC6BAE002131C4 /* BPSettingSwitchTableViewCell.m */,
 				3A3373BC2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.h */,
 				3A3373BD2BBC6BBC002131C4 /* BPSettingBaseTableViewCell.m */,
+				3A69413A2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.h */,
+				3A69413B2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1236,6 +1241,7 @@
 			files = (
 				3A03CE272AF690A30001B562 /* BPTaskDetailViewController.m in Sources */,
 				3A3C8F0F2AF146FD00AF62E4 /* ViewController.m in Sources */,
+				3A69413C2BF25CA600C8947B /* BPSettingPersonalInfoTableViewCell.m in Sources */,
 				3ADE1F2B2BAA093D00D7558D /* ARTaskCardView.swift in Sources */,
 				3A4D680C2B0233AB00B2FF86 /* UITextField+BPIndexPath.m in Sources */,
 				3A3F195F2AFBD09E0014378E /* BPTaskDetailBaseTableViewCell.m in Sources */,

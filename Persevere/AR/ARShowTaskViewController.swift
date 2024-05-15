@@ -118,7 +118,7 @@ extension ARShowTaskViewController {
         let raycastQuery: ARRaycastQuery? = sceneView.raycastQuery(from: location, allowing: .existingPlaneInfinite, alignment: .any)
         let hitTestResults: [ARRaycastResult] = sceneView.session.raycast(raycastQuery!)
         if let hitResult = hitTestResults.first, let planeAnchor = hitResult.anchor as? ARPlaneAnchor {
-            // 在这里，你可以使用 planeAnchor 获取平面的信息
+            // 使用 planeAnchor 获取平面的信息
             let position = planeAnchor.center
             let extent = planeAnchor.extent
             let alignment = planeAnchor.alignment
@@ -239,3 +239,19 @@ extension SCNMatrix4 {
         }
     }
 }
+/*
+extension SCNMatrix4 {
+    var eulerAngles: SCNVector3? {
+        // 假设我们想要从旋转矩阵中提取Y-X-Z欧拉角
+
+        guard abs(m11) > 1e-6 && abs(m33) > 1e-6 else { return nil }
+        // 避免除以零
+        let cy = sqrt(m11 * m11 + m21 * m21)
+        let thetaY = atan2(m31, cy)
+        let thetaX = atan2(-m32, m33)
+        // 注意：当cy接近零时，thetaZ是不确定的
+        let thetaZ = atan2(m21, m11)
+        return SCNVector3(x: thetaX, y: thetaY, z: thetaZ)
+    }
+}
+*/

@@ -27,6 +27,7 @@
     [super viewWillAppear:animated];
     [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [self.settingView reloadList];
 }
 
 - (void)viewDidLoad {

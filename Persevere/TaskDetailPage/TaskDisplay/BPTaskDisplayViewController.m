@@ -12,6 +12,7 @@
 #import "BPUIHelper.h"
 #import "LocalTaskDataManager.h"
 #import "Persevere-Swift.h"
+#import "HXPhotoPicker.h"
 
 @interface BPTaskDisplayViewController ()
 <
@@ -81,6 +82,30 @@ UIGestureRecognizerDelegate
 - (void)currentTaskInteractWithAR {
     BPARImageRecognizeViewController *arViewController = [[BPARImageRecognizeViewController alloc] initWithTaskArray:@[self.task]];
     [self.navigationController pushViewController:arViewController animated:YES];
+}
+
+// MARK: 选中信息
+
+- (void)didSelectLink {
+    
+}
+
+- (void)didSelectImage {
+    HXCustomAssetModel *assetModel1 = [HXCustomAssetModel assetWithLocalImage:[UIImage imageWithData:self.task.imageData] selected:YES];
+    HXPhotoManager *photoManager = [HXPhotoManager managerWithType:HXPhotoManagerSelectedTypePhotoAndVideo];
+    photoManager.configuration.saveSystemAblum = YES;
+    photoManager.configuration.photoMaxNum = 0;
+    photoManager.configuration.videoMaxNum = 0;
+    photoManager.configuration.maxNum = 10;
+    photoManager.configuration.selectTogether = YES;
+    photoManager.configuration.photoCanEdit = NO;
+    photoManager.configuration.videoCanEdit = NO;
+    [photoManager addCustomAssetModel:@[assetModel1]];
+    [self hx_presentPreviewPhotoControllerWithManager:photoManager previewStyle:HXPhotoViewPreViewShowStyleDefault currentIndex:0 photoView:nil];
+}
+
+- (void)didSelectMemo {
+    
 }
 
 // MARK: Button Actions

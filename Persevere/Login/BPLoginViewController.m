@@ -335,8 +335,11 @@ static int amountOfTimeLeft = 60;        //倒计时
         NSString *password = self.passwordTextField.text;
         [self.viewModel loginWithPhoneNumber:phoneNumber password:password finished:^(BOOL isRegistered, BOOL isCodeCorrect) {
             if (isRegistered && isCodeCorrect) {
-                [self presentRegisterPage];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentMainPage];
+                });
             }
+            self.loginButton.userInteractionEnabled = YES;
         }];
     } else {
         //验证验证码
